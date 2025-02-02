@@ -1,29 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhrh8bx7q7fx7"]
+[gd_scene load_steps=4 format=3 uid="uid://bhrh8bx7q7fx7"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_f74ov"]
-[ext_resource type="Texture2D" uid="uid://cpsr7aag7hcr7" path="res://Assets/Cat Sandwich.jpg" id="1_thdk4"]
+[ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_bh4md"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_56fqa"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wqi5w"]
-size = Vector2(52, 51)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ux8i6"]
 size = Vector2(1278, 57)
 
 [node name="Prototype" type="Node2D"]
 
-[node name="Player" type="CharacterBody2D" parent="."]
-position = Vector2(528, 385)
-script = ExtResource("1_f74ov")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player"]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("1_thdk4")
-metadata/_edit_lock_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
-shape = SubResource("RectangleShape2D_wqi5w")
-metadata/_edit_lock_ = true
+[node name="Player" parent="." instance=ExtResource("1_bh4md")]
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(597, 580)
