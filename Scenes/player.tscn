@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://ctakur372je0n"]
+[gd_scene load_steps=15 format=3 uid="uid://ctakur372je0n"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_dhtk5"]
 [ext_resource type="Texture2D" uid="uid://dmrx8803ipk6e" path="res://Assets/Owlet_Monster_Run_6.png" id="2_sboit"]
 [ext_resource type="Texture2D" uid="uid://c6x8hajsjiyjr" path="res://Assets/Owlet_Monster_Jump_8.png" id="3_f2dju"]
 [ext_resource type="Texture2D" uid="uid://br4odpa35f28g" path="res://Assets/Owlet_Monster_Idle_4.png" id="4_4p8ws"]
+[ext_resource type="Script" path="res://Scripts/state_machine.gd" id="5_q8ctg"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rrfp3"]
 radius = 7.5
@@ -375,6 +376,9 @@ debug_color = Color(1, 0.00890907, 0.0394268, 0.42)
 libraries = {
 "": SubResource("AnimationLibrary_plcqf")
 }
+
+[node name="State Machine" type="Node" parent="."]
+script = ExtResource("5_q8ctg")
 
 [connection signal="body_entered" from="Sword area" to="." method="_on_sword_area_body_entered"]
 [connection signal="body_exited" from="Sword area" to="." method="_on_sword_area_body_exited"]
