@@ -1,8 +1,10 @@
 extends CharacterBody2D
-
+class_name Enemy
 
 const SPEED = 150.0
 var direction := 1
+#var health = 3:
+	#set(value): if health 
 
 func _physics_process(delta: float) -> void:
 	# Add the gravity.
@@ -19,3 +21,4 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+	
