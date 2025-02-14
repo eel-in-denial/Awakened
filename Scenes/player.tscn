@@ -376,5 +376,19 @@ libraries = {
 "": SubResource("AnimationLibrary_plcqf")
 }
 
+<<<<<<< HEAD
+=======
+[node name="State Machine" type="Node" parent="."]
+script = ExtResource("5_q8ctg")
+
+[node name="damageOverlay" type="ColorRect" parent="."]
+visible = false
+offset_left = -6.0
+offset_top = -15.0
+offset_right = 7.0
+offset_bottom = 8.0
+color = Color(1, 0, 0, 1)
+
+>>>>>>> 00bf531204cced5ebecf244246ef51f73bcbe27c
 [connection signal="body_entered" from="Sword area" to="." method="_on_sword_area_body_entered"]
 [connection signal="body_exited" from="Sword area" to="." method="_on_sword_area_body_exited"]
