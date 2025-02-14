@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Player
 
+enum States {IDLE, RUNNING, JUMPING, DASH, WALLCLING}
+var current_state: States = States.IDLE: set = set_state
+
 const ACCELERATION := 50.0
 const DECELERATION := 50.0
 const MAX_SPEED := 300.0
@@ -37,8 +40,12 @@ func _movement(delta: float) -> void:
 func _attack() -> void:
 	sword_collision.disabled = false
 	
-
+ 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("jump") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING]:
+		set_state(States.JUMPING)
+	if current_state == States.IDLE and Input:
+		set_state(States.RUNNING)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -57,7 +64,10 @@ func _physics_process(delta: float) -> void:
 	
 	#does godot physics stuff
 	move_and_slide()
+	print(current_state)
 
+func set_state(new_state: int) -> void:
+	current_state = new_state
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
