@@ -1,15 +1,19 @@
 extends CharacterBody2D
 class_name Player
 
-enum States {IDLE, RUNNING, JUMPING, DASH, WALLCLING}
-var current_state: States = States.IDLE: set = set_state
+enum States {IDLE, RUNNING, JUMPING, FALLING, DASH, WALLCLING}
+var current_state: States = States.JUMPING: set = set_state
+var prev_state: States
 
-const ACCELERATION := 50.0
-const DECELERATION := 50.0
-const MAX_SPEED := 300.0
-const JUMP_VELOCITY := -550.0
+const JUMP_VELOCITY := -450.0
 const gravity := Global.gravity
+const SPEED := 300.0
+const DASH_SPEED := 800.0
+const DASH_DURATION := 15
+var dash_time := 0
 var direction := 0.0
+var prev_velocity := 0.0
+var moving := 0.0
 var health := 10
 var is_invincible : bool = false
 var iframe_duration := 1.0
@@ -25,54 +29,91 @@ func _ready() -> void:
 	
 
 func _movement(delta: float) -> void:
-	# if direction inputs detected, add to velocity, if not deccelerate to 0
-	direction = Input.get_axis("left", "right")
+	#sword.rotation = 90*Global.radians_conv*direction
+	velocity.x = moving * SPEED * delta * 60
+	#velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
 	
-	if direction:
-		sword.rotation = 90*Global.radians_conv*direction
-		velocity.x += direction * ACCELERATION * delta * 60
-		velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
-		if direction == 1 and animation_player.current_animation != "jump_left" and animation_player.current_animation != "jump_right":
-			animation_player.play("walk_right")
-		elif animation_player.current_animation != "jump_left" and animation_player.current_animation != "jump_right":
-			animation_player.play("walk_left")
-	elif !direction and velocity.x:
-		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * 60)
-	else:
-		animation_player.play("idle")
+	#elif !direction and velocity.x:
+		#velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * 60)
+	#else:
+		#animation_player.play("idle")
 		
 func _attack() -> void:
 	sword_collision.disabled = false
 	
  
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("jump") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING]:
+	moving = Input.get_axis("left", "right")
+	if moving:
+		direction = moving
+	if current_state in [States.JUMPING, States.FALLING]:
+		velocity.y += gravity*delta
+		if is_on_floor():
+			set_state(States.IDLE)
+	if current_state == States.JUMPING and (Input.is_action_just_released("jump") or velocity.y >= 0):
+		set_state(States.FALLING)
+	if current_state == States.RUNNING and not moving:
+		set_state(States.IDLE)
+	if Input.is_action_just_pressed("jump") and current_state in [States.IDLE, States.RUNNING]:
 		set_state(States.JUMPING)
-	if current_state == States.IDLE and Input:
+	if current_state == States.IDLE and moving:
 		set_state(States.RUNNING)
+	if Input.is_action_just_pressed("dash"):
+		set_state(States.DASH)
+	if current_state == States.DASH:
+		dash_time -= 1
+		if dash_time == 0:
+			set_state(prev_state)
+	
 	# Add the gravity.
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		if direction == 1:
-			animation_player.play("jump_right")
-		else:
-			animation_player.play("jump_left")
-	if Input.is_action_just_released("jump") and velocity.y < 0:
-		velocity.y = 100
-	if Input.is_action_just_pressed("attack"):
-		_attack()
-	_movement(delta)
+
+
+	#if Input.is_action_just_released("jump") and velocity.y < 0:
+		#velocity.y = 100
+	#if Input.is_action_just_pressed("attack"):
+		#_attack()
+	if current_state in [States.RUNNING, States.JUMPING, States.FALLING]:
+		_movement(delta)
 	
 	
 	#does godot physics stuff
 	move_and_slide()
-	print(current_state)
+	print(States.keys()[current_state], direction)
 
 func set_state(new_state: int) -> void:
+	prev_state = current_state
 	current_state = new_state
+	match prev_state:
+		States.DASH:
+			if prev_velocity*direction <= 0:
+				velocity.x = 0
+			else:
+				velocity.x = prev_velocity
+			if new_state == States.JUMPING:
+				set_state(States.FALLING)
+				return
+	match current_state:
+		States.IDLE:
+			velocity.x = 0
+			animation_player.play("idle")
+		States.RUNNING:
+			if direction == 1:
+				animation_player.play("walk_right")
+			else:
+				animation_player.play("walk_left")
+		States.JUMPING:
+			velocity.y = JUMP_VELOCITY
+			if direction == 1:
+				animation_player.play("jump_right")
+			else:
+				animation_player.play("jump_left")
+		States.FALLING:
+			velocity.y = 0
+		States.DASH:
+			prev_velocity = velocity.x
+			velocity.x = direction * DASH_SPEED
+			velocity.y = 0
+			dash_time = DASH_DURATION
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
