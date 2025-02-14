@@ -10,9 +10,13 @@ const MAX_SPEED := 300.0
 const JUMP_VELOCITY := -550.0
 const gravity := Global.gravity
 var direction := 0.0
+var health := 10
+var is_invincible : bool = false
+var iframe_duration := 1.0
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
 @onready var animation_player = $AnimationPlayer
+@onready var damage_overlay = $damageOverlay
 # node tree variables
 
 
@@ -62,6 +66,7 @@ func _physics_process(delta: float) -> void:
 		_attack()
 	_movement(delta)
 	
+	
 	#does godot physics stuff
 	move_and_slide()
 	print(current_state)
@@ -71,7 +76,38 @@ func set_state(new_state: int) -> void:
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
 	if body is Enemy:
-		body.queue_free()
+		body._deal_damage(1)
 
 func _on_sword_area_body_exited(body: Node2D) -> void:
 	pass
+	
+func _trigger_iframes() -> void:
+	is_invincible = true
+	damage_overlay.visible = true
+	await get_tree().create_timer(iframe_duration).timeout
+	
+	is_invincible = false
+	damage_overlay.visible = false
+	
+func _take_knockback(position: Vector2, force: float = 1000.0) -> void:
+	
+	var knockback_direction = (global_position - position).normalized()
+	knockback_direction.y *= 0.5  # Reduce upward knockback
+	knockback_direction = knockback_direction.normalized()
+	
+	velocity += knockback_direction * force
+	
+func _deal_damage_to_player(damage: int, position: Vector2) -> void:
+	if is_invincible:
+		return
+		
+	health -= damage
+	_take_knockback(position)
+	
+	if health <= 0:
+		_die()
+	else:
+		_trigger_iframes()
+	
+func _die() -> void:
+	queue_free()
