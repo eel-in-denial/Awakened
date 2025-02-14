@@ -507,7 +507,7 @@ advance_expression = "current_state == States.RUNNING"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_drdec"]
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_0rk8w")
-states/Idle/position = Vector2(509, 211)
+states/Idle/position = Vector2(501, 130)
 states/Jump/node = SubResource("AnimationNodeBlendSpace1D_3iixy")
 states/Jump/position = Vector2(638, 78)
 states/Run/node = SubResource("AnimationNodeBlendSpace1D_hntn3")
