@@ -1,19 +1,21 @@
 extends CharacterBody2D
 class_name Player
 
-enum States {IDLE, RUNNING, JUMPING, FALLING, DASH, WALLCLING, KNOCKBACK}
+enum States {IDLE, RUNNING, JUMPING, FALLING, DASH, WALLCLING, KNOCKBACK, ATTACK}
 var current_state: States = States.JUMPING: set = set_state
 var prev_state: States
 
 const JUMP_VELOCITY := -450.0
 const gravity := Global.gravity
-const SPEED := 300.0
+const SPEED := 200.0
 const DASH_SPEED := 800.0
 const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
+const ATTACK_DURATION := 0.5
 const KNOCKBACK_HEIGHT := -250
 var dash_time := 0.0
 var iframe_timer := 0.0
+var attack_timer := 0.0
 var is_invinsible := false
 var direction := 0.0
 var knock_direction := 0.0
@@ -59,6 +61,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.DASH)
 			elif not is_on_floor():
 				set_state(States.FALLING)
+			elif Input.is_action_just_pressed("attack"):
+				set_state(States.ATTACK)
 		States.RUNNING:
 			_movement(delta)
 			if Input.is_action_just_pressed("jump"):
@@ -69,6 +73,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.DASH)
 			elif not is_on_floor():
 				set_state(States.FALLING)
+			elif Input.is_action_just_pressed("attack"):
+				set_state(States.ATTACK)
 		States.JUMPING:
 			velocity.y += gravity*delta
 			_movement(delta)
@@ -93,6 +99,10 @@ func _physics_process(delta: float) -> void:
 			if is_on_floor() and velocity.y != KNOCKBACK_HEIGHT:
 				set_state(States.IDLE)
 			velocity.y += gravity*delta
+		States.ATTACK:
+			attack_timer -= delta
+			if attack_timer <= 0:
+				set_state(States.IDLE)
 	if is_invinsible:
 		iframe_timer -= delta
 		if iframe_timer <= 0.0:
@@ -104,6 +114,7 @@ func _process(delta: float) -> void:
 	animation_tree.set("parameters/Run/blend_position", direction)
 	animation_tree.set("parameters/Idle/blend_position", direction)
 	animation_tree.set("parameters/Jump/blend_position", direction)
+	animation_tree.set("parameters/Attack/blend_position", direction)
 
 func set_state(new_state: int) -> void:
 	prev_state = current_state
@@ -138,6 +149,9 @@ func set_state(new_state: int) -> void:
 			iframe_timer = HURT_DURATION
 			var tween: Tween = create_tween().set_loops(HURT_DURATION/0.5)
 			tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
+		States.ATTACK:
+			attack_timer = ATTACK_DURATION
+			velocity.x = 0
 			
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
