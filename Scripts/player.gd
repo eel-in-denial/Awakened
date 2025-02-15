@@ -11,6 +11,7 @@ const SPEED := 300.0
 const DASH_SPEED := 800.0
 const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
+const KNOCKBACK_HEIGHT := -250
 var dash_time := 0.0
 var iframe_timer := 0.0
 var is_invinsible := false
@@ -48,34 +49,56 @@ func _physics_process(delta: float) -> void:
 	moving = Input.get_axis("left", "right")
 	if moving:
 		direction = moving
-	if current_state in [States.JUMPING, States.FALLING, States.KNOCKBACK]:
-		velocity.y += gravity*delta
-	if current_state == States.JUMPING and (Input.is_action_just_released("jump") or velocity.y >= 0):
-		set_state(States.FALLING)
-	if current_state == States.RUNNING and not moving:
-		set_state(States.IDLE)
-	if Input.is_action_just_pressed("jump") and current_state in [States.IDLE, States.RUNNING]:
-		set_state(States.JUMPING)
-	if current_state == States.IDLE and moving:
-		set_state(States.RUNNING)
-	if Input.is_action_just_pressed("dash"):
-		set_state(States.DASH)
-	if current_state == States.DASH:
-		dash_time -= delta
-		if dash_time <= 0:
-			set_state(prev_state)
+	match current_state:
+		States.IDLE:
+			if Input.is_action_just_pressed("jump"):
+				set_state(States.JUMPING)
+			elif moving:
+				set_state(States.RUNNING)
+			elif Input.is_action_just_pressed("dash"):
+				set_state(States.DASH)
+			elif not is_on_floor():
+				set_state(States.FALLING)
+		States.RUNNING:
+			_movement(delta)
+			if Input.is_action_just_pressed("jump"):
+				set_state(States.JUMPING)
+			elif not moving:
+				set_state(States.IDLE)
+			elif Input.is_action_just_pressed("dash"):
+				set_state(States.DASH)
+			elif not is_on_floor():
+				set_state(States.FALLING)
+		States.JUMPING:
+			velocity.y += gravity*delta
+			_movement(delta)
+			if Input.is_action_just_released("jump") or velocity.y >= 0:
+				set_state(States.FALLING)
+			elif Input.is_action_just_pressed("dash"):
+				set_state(States.DASH)
+			elif is_on_floor():
+				set_state(States.IDLE)
+		States.FALLING:
+			velocity.y += gravity*delta
+			_movement(delta)
+			if Input.is_action_just_pressed("dash"):
+				set_state(States.DASH)
+			elif is_on_floor():
+				set_state(States.IDLE)
+		States.DASH:
+			dash_time -= delta
+			if dash_time <= 0:
+				set_state(prev_state)
+		States.KNOCKBACK:
+			if is_on_floor() and velocity.y != KNOCKBACK_HEIGHT:
+				set_state(States.IDLE)
+			velocity.y += gravity*delta
 	if is_invinsible:
 		iframe_timer -= delta
 		if iframe_timer <= 0.0:
 			is_invinsible = false
-	if current_state in [States.RUNNING, States.JUMPING, States.FALLING]:
-		_movement(delta)
-	
-	#does godot physics stuff
 	move_and_slide()
-	if is_on_floor() and current_state in [States.JUMPING, States.FALLING, States.KNOCKBACK]:
-			set_state(States.IDLE)
-	print(States.keys()[current_state], direction)
+	print(States.keys()[current_state], velocity)
 
 func _process(delta: float) -> void:
 	animation_tree.set("parameters/Run/blend_position", direction)
@@ -111,7 +134,7 @@ func set_state(new_state: int) -> void:
 		States.KNOCKBACK:
 			is_invinsible = true
 			velocity.x = knock_direction*250
-			velocity.y = -250
+			velocity.y = KNOCKBACK_HEIGHT
 			iframe_timer = HURT_DURATION
 			var tween: Tween = create_tween().set_loops(HURT_DURATION/0.5)
 			tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
