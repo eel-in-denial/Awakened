@@ -42,6 +42,7 @@ func _on_hitbox_body_entered(body: Node2D) -> void:
 	
 func _deal_damage(damage: int) -> void:
 	health -= damage
+	velocity.y = -200
 	if health <= 0:
 		_die()
 
