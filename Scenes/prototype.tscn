@@ -11,7 +11,7 @@ size = Vector2(1278, 57)
 [node name="Prototype" type="Node2D"]
 
 [node name="Player" parent="." groups=["Walls"] instance=ExtResource("1_bh4md")]
-position = Vector2(573, 347)
+position = Vector2(808, 477)
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
 position = Vector2(597, 580)
@@ -27,10 +27,10 @@ shape = SubResource("RectangleShape2D_ux8i6")
 metadata/_edit_lock_ = true
 
 [node name="Enemy(Walking)" parent="." instance=ExtResource("3_otile")]
-position = Vector2(74, 402)
+position = Vector2(1005, 542)
 
 [node name="Wall1" type="StaticBody2D" parent="." groups=["Walls"]]
-position = Vector2(1214, 281)
+position = Vector2(1213, 254)
 rotation = 1.5708
 
 [node name="Sprite2D" type="Sprite2D" parent="Wall1"]
@@ -46,5 +46,5 @@ metadata/_edit_lock_ = true
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
 [node name="Enemy(Flying)" type="CharacterBody2D" parent="."]
-position = Vector2(74, 402)
+position = Vector2(139, 289)
 script = ExtResource("4_5bi02")
