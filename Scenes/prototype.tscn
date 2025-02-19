@@ -331,7 +331,7 @@ shape = SubResource("RectangleShape2D_ux8i6")
 metadata/_edit_lock_ = true
 
 [node name="Enemy(Walking)" parent="." instance=ExtResource("3_otile")]
-position = Vector2(318, 399)
+position = Vector2(890, 396)
 
 [node name="Wall1" type="StaticBody2D" parent="." groups=["Walls"]]
 position = Vector2(1213, 254)
