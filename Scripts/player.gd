@@ -21,11 +21,12 @@ var direction := 0.0
 var knock_direction := 0.0
 var prev_velocity := 0.0
 var moving := 0.0
-var health := 10
+var health := 3
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
 @onready var damage_overlay = $damageOverlay
 @onready var animation_tree = $AnimationTree
+@export var UI: CanvasLayer
 # node tree variables
 
 
@@ -167,6 +168,7 @@ func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
 		return
 		
 	health -= damage
+	UI.remove_heart(damage)
 	if global_position.x < enemy_position.x:
 		knock_direction = -1
 	else:
