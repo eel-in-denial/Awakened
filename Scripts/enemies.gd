@@ -6,6 +6,7 @@ var direction := 1
 var health = 3
 @onready var hitbox: Area2D = $Hitbox
 @onready var ledge_detector: RayCast2D = $LedgeDetector
+var should_turn := true;
 
 func _ready() -> void:
 	ledge_detector.enabled = true
@@ -18,9 +19,11 @@ func _physics_process(delta: float) -> void:
 	velocity.x = direction * SPEED
 	move_and_slide()
 
-	if not ledge_detector.is_colliding():
+	if (not ledge_detector.is_colliding()) and should_turn:
 		direction *= -1
-		await get_tree().create_timer(1).timeout
+		should_turn = false
+		await get_tree().create_timer(0.2).timeout
+		should_turn = true
 		
 	# Check for collisions
 	for i in range(get_slide_collision_count()):
