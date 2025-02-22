@@ -701,11 +701,11 @@ advance_expression = "current_state == States.IDLE"
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_drdec"]
 states/Attack/node = SubResource("AnimationNodeBlendSpace1D_3nr7l")
-states/Attack/position = Vector2(268, 131)
+states/Attack/position = Vector2(285, 141)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_0rk8w")
 states/Idle/position = Vector2(413, 251)
 states/Jump/node = SubResource("AnimationNodeBlendSpace1D_3iixy")
-states/Jump/position = Vector2(598, 174)
+states/Jump/position = Vector2(583, 163)
 states/Run/node = SubResource("AnimationNodeBlendSpace1D_hntn3")
 states/Run/position = Vector2(435, 64)
 states/Start/position = Vector2(268, 287)
@@ -739,7 +739,6 @@ position = Vector2(0, -50)
 metadata/_edit_lock_ = true
 
 [node name="Sword area" type="Area2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
 disable_mode = 2
 metadata/_edit_lock_ = true
 
@@ -759,9 +758,9 @@ tree_root = SubResource("AnimationNodeStateMachine_drdec")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AnimationPlayer")
 parameters/Attack/blend_position = 0
-parameters/Idle/blend_position = -0.785075
+parameters/Idle/blend_position = -0.00895524
 parameters/Jump/blend_position = -0.408955
-parameters/Run/blend_position = 0.0
+parameters/Run/blend_position = -0.298507
 
 [connection signal="body_entered" from="Sword area" to="." method="_on_sword_area_body_entered"]
 [connection signal="body_exited" from="Sword area" to="." method="_on_sword_area_body_exited"]
