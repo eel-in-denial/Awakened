@@ -711,7 +711,7 @@ states/Run/position = Vector2(435, 64)
 states/Start/position = Vector2(268, 287)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_p7qus"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_lgxfv"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_lswvx"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_fod6d"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_bmxer"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_kx68e"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_uduke"), "Run", "Attack", SubResource("AnimationNodeStateMachineTransition_5dk3u"), "Idle", "Attack", SubResource("AnimationNodeStateMachineTransition_115j6"), "Attack", "Idle", SubResource("AnimationNodeStateMachineTransition_72gc2")]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 script = ExtResource("1_dhtk5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

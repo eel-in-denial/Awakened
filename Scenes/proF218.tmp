@@ -1,0 +1,61 @@
+[gd_scene load_steps=7 format=3 uid="uid://bhrh8bx7q7fx7"]
+
+[ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_bh4md"]
+[ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_56fqa"]
+[ext_resource type="PackedScene" uid="uid://31sdqryt5ngg" path="res://Scenes/enemy_1.tscn" id="3_otile"]
+[ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/enemy(flying).tscn" id="4_j73ye"]
+[ext_resource type="Texture2D" uid="uid://cpsr7aag7hcr7" path="res://Assets/Cat Sandwich.jpg" id="5_na5y0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ux8i6"]
+size = Vector2(1278, 57)
+
+[node name="Prototype" type="Node2D"]
+
+[node name="Player" parent="." groups=["Walls"] instance=ExtResource("1_bh4md")]
+position = Vector2(315, 511)
+
+[node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
+position = Vector2(597, 580)
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+scale = Vector2(1, 0.0791667)
+texture = ExtResource("2_56fqa")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_ux8i6")
+metadata/_edit_lock_ = true
+
+[node name="Enemy(Walking)" parent="." instance=ExtResource("3_otile")]
+position = Vector2(1005, 542)
+
+[node name="Wall1" type="StaticBody2D" parent="." groups=["Walls"]]
+position = Vector2(1213, 254)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall1"]
+scale = Vector2(1, 0.0791667)
+texture = ExtResource("2_56fqa")
+metadata/_edit_lock_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1"]
+position = Vector2(1, 0.5)
+shape = SubResource("RectangleShape2D_ux8i6")
+metadata/_edit_lock_ = true
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+
+[node name="Enemy(Flying)" parent="." instance=ExtResource("4_j73ye")]
+position = Vector2(321, 459)
+
+[node name="PatrolPositionB2" type="Marker2D" parent="."]
+position = Vector2(756, 460)
+
+[node name="Sprite2D" type="Sprite2D" parent="PatrolPositionB2"]
+position = Vector2(-813.25, 8.49998)
+scale = Vector2(0.0302734, 0.0253907)
+texture = ExtResource("5_na5y0")
+
+[node name="PatrolPositionA2" type="Marker2D" parent="."]
+position = Vector2(-59, 464)
