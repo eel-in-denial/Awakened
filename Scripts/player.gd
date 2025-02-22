@@ -108,7 +108,7 @@ func _physics_process(delta: float) -> void:
 		if iframe_timer <= 0.0:
 			is_invinsible = false
 	move_and_slide()
-	print(States.keys()[current_state], velocity)
+	#print(States.keys()[current_state], velocity)
 
 func _process(delta: float) -> void:
 	animation_tree.set("parameters/Run/blend_position", direction)
