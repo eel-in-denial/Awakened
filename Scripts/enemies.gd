@@ -25,6 +25,9 @@ func _physics_process(delta: float) -> void:
 		should_turn = false
 		await get_tree().create_timer(0.2).timeout
 		should_turn = true
+	
+	if is_on_wall():
+		direction *= -1
 		
 	# Check for collisions
 	for i in range(get_slide_collision_count()):
@@ -33,8 +36,8 @@ func _physics_process(delta: float) -> void:
 		
 		if body is Player:
 			body._deal_damage_to_player(1, global_position)
-		elif body.is_in_group("Walls"):
-			direction *= -1
+		#elif body.is_in_group("Walls") or body.is_in_group("Enemies"):
+			#direction *= -1
 	
 func _on_enemy_body_contact(body: Node2D) -> void:
 	if body is Player:
