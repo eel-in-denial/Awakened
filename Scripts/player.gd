@@ -7,15 +7,18 @@ var prev_state: States
 
 const JUMP_VELOCITY := -450.0
 const gravity := Global.gravity
-const SPEED := 200.0
+const ACCELERATION := 20.0
+const DECELERATION := 5.0
+const MAX_SPEED := 200.0
 const DASH_SPEED := 800.0
 const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
 const ATTACK_DURATION := 0.5
-const KNOCKBACK_HEIGHT := -250
+const KNOCKBACK_HEIGHT := -250.0
 var dash_time := 0.0
 var iframe_timer := 0.0
 var attack_timer := 0.0
+var corner_jump := false
 var is_invinsible := false
 var direction := 0.0
 var knock_direction := 0.0
@@ -36,11 +39,12 @@ func _ready() -> void:
 
 func _movement(delta: float) -> void:
 	#sword.rotation = 90*Global.radians_conv*direction
-	velocity.x = moving * SPEED * delta * 60
-	#velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+	velocity.x += moving * ACCELERATION * delta * 60
 	
-	#elif !direction and velocity.x:
-		#velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * 60)
+	velocity.x = clamp(velocity.x, -MAX_SPEED, MAX_SPEED)
+	
+	if not moving and velocity.x:
+		velocity.x = move_toward(velocity.x, 0, DECELERATION * delta * 60)
 	#else:
 		#animation_player.play("idle")
 		
@@ -83,6 +87,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.FALLING)
 			elif Input.is_action_just_pressed("dash"):
 				set_state(States.DASH)
+			elif is_on_floor() and moving:
+				set_state(States.RUNNING)
 			elif is_on_floor():
 				set_state(States.IDLE)
 		States.FALLING:
@@ -90,8 +96,12 @@ func _physics_process(delta: float) -> void:
 			_movement(delta)
 			if Input.is_action_just_pressed("dash"):
 				set_state(States.DASH)
+			elif is_on_floor() and moving:
+				set_state(States.RUNNING)
 			elif is_on_floor():
 				set_state(States.IDLE)
+			elif is_on_wall():
+				set_state(States.WALLCLING)
 		States.DASH:
 			dash_time -= delta
 			if dash_time <= 0:
@@ -104,12 +114,21 @@ func _physics_process(delta: float) -> void:
 			attack_timer -= delta
 			if attack_timer <= 0:
 				set_state(States.IDLE)
+		States.WALLCLING:
+			velocity.y = gravity*delta*7
+			_movement(delta)
+			if Input.is_action_just_pressed("jump"):
+				set_state(States.JUMPING)
+			elif Input.is_action_just_released("left") or Input.is_action_just_released("right"):
+				set_state(States.FALLING)
+			elif not is_on_wall() or is_on_floor():
+				set_state(States.IDLE)
 	if is_invinsible:
 		iframe_timer -= delta
 		if iframe_timer <= 0.0:
 			is_invinsible = false
 	move_and_slide()
-	#print(States.keys()[current_state], velocity)
+	print(States.keys()[current_state], velocity)
 
 func _process(delta: float) -> void:
 	animation_tree.set("parameters/Run/blend_position", direction)
@@ -129,6 +148,9 @@ func set_state(new_state: int) -> void:
 			if new_state == States.JUMPING:
 				set_state(States.FALLING)
 				return
+		States.WALLCLING:
+			if new_state == States.JUMPING:
+				velocity.x = get_wall_normal().x * 500
 	match current_state:
 		States.IDLE:
 			velocity.x = 0
@@ -137,7 +159,7 @@ func set_state(new_state: int) -> void:
 		States.JUMPING:
 			velocity.y = JUMP_VELOCITY
 		States.FALLING:
-			velocity.y = 0
+			velocity.y += 50
 		States.DASH:
 			prev_velocity = velocity.x
 			velocity.x = direction * DASH_SPEED
@@ -153,6 +175,8 @@ func set_state(new_state: int) -> void:
 		States.ATTACK:
 			attack_timer = ATTACK_DURATION
 			velocity.x = 0
+		States.WALLCLING:
+			velocity.y = 0
 			
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
