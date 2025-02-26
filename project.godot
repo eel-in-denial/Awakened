@@ -30,7 +30,6 @@ window/stretch/mode="canvas_items"
 Ground=""
 Walls=""
 Player=""
-Enemies=""
 
 [input]
 
