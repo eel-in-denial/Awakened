@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjtqmpq4k5yly"]
+
+[ext_resource type="Script" path="res://Scripts/GooseBoss/feather_projectile.gd" id="1_vicpp"]
+[ext_resource type="Texture2D" uid="uid://bvot67eapw0nq" path="res://Assets/feather.jpg" id="2_3kchs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrd6l"]
+size = Vector2(38, 115)
+
+[node name="FeatherProjectile" type="Area2D"]
+script = ExtResource("1_vicpp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0646044, 0.0883654)
+texture = ExtResource("2_3kchs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_lrd6l")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

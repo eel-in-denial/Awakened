@@ -1,5 +1,4 @@
 extends CharacterBody2D
-class_name EnemyFly
 
 const SPEED = 150.0
 var speed = SPEED

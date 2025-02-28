@@ -1,5 +1,4 @@
 extends CharacterBody2D
-class_name EnemyCharge
 
 var state := "Patrol"
 var health = 3
@@ -27,7 +26,7 @@ func _ready() -> void:
 	player = get_node("../Player")
 	
 func _physics_process(delta):
-	print(state)
+	#print(state)
 	if state == "Patrol":
 		patrol(delta)
 		if _detect_player():
