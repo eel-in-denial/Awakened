@@ -25,15 +25,23 @@ var knock_direction := 0.0
 var prev_velocity := 0.0
 var moving := 0.0
 var health := 3
+var camera_return_offset: Vector2 = Vector2(0, -20)
+var camera_hold_duration: float = 0.0
+var camera_pan_duration: float = 0.0
+var centerMarker: Marker2D
+var canMove = true
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
 @onready var damage_overlay = $damageOverlay
 @onready var animation_tree = $AnimationTree
 @export var UI: CanvasLayer
+@onready var camera = $Camera2D 
+
 # node tree variables
 
 
 func _ready() -> void:
+	centerMarker = get_node("../CenterMarker")
 	sword_collision.disabled = true
 	
 
@@ -127,8 +135,9 @@ func _physics_process(delta: float) -> void:
 		iframe_timer -= delta
 		if iframe_timer <= 0.0:
 			is_invinsible = false
-	move_and_slide()
-	print(States.keys()[current_state], velocity)
+	if canMove:
+		move_and_slide()
+	#print(States.keys()[current_state], velocity)
 
 func _process(delta: float) -> void:
 	animation_tree.set("parameters/Run/blend_position", direction)
@@ -180,13 +189,34 @@ func set_state(new_state: int) -> void:
 			
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
-	if body is Enemy:
+	if body.is_in_group("Enemies"):
 		body._deal_damage(1)
 
 func _on_sword_area_body_exited(body: Node2D) -> void:
 	pass
 	
+func _boss_camera():
+	canMove = false
+	moving = 0
+	animate_camera_pan(centerMarker.global_position - global_position, Vector2(0, -20), 1.0, 3.0)
+	await get_tree().create_timer(6.0).timeout  
+	canMove = true
 	
+func animate_camera_pan(target_offset: Vector2, return_offset: Vector2, hold_duration: float, pan_duration: float) -> void:
+	camera_return_offset = return_offset
+	camera_hold_duration = hold_duration
+	camera_pan_duration = pan_duration
+	var tween = create_tween()
+	tween.tween_property(camera, "offset", target_offset, pan_duration) \
+		 .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween.tween_callback(Callable(self, "_on_camera_hold_complete"))
+
+func _on_camera_hold_complete() -> void:
+	await get_tree().create_timer(camera_hold_duration).timeout
+	var tween = create_tween()
+	tween.tween_property(camera, "offset", camera_return_offset, camera_pan_duration) \
+		 .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+
 func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
 	if is_invinsible:
 		return
