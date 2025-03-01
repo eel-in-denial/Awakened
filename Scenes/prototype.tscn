@@ -2,10 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_bh4md"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_56fqa"]
-[ext_resource type="PackedScene" uid="uid://31sdqryt5ngg" path="res://Scenes/enemy.tscn" id="3_otile"]
-[ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/enemy(flying).tscn" id="4_j73ye"]
-[ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="4_lyith"]
-[ext_resource type="Script" path="res://Scripts/enemy(charge).gd" id="6_wgpf8"]
+[ext_resource type="PackedScene" uid="uid://31sdqryt5ngg" path="res://Scenes/enemy_1.tscn" id="3_otile"]
+[ext_resource type="PackedScene" path="res://Scenes/enemy(flying).tscn" id="4_j73ye"]
+[ext_resource type="TileSet" uid="uid://bmr61nqgcoc14" path="res://Assets/prototype.tres" id="4_lyith"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="6_ywlpg"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="7_y2kox"]
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/StaticEnemy/enemy(static).tscn" id="8_1rdkb"]
@@ -18,7 +17,7 @@ size = Vector2(1278, 57)
 [node name="Prototype" type="Node2D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") groups=["Walls"] instance=ExtResource("1_bh4md")]
-position = Vector2(-252, 202)
+position = Vector2(61, 423)
 UI = NodePath("../UI")
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
@@ -34,8 +33,8 @@ position = Vector2(1, 0.5)
 shape = SubResource("RectangleShape2D_ux8i6")
 metadata/_edit_lock_ = true
 
-[node name="Enemy(Walking)" parent="." groups=["Enemies"] instance=ExtResource("3_otile")]
-position = Vector2(905, 437)
+[node name="Enemy(Walking)" parent="." instance=ExtResource("3_otile")]
+position = Vector2(890, 396)
 
 [node name="Wall1" type="StaticBody2D" parent="." groups=["Walls"]]
 position = Vector2(1213, 254)
@@ -56,7 +55,7 @@ tile_map_data = PackedByteArray("AAAhAA8AAAABAAAAAAAgAA8AAAABAAAAAAAfAA8AAAAAAAA
 tile_set = ExtResource("4_lyith")
 metadata/_edit_lock_ = true
 
-[node name="Enemy(Charge)" parent="." groups=["Bosses"] instance=ExtResource("9_545ny")]
+[node name="Enemy(Charge)" parent="." instance=ExtResource("9_545ny")]
 position = Vector2(-42, 470)
 script = ExtResource("6_wgpf8")
 
@@ -64,37 +63,10 @@ script = ExtResource("6_wgpf8")
 position = Vector2(895, 228)
 
 [node name="PatrolPositionB2" type="Marker2D" parent="."]
-position = Vector2(1152, 231)
+position = Vector2(1089, 314)
 
 [node name="PatrolPositionA2" type="Marker2D" parent="."]
-position = Vector2(687, 233)
-
-[node name="Enemy(Static)" parent="." groups=["Enemies"] instance=ExtResource("8_1rdkb")]
-position = Vector2(-694, 214)
-
-[node name="Door" type="TileMapLayer" parent="."]
-visible = false
-tile_map_data = PackedByteArray("AAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAAAAAD8/wEAAAAAAAAAAAA=")
-tile_set = ExtResource("4_lyith")
-collision_enabled = false
-
-[node name="ArenaLeftEdge" type="Marker2D" parent="."]
-position = Vector2(696, -459)
-
-[node name="ArenaRightEdge" type="Marker2D" parent="."]
-position = Vector2(-167, -466)
-
-[node name="CenterMarker" type="Marker2D" parent="."]
-position = Vector2(305, -118)
-
-[node name="PatrolPositionA3" type="Marker2D" parent="."]
-position = Vector2(-10, -173)
-
-[node name="PatrolPositionB3" type="Marker2D" parent="."]
-position = Vector2(650, -166)
-
-[node name="ArenaTrigger" parent="." instance=ExtResource("9_ein2r")]
-position = Vector2(-45, -20)
+position = Vector2(583, 222)
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("6_ywlpg")
