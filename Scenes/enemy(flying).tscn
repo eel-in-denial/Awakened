@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://b2yh1t0op3ecn"]
+[gd_scene load_steps=5 format=3 uid="uid://bxfmudosqwlxf"]
 
-[ext_resource type="Script" path="res://Scripts/enemy(flying).gd" id="1_vp28o"]
+[ext_resource type="Script" path="res://Scripts/enemy(Flying).gd" id="1_y1n5o"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_60crx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eveg5"]
@@ -10,7 +10,7 @@ size = Vector2(28, 23)
 
 [node name="Enemy(Flying)" type="CharacterBody2D"]
 position = Vector2(139, 289)
-script = ExtResource("1_vp28o")
+script = ExtResource("1_y1n5o")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_eveg5")
