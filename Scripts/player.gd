@@ -234,4 +234,4 @@ func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
 		_die()
 	
 func _die() -> void:
-	queue_free()
+	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dihmoi0xtqdin"]
+[gd_scene load_steps=5 format=3 uid="uid://gxfwy6fxcl77"]
 
 [ext_resource type="Script" path="res://Scripts/enemies.gd" id="1_pudhf"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_x8mkn"]
@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwbrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1001u"]
-size = Vector2(28, 23)
+size = Vector2(32, 23)
 
 [node name="Enemy1" type="CharacterBody2D" groups=["Enemies"]]
 script = ExtResource("1_pudhf")

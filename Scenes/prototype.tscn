@@ -1,16 +1,15 @@
-[gd_scene load_steps=14 format=4 uid="uid://iawn207kkr8d"]
+[gd_scene load_steps=13 format=4 uid="uid://iawn207kkr8d"]
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_bh4md"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_56fqa"]
 [ext_resource type="PackedScene" uid="uid://31sdqryt5ngg" path="res://Scenes/enemy.tscn" id="3_otile"]
-[ext_resource type="PackedScene" uid="uid://bxfmudosqwlxf" path="res://Scenes/enemy(flying).tscn" id="4_j73ye"]
-[ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="4_lyith"]
+[ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/enemy(flying).tscn" id="4_j73ye"]
+[ext_resource type="TileSet" uid="uid://bmr61nqgcoc14" path="res://Assets/prototype.tres" id="4_lyith"]
 [ext_resource type="Script" path="res://tile_map_layer.gd" id="5_xsofq"]
-[ext_resource type="Script" path="res://Scripts/enemy(charge).gd" id="6_wgpf8"]
+[ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/enemy(walking).tscn" id="5_y4i3i"]
 [ext_resource type="Script" path="res://Scripts/UI.gd" id="6_ywlpg"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="7_y2kox"]
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/StaticEnemy/enemy(static).tscn" id="8_1rdkb"]
-[ext_resource type="PackedScene" uid="uid://dihmoi0xtqdin" path="res://Scenes/enemy(charging).tscn" id="9_545ny"]
 [ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/GooseBoss/arena_trigger.tscn" id="9_ein2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ux8i6"]
@@ -19,7 +18,7 @@ size = Vector2(1278, 57)
 [node name="Prototype" type="Node2D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") groups=["Walls"] instance=ExtResource("1_bh4md")]
-position = Vector2(-252, 202)
+position = Vector2(-265, 132)
 UI = NodePath("../UI")
 
 [node name="Ground" type="StaticBody2D" parent="." groups=["Ground"]]
@@ -58,9 +57,8 @@ tile_set = ExtResource("4_lyith")
 script = ExtResource("5_xsofq")
 metadata/_edit_lock_ = true
 
-[node name="Enemy(Charge)" parent="." groups=["Bosses"] instance=ExtResource("9_545ny")]
-position = Vector2(-42, 470)
-script = ExtResource("6_wgpf8")
+[node name="Enemy1" parent="." instance=ExtResource("5_y4i3i")]
+position = Vector2(131, 189)
 
 [node name="Enemy(Flying)" parent="." groups=["Enemies"] instance=ExtResource("4_j73ye")]
 position = Vector2(895, 228)

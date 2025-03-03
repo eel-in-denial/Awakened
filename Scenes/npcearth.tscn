@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqlp3y01etiiu"]
+
+[ext_resource type="Script" path="res://Scripts/npc.gd" id="1_4q60w"]
+[ext_resource type="Texture2D" uid="uid://dhf60mt7mbi1o" path="res://Assets/earth.png" id="1_shlwa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcf8e"]
+size = Vector2(20, 30)
+
+[node name="Npcearth" type="CharacterBody2D"]
+script = ExtResource("1_4q60w")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bcf8e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(8.52651e-14, 0)
+scale = Vector2(0.0119605, 0.0106066)
+texture = ExtResource("1_shlwa")
+
+[node name="LedgeDetector" type="RayCast2D" parent="."]
+target_position = Vector2(0, 28)

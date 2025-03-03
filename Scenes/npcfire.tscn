@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://cddvro8lafg8q"]
+
+[ext_resource type="Texture2D" uid="uid://be7liab64rhxv" path="res://Assets/fire.png" id="1_c8ips"]
+[ext_resource type="Script" path="res://Scripts/npc.gd" id="1_q37e1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcf8e"]
+size = Vector2(20, 30)
+
+[node name="Npcfire" type="CharacterBody2D"]
+script = ExtResource("1_q37e1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bcf8e")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.5, 0.124994)
+scale = Vector2(0.0119605, 0.0106066)
+texture = ExtResource("1_c8ips")
+
+[node name="LedgeDetector" type="RayCast2D" parent="."]
+target_position = Vector2(0, 27)
