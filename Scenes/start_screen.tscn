@@ -1,30 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6cfsaiiutegb"]
+[gd_scene load_steps=4 format=3 uid="uid://c6cfsaiiutegb"]
 
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="1_2l310"]
 [ext_resource type="Script" path="res://Scripts/start_screen.gd" id="1_omjfr"]
+[ext_resource type="Texture2D" uid="uid://rgme44ynvry8" path="res://Assets/awakened.png" id="2_gjq52"]
 
 [node name="Start Screen" type="Node2D"]
 script = ExtResource("1_omjfr")
 metadata/_edit_lock_ = true
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_gjq52")
+centered = false
+
 [node name="CenterContainer" type="CenterContainer" parent="."]
+layout_direction = 2
+offset_top = 50.0
 offset_right = 640.0
-offset_bottom = 360.0
+offset_bottom = 410.0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
 layout_mode = 2
-theme_override_constants/separation = 20
+theme_override_constants/separation = 70
 
-[node name="Start" type="TextureButton" parent="CenterContainer/VBoxContainer"]
-layout_mode = 2
-texture_normal = ExtResource("1_2l310")
-
-[node name="Start2" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+[node name="Start" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_2l310")
 
-[node name="Start3" type="TextureButton" parent="CenterContainer/VBoxContainer"]
+[node name="Start2" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("1_2l310")
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Start" to="." method="_on_start_pressed"]
+[node name="Start3" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("1_2l310")
+
+[connection signal="pressed" from="CenterContainer/HBoxContainer/Start" to="." method="_on_start_pressed"]
