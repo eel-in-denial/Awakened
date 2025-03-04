@@ -8,6 +8,11 @@ var clicked_cell
 #
 ## Called every frame. 'delta' is the elapsed time since the previous frame.
 
+var array_dict = {
+	"apple": [1, 1, 1, 1, 1, 2, 1, 2, 2]
+}
+
+
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():
 		InputMap.load_from_project_settings()
@@ -15,6 +20,7 @@ func _process(delta: float) -> void:
 			clicked_cell = local_to_map(get_local_mouse_position())
 			if get_cell_tile_data(clicked_cell):
 				autotile(clicked_cell)
+		print("")
 			
 func autotile(tile_clicked):
 	for vector in get_surrounding_vectors(tile_clicked):
@@ -25,7 +31,6 @@ func autotile(tile_clicked):
 					tile_depths.append(tile.get_custom_data("depth"))
 				else:
 					tile_depths.append(0)
-			print(tile_depths)
 			check_and_assign(vector, tile_depths)
 
 func get_surrounding_vectors(vector):
@@ -44,7 +49,9 @@ func get_surrounding_tiles(vector):
 	return tiles
 	
 func check_and_assign(position, array):
-	pass
+	print(array_dict)
+	if array == array_dict["apple"]:
+		set_cell(position, 1, Vector2i(3, 6))
 	#elif neighbour_array[0] == 2 and neighbour_array[1] == 2 and neighbour_array[2] == 2:
 		#set_cell(clicked_cell, 1, Vector2i(randi_range(6, 7), 0))
 		#pass
