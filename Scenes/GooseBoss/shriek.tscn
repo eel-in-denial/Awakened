@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2eexcjujrivr"]
 
-[ext_resource type="Script" path="res://Scripts/GooseBoss/shriek.gd" id="1_5k5xx"]
+[ext_resource type="Script" uid="uid://d3awuh5gdjsqj" path="res://Scripts/GooseBoss/shriek.gd" id="1_5k5xx"]
 [ext_resource type="Texture2D" uid="uid://dm0v7aowpfnxe" path="res://Assets/shriek.png" id="2_p368y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gx3j"]

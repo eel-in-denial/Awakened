@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://y0fmv42elpro"]
 
-[ext_resource type="Script" path="res://Scripts/GooseBoss/GooseBoss.gd" id="1_717ya"]
+[ext_resource type="Script" uid="uid://cqhjxxb4888g5" path="res://Scripts/GooseBoss/GooseBoss.gd" id="1_717ya"]
 [ext_resource type="Texture2D" uid="uid://bfjbqrbgb488m" path="res://Assets/Biblical goose1.png" id="2_5j0aq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xj6ly"]

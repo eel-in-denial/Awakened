@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://ctakur372je0n"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_dhtk5"]
+[ext_resource type="Script" uid="uid://cmcow6dcmd0ak" path="res://Scripts/player.gd" id="1_dhtk5"]
 [ext_resource type="Texture2D" uid="uid://dmrx8803ipk6e" path="res://Assets/Owlet_Monster_Run_6.png" id="2_sboit"]
 [ext_resource type="Texture2D" uid="uid://c6x8hajsjiyjr" path="res://Assets/Owlet_Monster_Jump_8.png" id="3_f2dju"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="3_xle8d"]
@@ -596,16 +596,16 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_plcqf"]
 _data = {
-"RESET": SubResource("Animation_knjl0"),
-"attack_left": SubResource("Animation_5w4gq"),
-"attack_right": SubResource("Animation_tehwu"),
-"idle_left": SubResource("Animation_77cue"),
-"idle_right": SubResource("Animation_i23wx"),
-"jump_left": SubResource("Animation_nkdqh"),
-"jump_right": SubResource("Animation_54msy"),
-"knockback_right": SubResource("Animation_b3i1p"),
-"walk_left": SubResource("Animation_wgb87"),
-"walk_right": SubResource("Animation_0gb8m")
+&"RESET": SubResource("Animation_knjl0"),
+&"attack_left": SubResource("Animation_5w4gq"),
+&"attack_right": SubResource("Animation_tehwu"),
+&"idle_left": SubResource("Animation_77cue"),
+&"idle_right": SubResource("Animation_i23wx"),
+&"jump_left": SubResource("Animation_nkdqh"),
+&"jump_right": SubResource("Animation_54msy"),
+&"knockback_right": SubResource("Animation_b3i1p"),
+&"walk_left": SubResource("Animation_wgb87"),
+&"walk_right": SubResource("Animation_0gb8m")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rqcmb"]
