@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/GooseBoss/arena_trigger.tscn" id="9_d1h5e"]
 [ext_resource type="Script" uid="uid://djgdiwtx7v661" path="res://Scripts/UI.gd" id="10_ykay3"]
 [ext_resource type="PackedScene" uid="uid://y0fmv42elpro" path="res://Scenes/GooseBoss/goose_boss.tscn" id="11_768pe"]
-
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="11_p2bqg"]
 
 [node name="Prototype" type="Node2D"]
