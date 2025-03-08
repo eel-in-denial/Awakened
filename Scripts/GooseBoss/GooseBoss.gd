@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Bosses
 
 const SPEED = 300.0
 const CHARGESPEED = 600.0
@@ -46,7 +47,6 @@ func _start_fight() -> void:
 	ultimate_timer.timeout.connect(_on_ultimate_timer_timeout)
 
 func _physics_process(delta: float) -> void:
-	
 	match currentState:
 		"Patrol":
 			_patrol(delta)
@@ -88,10 +88,9 @@ func _charge(delta: float) -> void:
 		attack_timer.start(3.0)
 		
 func _recovery(delta: float) -> void:
-	velocity.y = -300  # Move the boss upwards
+	velocity.y = -300
 	move_and_slide()
 
-	# Once the boss has moved up enough, return to Patrol
 	if global_position.y < centerMarker.global_position.y - 100:  
 		currentState = "Patrol"
 		attack_timer.start(3.0)

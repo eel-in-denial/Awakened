@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://m27kbjfjpa7i"]
+
+[ext_resource type="Script" uid="uid://ck6842sknrbmq" path="res://Scripts/HornetBoss/hornet_boss_projectile.gd" id="1_cdj7s"]
+[ext_resource type="Texture2D" uid="uid://cpsr7aag7hcr7" path="res://Assets/Cat Sandwich.jpg" id="1_dm6yo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdj7s"]
+size = Vector2(40, 40)
+
+[node name="HornetBossProjectile" type="CharacterBody2D"]
+script = ExtResource("1_cdj7s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 2.98023e-08)
+scale = Vector2(0.0776367, 0.0766602)
+texture = ExtResource("1_dm6yo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_cdj7s")

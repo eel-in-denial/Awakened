@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxfmudosqwlxf"]
+[gd_scene load_steps=5 format=3 uid="uid://b2yh1t0op3ecn"]
 
-[ext_resource type="Script" uid="uid://dmqirt763svdr" path="res://Scripts/enemy(Flying).gd" id="1_y1n5o"]
+[ext_resource type="Script" uid="uid://nil0vr0bjbra" path="res://Scripts/enemy(flying).gd" id="1_y1n5o"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_60crx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eveg5"]
@@ -26,3 +26,5 @@ position = Vector2(12, 9)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-12, -9)
 shape = SubResource("RectangleShape2D_rqpr2")
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
