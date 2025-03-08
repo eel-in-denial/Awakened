@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://bwxm655b3iate"]
+
+[ext_resource type="Script" uid="uid://b5emnm5je3y6h" path="res://Scripts/HornetBoss/arena_trigger.gd" id="1_3tb6i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7sxl1"]
+size = Vector2(36, 127.5)
+
+[node name="ArenaTrigger" type="Area2D"]
+script = ExtResource("1_3tb6i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_7sxl1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

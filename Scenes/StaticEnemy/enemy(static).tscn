@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://7l5d76b5c38w"]
 
-[ext_resource type="Script" uid="uid://brge3d7osndat" path="res://Scripts/StaticEnemy/enemy(static).gd" id="1_4yuyf"]
+[ext_resource type="Script" uid="uid://ddtwphof0c8r6" path="res://Scripts/StaticEnemy/enemy(static).gd" id="1_4yuyf"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_4wowu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_47qst"]

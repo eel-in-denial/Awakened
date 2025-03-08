@@ -4,11 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://31sdqryt5ngg" path="res://Scenes/enemy.tscn" id="3_piit1"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="4_dhn0g"]
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/enemy(walking).tscn" id="6_tnqfh"]
-[ext_resource type="PackedScene" uid="uid://bxfmudosqwlxf" path="res://Scenes/enemy(flying).tscn" id="7_u5jtg"]
+[ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/enemy(flying).tscn" id="7_u5jtg"]
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/StaticEnemy/enemy(static).tscn" id="8_7kx6t"]
 [ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/GooseBoss/arena_trigger.tscn" id="9_d1h5e"]
 [ext_resource type="Script" uid="uid://djgdiwtx7v661" path="res://Scripts/UI.gd" id="10_ykay3"]
 [ext_resource type="PackedScene" uid="uid://y0fmv42elpro" path="res://Scenes/GooseBoss/goose_boss.tscn" id="11_768pe"]
+
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="11_p2bqg"]
 
 [node name="Prototype" type="Node2D"]
