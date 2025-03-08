@@ -6,7 +6,7 @@ const SPEED: float = 200.0
 @export var burst_cooldown: float = 0.5
 @onready var shriek_projectile = preload("res://Scenes/StaticEnemy/proj.tscn")
 
-var player : CharacterBody2D
+@export var player : CharacterBody2D
 var current_state = "Idle"
 var burst_timer = 0.0
 var cooldown_timer = 0.0
@@ -17,7 +17,7 @@ var health := 3
 var projectile_fired: bool = false
 
 func _ready():
-	player = get_node("../Player")
+	pass
 
 func _physics_process(delta):
 	match current_state:

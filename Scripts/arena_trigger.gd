@@ -1,5 +1,6 @@
 extends Area2D
 
+
 @export var tilemap: TileMapLayer
 @export var boss: Node2D
 @export var bossPos: Marker2D

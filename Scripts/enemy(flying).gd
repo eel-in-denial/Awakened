@@ -9,14 +9,12 @@ var currentState := "Patrol"
 var currentTarget: Marker2D
 var detectionRange := 150.0
 
-var pointA : Marker2D
-var pointB : Marker2D
-var player: Node2D
+@export var pointA : Marker2D
+@export var pointB : Marker2D
+@export var player: Player
 
 func _ready() -> void:
-	player = get_node("../Player")
-	pointA = get_node("../PatrolPositionA2")
-	pointB = get_node("../PatrolPositionB2")
+	get_tree().physics_frame
 	if pointA:
 		currentTarget = pointA
 	pass

@@ -12,23 +12,17 @@ var health = 50
 var currentState : String
 var currentTarget: Marker2D
 
-var pointA : Marker2D
-var pointB : Marker2D
-var leftBound : Marker2D
-var rightBound : Marker2D
-var centerMarker: Marker2D
-var player: Node2D
+@export var pointA : Marker2D
+@export var pointB : Marker2D
+@export var leftBound : Marker2D
+@export var rightBound : Marker2D
+@export var centerMarker: Marker2D
+@export var player: Node2D
 var last_spawn_x
 
 var rain_accumulator := 0.0
 
 func _ready() -> void:
-	player = get_node("../Player")
-	pointA = get_node("../PatrolPositionA3")
-	pointB = get_node("../PatrolPositionB3")
-	leftBound = get_node("../ArenaLeftEdge")
-	rightBound = get_node("../ArenaRightEdge")
-	centerMarker = get_node("../CenterMarker")
 	if pointA:
 		currentTarget = pointA
 		
