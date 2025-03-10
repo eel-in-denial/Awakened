@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed: float = 30.0
+@export var speed: float = 300.0
 var direction: Vector2 = Vector2.ZERO
 
 # Optional: Limit the number of bounces before the projectile disappears.

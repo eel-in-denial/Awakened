@@ -10,6 +10,8 @@ size = Vector2(94, 89)
 size = Vector2(116, 109)
 
 [node name="HornetBoss" type="CharacterBody2D" groups=["Bosses"]]
+collision_layer = 4
+collision_mask = 7
 script = ExtResource("1_hl75p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

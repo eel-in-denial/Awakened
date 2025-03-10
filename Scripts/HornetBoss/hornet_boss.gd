@@ -21,7 +21,7 @@ var centerMarker: Marker2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var hornet_projectile_scene = preload("res://Scenes/HornetBoss/hornet_boss_projectile.tscn")
-#@onready var small_hornet_scene = preload("res://Scenes/StaticEnemy/enemy(static).tscn")
+@onready var small_hornet_scene = preload("res://Scenes/StaticEnemy/enemy(static).tscn")
 
 var currentState: String = "Idle"
 var player: Node2D
@@ -34,7 +34,7 @@ func _ready() -> void:
 	
 
 func _start_fight() -> void:
-	global_position = centerMarker.global_position + Vector2(0, -300)
+	global_position = centerMarker.global_position + Vector2(0, -400)
 	currentState = "Spawn"
 	
 	dash_timer.wait_time = 2.0
@@ -53,8 +53,8 @@ func _physics_process(delta: float) -> void:
 			_dash(delta)
 		"Projectile":
 			_projectile(delta)
-		#"Ultimate":
-			#_ultimate(delta)
+		"Ultimate":
+			_ultimate(delta)
 		"Recovery":
 			_recovery(delta)
 
@@ -63,7 +63,7 @@ func _spawn(delta: float) -> void:
 	global_position = global_position.move_toward(target, Recovery_speed * delta)
 	if global_position.distance_to(target) < 2:
 		global_position = target
-		currentState = "Projectile"
+		currentState = "Idle"
 		await get_tree().create_timer(3.0).timeout  
 		attack_timer.start()
 
@@ -110,16 +110,17 @@ func _projectile(delta: float) -> void:
 	currentState = "Idle"
 	attack_timer.start(3.0)
 
-#
-#func _ultimate(delta: float) -> void:
-	#var spawn_count = randi() % 3 + 3  # random between 3 and 5
-	#for i in range(spawn_count):
-		#var spawn_offset = Vector2(randf_range(-50, 50), randf_range(-50, 50))
-		#var small_hornet = small_hornet_scene.instantiate()
-		#small_hornet.global_position = global_position + spawn_offset
-		#get_parent().add_child(small_hornet)
-	#currentState = "Idle"
-	#attack_timer.start()
+func _ultimate(delta: float) -> void:
+	var spawn_count = 3
+	for i in range(spawn_count):
+		var spawn_offset = Vector2(randf_range(-200, 200), randf_range(-200, 200))
+		var small_hornet = small_hornet_scene.instantiate()
+		small_hornet.player = player
+		small_hornet.global_position = global_position + spawn_offset
+		get_parent().add_child(small_hornet)
+		small_hornet.current_state = "Chasing"
+	currentState = "Idle"
+	attack_timer.start()
 
 func _on_attack_timer_timeout() -> void:
 	var attack_choice = randi() % 10
@@ -131,7 +132,6 @@ func _on_attack_timer_timeout() -> void:
 		currentState = "Projectile"
 	else:
 		currentState = "Ultimate"
-	#print("Chosen attack: ", currentState)
 
 func _on_ultimate_timer_timeout() -> void:
 	currentState = "Idle"
