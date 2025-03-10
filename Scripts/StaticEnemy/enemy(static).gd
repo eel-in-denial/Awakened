@@ -7,7 +7,7 @@ const SPEED: float = 200.0
 @onready var shriek_projectile = preload("res://Scenes/StaticEnemy/proj.tscn")
 
 @export var player : CharacterBody2D
-var current_state = "Idle"
+@onready var current_state = "Idle"
 var burst_timer = 0.0
 var cooldown_timer = 0.0
 var detectionRange := 150.0
