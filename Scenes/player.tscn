@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://ctakur372je0n"]
 
-[ext_resource type="Script" uid="uid://b2metb1g1na51" path="res://Scripts/player.gd" id="1_dhtk5"]
+[ext_resource type="Script" uid="uid://cmcow6dcmd0ak" path="res://Scripts/player.gd" id="1_dhtk5"]
 [ext_resource type="Texture2D" uid="uid://dmrx8803ipk6e" path="res://Assets/Owlet_Monster_Run_6.png" id="2_sboit"]
 [ext_resource type="Texture2D" uid="uid://c6x8hajsjiyjr" path="res://Assets/Owlet_Monster_Jump_8.png" id="3_f2dju"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="3_xle8d"]
