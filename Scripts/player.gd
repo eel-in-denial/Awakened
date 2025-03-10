@@ -145,10 +145,11 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 
 func _process(delta: float) -> void:
-	movement_animation.set("parameters/Run/blend_position", direction)
-	movement_animation.set("parameters/Idle/blend_position", direction)
-	movement_animation.set("parameters/Jump/blend_position", direction)
+	movement_animation.set("parameters/Run/blend_position", direction.x)
+	movement_animation.set("parameters/Idle/blend_position", direction.x)
+	movement_animation.set("parameters/Jump/blend_position", direction.x)
 	attack_animation.set("parameters/Slash/blend_position", direction)
+	print(direction)
 	
 func set_state(new_state: int) -> void:
 	prev_state = current_state

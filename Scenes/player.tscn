@@ -527,58 +527,6 @@ states/Run/position = Vector2(435, 64)
 states/Start/position = Vector2(268, 287)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_p7qus"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_lgxfv"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_lswvx"), "Idle", "Jump", SubResource("AnimationNodeStateMachineTransition_fod6d"), "Jump", "Idle", SubResource("AnimationNodeStateMachineTransition_bmxer"), "Run", "Jump", SubResource("AnimationNodeStateMachineTransition_kx68e"), "Jump", "Run", SubResource("AnimationNodeStateMachineTransition_uduke")]
 
-[sub_resource type="Animation" id="Animation_3smsa"]
-resource_name = "AttackUp"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../Sword area/CollisionShape2D:disabled")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../Sword area:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../Sword area:rotation")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../Sword area:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(5, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_8erm5"]
 resource_name = "AttackDown"
 length = 0.4
@@ -658,6 +606,30 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sword area:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sword area:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_tx1dd"]
 resource_name = "AttackRight"
@@ -686,6 +658,85 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sword area:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sword area:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3smsa"]
+resource_name = "AttackUp"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sword area/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Sword area:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Sword area:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../Sword area:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(5, 0), Vector2(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pu2lt"]
+resource_name = "IdleAttack"
 
 [sub_resource type="Animation" id="Animation_gymyn"]
 length = 0.001
@@ -701,9 +752,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(-5, 0)]
 }
-
-[sub_resource type="Animation" id="Animation_pu2lt"]
-resource_name = "IdleAttack"
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pu2lt"]
 _data = {
@@ -732,13 +780,14 @@ animation = &"AttackDown"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_igrcy"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_7dp3o")
-blend_point_0/pos = Vector2(1, 0)
+blend_point_0/pos = Vector2(0.5, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_h4iuc")
-blend_point_1/pos = Vector2(-1, 0)
+blend_point_1/pos = Vector2(-0.5, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_fd4e3")
 blend_point_2/pos = Vector2(0, -1)
 blend_point_3/node = SubResource("AnimationNodeAnimation_qqcod")
 blend_point_3/pos = Vector2(0, 1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fs7ks"]
 advance_mode = 2
@@ -810,7 +859,7 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../MovementAnim")
 parameters/Idle/blend_position = -0.00895524
 parameters/Jump/blend_position = -0.408955
-parameters/Run/blend_position = -0.298507
+parameters/Run/blend_position = 0.411043
 
 [node name="AttackAnim" type="AnimationPlayer" parent="."]
 root_node = NodePath("../MovementAnim")
@@ -823,7 +872,7 @@ root_node = NodePath("../MovementAnim")
 tree_root = SubResource("AnimationNodeStateMachine_3smsa")
 advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AttackAnim")
-parameters/Slash/blend_position = Vector2(-0.7422, 0.241758)
+parameters/Slash/blend_position = Vector2(-0.0394089, 0.230769)
 
 [connection signal="body_entered" from="Sword area" to="." method="_on_sword_area_body_entered"]
 [connection signal="body_exited" from="Sword area" to="." method="_on_sword_area_body_exited"]

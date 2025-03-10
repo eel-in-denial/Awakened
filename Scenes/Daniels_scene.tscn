@@ -14,7 +14,7 @@
 [node name="Prototype" type="Node2D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") groups=["Walls"] instance=ExtResource("1_f7rvy")]
-position = Vector2(-265, 132)
+position = Vector2(1321, 465)
 UI = NodePath("../UI")
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -50,7 +50,7 @@ tile_set = ExtResource("4_dhn0g")
 metadata/_edit_lock_ = true
 
 [node name="Goose" type="Node2D" parent="."]
-position = Vector2(-167, 299)
+position = Vector2(-111, 178)
 
 [node name="GooseBoss" parent="Goose" node_paths=PackedStringArray("pointA", "pointB", "leftBound", "rightBound", "centerMarker", "player") instance=ExtResource("11_768pe")]
 pointA = NodePath("../PatrolPositionA3")
