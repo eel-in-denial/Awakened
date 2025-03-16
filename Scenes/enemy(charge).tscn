@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv48u0wscuwoc"]
+[gd_scene load_steps=5 format=3 uid="uid://ck2jcklave3sf"]
 
-[ext_resource type="Script" uid="uid://c6c22ontn0iem" path="res://Scripts/enemies.gd" id="1_pudhf"]
+[ext_resource type="Script" uid="uid://cnh14onuij2xp" path="res://Scripts/enemy(charge).gd" id="1_4e1m4"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_x8mkn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwbrn"]
@@ -9,7 +9,8 @@
 size = Vector2(28, 23)
 
 [node name="Enemy1" type="CharacterBody2D" groups=["Enemies"]]
-script = ExtResource("1_pudhf")
+collision_layer = 4
+script = ExtResource("1_4e1m4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hwbrn")

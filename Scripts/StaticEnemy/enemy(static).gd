@@ -11,9 +11,8 @@ const SPEED: float = 200.0
 var burst_timer = 0.0
 var cooldown_timer = 0.0
 var detectionRange := 150.0
-var health := 3
+var health := 2
 
-# Flag to ensure we fire only one projectile per burst cycle
 var projectile_fired: bool = false
 
 func _ready():
@@ -39,7 +38,6 @@ func chase_player(delta):
 		burst_timer -= delta
 	else:
 		velocity = Vector2.ZERO
-		# Fire a projectile only once when burst stops
 		if not projectile_fired:
 			fire_proj()
 			projectile_fired = true
@@ -48,7 +46,6 @@ func chase_player(delta):
 		if cooldown_timer <= 0:
 			burst_timer = burst_duration
 			cooldown_timer = burst_cooldown
-			# Reset the flag for the next burst
 			projectile_fired = false
 
 	move_and_slide()
@@ -57,7 +54,7 @@ func fire_proj() -> void:
 	var projectile = shriek_projectile.instantiate()
 	projectile.global_position = global_position
 	projectile.direction = (player.global_position - global_position).normalized()
-	projectile.shooter = self  # Set the enemy as the shooter
+	projectile.shooter = self 
 	get_parent().add_child(projectile)
 	
 func _on_enemy_body_contact(body: Node2D) -> void:

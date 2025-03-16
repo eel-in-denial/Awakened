@@ -1,6 +1,6 @@
 [gd_scene load_steps=44 format=3 uid="uid://ctakur372je0n"]
 
-[ext_resource type="Script" uid="uid://cmcow6dcmd0ak" path="res://Scripts/player.gd" id="1_dhtk5"]
+[ext_resource type="Script" uid="uid://b2metb1g1na51" path="res://Scripts/player.gd" id="1_dhtk5"]
 [ext_resource type="Texture2D" uid="uid://dmrx8803ipk6e" path="res://Assets/Owlet_Monster_Run_6.png" id="2_sboit"]
 [ext_resource type="Texture2D" uid="uid://c6x8hajsjiyjr" path="res://Assets/Owlet_Monster_Jump_8.png" id="3_f2dju"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="3_xle8d"]
@@ -12,7 +12,7 @@
 radius = 7.5
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5jecp"]
-size = Vector2(23, 22)
+size = Vector2(300, 500)
 
 [sub_resource type="Animation" id="Animation_knjl0"]
 length = 0.001
@@ -737,11 +737,13 @@ metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -50)
+offset = Vector2(0, -20)
 metadata/_edit_lock_ = true
 
 [node name="Sword area" type="Area2D" parent="."]
 scale = Vector2(1e-05, 1e-05)
 disable_mode = 2
+collision_mask = 13
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sword area"]

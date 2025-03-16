@@ -147,7 +147,7 @@ func _process(delta: float) -> void:
 func set_state(new_state: int) -> void:
 	prev_state = current_state
 	current_state = new_state
-	print(States.keys()[current_state])
+	#print(States.keys()[current_state])
 	match prev_state:
 		States.DASH:
 			if prev_velocity*direction <= 0:
