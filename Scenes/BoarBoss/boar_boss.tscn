@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://pdkoahpna2jj"]
+
+[ext_resource type="Script" uid="uid://da30jh8lf7vrs" path="res://Scripts/BoarBoss/boar_boss.gd" id="1_g30iv"]
+[ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="2_ityqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lkm0q"]
+size = Vector2(94, 89)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ohd1p"]
+size = Vector2(116, 109)
+
+[node name="BoarBoss" type="CharacterBody2D"]
+script = ExtResource("1_g30iv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lkm0q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.27027, 1)
+texture = ExtResource("2_ityqk")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("RectangleShape2D_ohd1p")
+
+[node name="AttackTimer" type="Timer" parent="."]
+
+[node name="JumpTimer" type="Timer" parent="."]
+
+[node name="UltimateTimer" type="Timer" parent="."]
+
+[node name="ChargeTimer" type="Timer" parent="."]
+
+[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="UltimateTimer" to="." method="_on_ultimate_timer_timeout"]

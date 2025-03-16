@@ -18,7 +18,7 @@ var detectionRange := 150.0
 var dash_direction = Vector2.ZERO
 var player : CharacterBody2D
 
-var recovery_deceleration = 800.0  
+var recovery_deceleration = 300.0  
 var recovery_threshold = 0.1
 
 func _ready() -> void:

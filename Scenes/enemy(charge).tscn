@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv48u0wscuwoc"]
+[gd_scene load_steps=5 format=3 uid="uid://ck2jcklave3sf"]
 
-[ext_resource type="Script" uid="uid://bg200nd2tve6n" path="res://Scripts/enemies.gd" id="1_pudhf"]
+[ext_resource type="Script" uid="uid://cnh14onuij2xp" path="res://Scripts/enemy(charge).gd" id="1_4e1m4"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_x8mkn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwbrn"]

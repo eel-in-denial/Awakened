@@ -1,5 +1,6 @@
 extends Area2D
 
+
 @export var tilemap: TileMapLayer
 @export var boss: Node2D
 @export var bossPos: Marker2D
@@ -16,14 +17,16 @@ func _on_body_entered(body):
 		player._boss_camera()
 		isTriggered = true
 		
+
 func close_door():
 	if tilemap:
 		tilemap.visible = true
 		tilemap.collision_enabled = true
 		
 func spawn_boss():
-	var boss_scene = preload("res://Scenes/HornetBoss/hornet_boss.tscn")
+	var boss_scene = preload("res://Scenes/BoarBoss/boar_boss.tscn")
 	var boss_instance = boss_scene.instantiate()
 	get_parent().add_child(boss_instance) 
-	boss_instance.global_position = bossPos.global_position  
+	boss_instance.global_position = bossPos.global_position + Vector2(0, -300)
+	boss_instance.player = player
 	boss_instance._start_fight()  
