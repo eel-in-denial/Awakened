@@ -7,14 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/enemy(flying).tscn" id="7_u5jtg"]
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/StaticEnemy/enemy(static).tscn" id="8_7kx6t"]
 [ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/GooseBoss/arena_trigger.tscn" id="9_d1h5e"]
-[ext_resource type="Script" uid="uid://djgdiwtx7v661" path="res://Scripts/UI.gd" id="10_ykay3"]
+[ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="10_ykay3"]
 [ext_resource type="PackedScene" uid="uid://y0fmv42elpro" path="res://Scenes/GooseBoss/goose_boss.tscn" id="11_768pe"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="11_p2bqg"]
 
 [node name="Prototype" type="Node2D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") groups=["Walls"] instance=ExtResource("1_f7rvy")]
-position = Vector2(-265, 132)
+position = Vector2(1321, 465)
 UI = NodePath("../UI")
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -32,10 +32,9 @@ position = Vector2(131, 189)
 [node name="Flying Enemy" type="Node2D" parent="Enemies"]
 position = Vector2(461, 334)
 
-[node name="Enemy(Flying)" parent="Enemies/Flying Enemy" node_paths=PackedStringArray("pointA", "pointB", "player") groups=["Enemies"] instance=ExtResource("7_u5jtg")]
+[node name="Enemy(Flying)" parent="Enemies/Flying Enemy" node_paths=PackedStringArray("pointA", "pointB") groups=["Enemies"] instance=ExtResource("7_u5jtg")]
 pointA = NodePath("../PatrolPositionA2")
 pointB = NodePath("../PatrolPositionB2")
-player = NodePath("../../../Player")
 metadata/_edit_lock_ = true
 
 [node name="PatrolPositionB2" type="Marker2D" parent="Enemies/Flying Enemy"]
@@ -50,7 +49,7 @@ tile_set = ExtResource("4_dhn0g")
 metadata/_edit_lock_ = true
 
 [node name="Goose" type="Node2D" parent="."]
-position = Vector2(-167, 299)
+position = Vector2(-111, 178)
 
 [node name="GooseBoss" parent="Goose" node_paths=PackedStringArray("pointA", "pointB", "leftBound", "rightBound", "centerMarker", "player") instance=ExtResource("11_768pe")]
 pointA = NodePath("../PatrolPositionA3")

@@ -8,21 +8,29 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rqpr2"]
 size = Vector2(28, 23)
 
-[node name="Enemy(Flying)" type="CharacterBody2D" groups=["Enemies"]]
+[node name="Node2D" type="Node2D"]
+
+[node name="Enemy(Flying)" type="CharacterBody2D" parent="." node_paths=PackedStringArray("pointA", "pointB")]
 collision_layer = 4
 script = ExtResource("1_y1n5o")
+pointA = NodePath("../pointA")
+pointB = NodePath("../pointB")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy(Flying)"]
 shape = SubResource("RectangleShape2D_eveg5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="Enemy(Flying)"]
 position = Vector2(-0.156262, 8.58307e-06)
 scale = Vector2(0.0158691, 0.0277778)
 texture = ExtResource("2_60crx")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="Enemy(Flying)"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy(Flying)/Hitbox"]
 shape = SubResource("RectangleShape2D_rqpr2")
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
+[node name="pointA" type="Marker2D" parent="."]
+
+[node name="pointB" type="Marker2D" parent="."]
+
+[connection signal="body_entered" from="Enemy(Flying)/Hitbox" to="Enemy(Flying)" method="_on_hitbox_body_entered"]

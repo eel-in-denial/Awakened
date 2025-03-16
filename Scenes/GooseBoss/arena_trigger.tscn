@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://buixklke8spa"]
 
-[ext_resource type="Script" path="res://Scripts/GooseBoss/arena_trigger.gd" id="1_kjqt8"]
+[ext_resource type="Script" uid="uid://6wibod5wbmdo" path="res://Scripts/GooseBoss/arena_trigger.gd" id="1_kjqt8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0xk0"]
 size = Vector2(36, 127.5)

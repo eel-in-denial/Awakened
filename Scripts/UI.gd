@@ -19,4 +19,4 @@ func _process(delta: float) -> void:
 	pass
 
 func remove_heart(num) -> void:
-	hearts_list[player.health-1].visible = false
+	hearts_list[player.health-num].visible = false
