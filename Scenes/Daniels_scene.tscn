@@ -22,9 +22,8 @@ UI = NodePath("../UI")
 [node name="Enemy(Walking)" parent="Enemies" groups=["Enemies"] instance=ExtResource("3_piit1")]
 position = Vector2(905, 437)
 
-[node name="Enemy(Static)" parent="Enemies" node_paths=PackedStringArray("player") groups=["Enemies"] instance=ExtResource("8_7kx6t")]
+[node name="Enemy(Static)" parent="Enemies" groups=["Enemies"] instance=ExtResource("8_7kx6t")]
 position = Vector2(-694, 214)
-player = NodePath("../../Player")
 
 [node name="Enemy1" parent="Enemies" instance=ExtResource("6_tnqfh")]
 position = Vector2(131, 189)
@@ -86,9 +85,8 @@ tile_map_data = PackedByteArray("AAD8//7/AAAAAAAAAAD8////AAAAAAAAAAD8/wAAAAAAAAA
 tile_set = ExtResource("4_dhn0g")
 collision_enabled = false
 
-[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+[node name="UI" type="CanvasLayer" parent="."]
 script = ExtResource("10_ykay3")
-player = NodePath("../Player")
 
 [node name="Health Bar" type="HBoxContainer" parent="UI"]
 offset_right = 40.0

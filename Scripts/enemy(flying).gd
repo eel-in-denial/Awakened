@@ -15,8 +15,6 @@ var detectionRange := 150.0
 @export var pointB : Marker2D
 @onready var player = Global.player
 
-#@export_tool_button("Set_Pointer", "Callable") var set_point = set_pointer
-
 var dash_direction: Vector2 = Vector2.ZERO
 var dash_initiated: bool = false
 
@@ -97,5 +95,3 @@ func _die() -> void:
 	
 func is_on_surface() -> bool:
 	return is_on_ceiling() or is_on_floor() or is_on_wall()
-func set_pointer():
-	print("Hello")

@@ -17,6 +17,7 @@ const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
 const ATTACK_DURATION := 0.5
 const KNOCKBACK_HEIGHT := -250.0
+const MAX_HEALTH := 10.0
 var dash_time := 0.0
 var iframe_timer := 0.0
 var attack_timer := 0.0
@@ -26,7 +27,7 @@ var direction := Vector2(1, 0)
 var knock_direction := 0.0
 var prev_velocity := 0.0
 var moving := 0.0
-var health := 3
+var health := MAX_HEALTH
 var camera_return_offset: Vector2 = Vector2(0, -20)
 var camera_hold_duration: float = 0.0
 var camera_pan_duration: float = 0.0
@@ -35,8 +36,8 @@ var canMove = true
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
 @onready var damage_overlay = $damageOverlay
-@onready var movement_animation = $MovementAnimTree
-@onready var attack_animation = $AttackAnimTree
+@onready var leg_animation = $PlayerLegsAnim
+@onready var body_animation = $PlayerBodyAnim
 @export var UI: CanvasLayer
 @onready var camera = $Camera2D 
 
@@ -144,14 +145,12 @@ func _physics_process(delta: float) -> void:
 			is_invinsible = false
 	if canMove:
 		move_and_slide()
-
-func _process(_delta: float) -> void:
-	movement_animation.set("parameters/Run/blend_position", direction.x)
-	movement_animation.set("parameters/Idle/blend_position", direction.x)
-	movement_animation.set("parameters/Jump/blend_position", direction.x)
-	attack_animation.set("parameters/Slash/blend_position", direction)
-	attack_animation.set("parameters/Run/blend_position", direction.x)
-	attack_animation.set("parameters/Idle/blend_position", direction.x)
+	leg_animation.set("parameters/Run/blend_position", direction.x)
+	leg_animation.set("parameters/Idle/blend_position", direction.x)
+	leg_animation.set("parameters/Jump/blend_position", direction.x)
+	body_animation.set("parameters/Slash/blend_position", direction)
+	body_animation.set("parameters/Run/blend_position", direction.x)
+	body_animation.set("parameters/Idle/blend_position", direction.x)
 	
 func set_state(new_state: States) -> void:
 	prev_state = current_state
@@ -202,6 +201,7 @@ func set_attack(new_atk_state: Attack_States) -> void:
 			attack_timer = ATTACK_DURATION
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
+	print(body, body.is_in_group("Enemies"))
 	if body.is_in_group("Enemies"):
 		body._deal_damage(1)
 
@@ -235,7 +235,7 @@ func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
 		return
 		
 	health -= damage
-	UI.remove_heart(damage)
+	UI.update()
 	if global_position.x < enemy_position.x:
 		knock_direction = -1
 	else:

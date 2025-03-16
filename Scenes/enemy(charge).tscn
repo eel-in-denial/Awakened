@@ -10,8 +10,7 @@ size = Vector2(28, 23)
 
 [node name="Enemy1" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 4
-collision_mask = 2
-script = ExtResource("1_pudhf")
+script = ExtResource("1_4e1m4")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_hwbrn")
@@ -23,6 +22,7 @@ texture = ExtResource("2_x8mkn")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(12, 9)
+collision_layer = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-12, -9)
