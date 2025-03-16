@@ -152,7 +152,6 @@ func _process(_delta: float) -> void:
 	attack_animation.set("parameters/Slash/blend_position", direction)
 	attack_animation.set("parameters/Run/blend_position", direction.x)
 	attack_animation.set("parameters/Idle/blend_position", direction.x)
-	print(direction)
 	
 func set_state(new_state: States) -> void:
 	prev_state = current_state

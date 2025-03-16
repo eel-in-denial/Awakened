@@ -899,7 +899,7 @@ advance_expression_base_node = NodePath("..")
 anim_player = NodePath("../AttackAnim")
 parameters/Idle/blend_position = 0.378834
 parameters/Run/blend_position = 0
-parameters/Slash/blend_position = Vector2(-0.0394089, 0.230769)
+parameters/Slash/blend_position = 0.0
 
 [connection signal="body_entered" from="Sword area" to="." method="_on_sword_area_body_entered"]
 [connection signal="body_exited" from="Sword area" to="." method="_on_sword_area_body_exited"]

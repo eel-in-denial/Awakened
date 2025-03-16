@@ -32,9 +32,7 @@ position = Vector2(131, 189)
 [node name="Flying Enemy" type="Node2D" parent="Enemies"]
 position = Vector2(461, 334)
 
-[node name="Enemy(Flying)" parent="Enemies/Flying Enemy" node_paths=PackedStringArray("pointA", "pointB") groups=["Enemies"] instance=ExtResource("7_u5jtg")]
-pointA = NodePath("../PatrolPositionA2")
-pointB = NodePath("../PatrolPositionB2")
+[node name="Enemy(Flying)" parent="Enemies/Flying Enemy" groups=["Enemies"] instance=ExtResource("7_u5jtg")]
 metadata/_edit_lock_ = true
 
 [node name="PatrolPositionB2" type="Marker2D" parent="Enemies/Flying Enemy"]
