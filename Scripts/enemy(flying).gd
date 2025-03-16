@@ -1,3 +1,4 @@
+
 extends CharacterBody2D
 
 const SPEED = 150.0
@@ -11,10 +12,11 @@ var detectionRange := 150.0
 
 @export var pointA : Marker2D
 @export var pointB : Marker2D
-@export var player: Player
+@onready var player = Global.player
+
+#@export_tool_button("Set_Pointer", "Callable") var set_point = set_pointer
 
 func _ready() -> void:
-	get_tree().physics_frame
 	if pointA:
 		currentTarget = pointA
 	pass
@@ -82,3 +84,6 @@ func _deal_damage(damage: int) -> void:
 
 func _die() -> void:
 	queue_free()
+	
+func set_pointer():
+	print("Hello")

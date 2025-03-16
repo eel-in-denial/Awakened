@@ -5,7 +5,6 @@ var direction := 1
 var health = 3
 @onready var hitbox: Area2D = $Hitbox
 @onready var ledge_detector: RayCast2D = $LedgeDetector
-@onready var Player: Node2D = get_tree().get_nodes_in_group("Player")[0]
 var should_turn := true;
 
 func _ready() -> void:

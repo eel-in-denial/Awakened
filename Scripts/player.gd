@@ -22,7 +22,7 @@ var iframe_timer := 0.0
 var attack_timer := 0.0
 var corner_jump := false
 var is_invinsible := false
-var direction := Vector2.ZERO
+var direction := Vector2(1, 0)
 var knock_direction := 0.0
 var prev_velocity := 0.0
 var moving := 0.0
@@ -46,6 +46,7 @@ var canMove = true
 func _ready() -> void:
 	centerMarker = get_node("../CenterMarker")
 	sword_collision.disabled = true
+	Global.player = self
 	
 
 func _movement(delta: float) -> void:
@@ -144,14 +145,16 @@ func _physics_process(delta: float) -> void:
 	if canMove:
 		move_and_slide()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	movement_animation.set("parameters/Run/blend_position", direction.x)
 	movement_animation.set("parameters/Idle/blend_position", direction.x)
 	movement_animation.set("parameters/Jump/blend_position", direction.x)
 	attack_animation.set("parameters/Slash/blend_position", direction)
+	attack_animation.set("parameters/Run/blend_position", direction.x)
+	attack_animation.set("parameters/Idle/blend_position", direction.x)
 	print(direction)
 	
-func set_state(new_state: int) -> void:
+func set_state(new_state: States) -> void:
 	prev_state = current_state
 	current_state = new_state
 	print(States.keys()[current_state])
@@ -186,12 +189,12 @@ func set_state(new_state: int) -> void:
 			velocity.x = knock_direction*250
 			velocity.y = KNOCKBACK_HEIGHT
 			iframe_timer = HURT_DURATION
-			var tween: Tween = create_tween().set_loops(HURT_DURATION/0.5)
+			var tween: Tween = create_tween().set_loops(HURT_DURATION*2)
 			tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
 		States.WALLCLING:
 			velocity.y = 0
 			
-func set_attack(new_atk_state: int) -> void:
+func set_attack(new_atk_state: Attack_States) -> void:
 	current_atk_state = new_atk_state
 	match current_atk_state:
 		Attack_States.IDLE:

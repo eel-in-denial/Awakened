@@ -8,10 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/StaticEnemy/enemy(static).tscn" id="8_f0mfx"]
 [ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/GooseBoss/arena_trigger.tscn" id="9_dhdm6"]
 [ext_resource type="PackedScene" uid="uid://bwxm655b3iate" path="res://Scenes/HornetBoss/arena_trigger.tscn" id="9_laxqo"]
-[ext_resource type="Script" uid="uid://djgdiwtx7v661" path="res://Scripts/UI.gd" id="10_jw3g5"]
+[ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="10_jw3g5"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="11_uxrno"]
 
-[node name="Prototype" type="Node2D"]
+[node name="Prototype" type="Node2D" groups=["Player"]]
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") groups=["Walls"] instance=ExtResource("1_533aw")]
 position = Vector2(218, 5)
@@ -28,11 +28,8 @@ metadata/_edit_lock_ = true
 [node name="Enemy1" parent="." instance=ExtResource("6_cne2q")]
 position = Vector2(131, 189)
 
-[node name="Enemy(Flying)" parent="." node_paths=PackedStringArray("pointA", "pointB", "player") groups=["Enemies"] instance=ExtResource("7_lp75l")]
+[node name="Enemy(Flying)" parent="." groups=["Enemies"] instance=ExtResource("7_lp75l")]
 position = Vector2(895, 228)
-pointA = NodePath("../PatrolPositionB2")
-pointB = NodePath("../PatrolPositionA2")
-player = NodePath("../Player")
 
 [node name="PatrolPositionB2" type="Marker2D" parent="."]
 position = Vector2(1152, 231)
