@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://31sdqryt5ngg" path="res://Scenes/enemy.tscn" id="2_byxas"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_xabcl"]
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/enemy(walking).tscn" id="4_sduc3"]
-[ext_resource type="PackedScene" uid="uid://ck2jcklave3sf" path="res://Scenes/enemy(charge).tscn" id="5_bvt53"]
+[ext_resource type="PackedScene" uid="uid://3q88jhfyphm0" path="res://Scenes/enemy(charging).tscn" id="5_bvt53"]
 [ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/enemy(flying).tscn" id="6_vlddq"]
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/StaticEnemy/enemy(static).tscn" id="7_hb2iw"]
 [ext_resource type="PackedScene" uid="uid://bwxm655b3iate" path="res://Scenes/HornetBoss/arena_trigger.tscn" id="8_4dwmg"]
@@ -43,11 +43,8 @@ position = Vector2(-3714, 1681)
 [node name="Enemy(charge)2" parent="." instance=ExtResource("5_bvt53")]
 position = Vector2(-5411, 465)
 
-[node name="Enemy(Flying)" parent="." node_paths=PackedStringArray("pointA", "pointB", "player") instance=ExtResource("6_vlddq")]
+[node name="Enemy(Flying)" parent="." instance=ExtResource("6_vlddq")]
 position = Vector2(-5414, 577)
-pointA = NodePath("../PatrolPositionB2")
-pointB = NodePath("../PatrolPositionA2")
-player = NodePath("../Player")
 
 [node name="PatrolPositionB2" type="Marker2D" parent="."]
 position = Vector2(-5171, 577)
