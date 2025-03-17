@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_nwpuv"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_xabcl"]
+
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/Enemies/enemy(walking).tscn" id="4_sduc3"]
 [ext_resource type="PackedScene" uid="uid://ck2jcklave3sf" path="res://Scenes/Enemies/enemy(charge).tscn" id="5_bvt53"]
 [ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/Enemies/enemy(flying).tscn" id="6_vlddq"]
