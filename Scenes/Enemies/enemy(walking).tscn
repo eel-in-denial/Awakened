@@ -1,15 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://cs0gjj4iq26v5"]
+[gd_scene load_steps=5 format=3 uid="uid://gxfwy6fxcl77"]
 
-[ext_resource type="Script" uid="uid://bg200nd2tve6n" path="res://Scripts/enemies.gd" id="1_pudhf"]
+[ext_resource type="Script" uid="uid://bg200nd2tve6n" path="res://Scripts/enemy(walking).gd" id="1_pudhf"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_x8mkn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hwbrn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1001u"]
-size = Vector2(28, 23)
+size = Vector2(32, 23)
 
 [node name="Enemy1" type="CharacterBody2D" groups=["Enemies"]]
 collision_layer = 4
+collision_mask = 18
 script = ExtResource("1_pudhf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -22,6 +23,7 @@ texture = ExtResource("2_x8mkn")
 
 [node name="Hitbox" type="Area2D" parent="."]
 position = Vector2(12, 9)
+collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 position = Vector2(-12, -9)

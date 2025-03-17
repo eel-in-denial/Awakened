@@ -4,7 +4,7 @@ const SPEED: float = 200.0
 @export var detection_range: float = 150.0
 @export var burst_duration: float = 0.5
 @export var burst_cooldown: float = 0.5
-@onready var shriek_projectile = preload("res://Scenes/StaticEnemy/proj.tscn")
+@onready var shriek_projectile = preload("res://Scenes/Enemies/StaticEnemy/proj.tscn")
 
 @onready var player = Global.player
 @onready var current_state = "Idle"

@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b2yh1t0op3ecn"]
 
-[ext_resource type="Script" uid="uid://nctxlubjpa1v" path="res://Scenes/pointer.gd" id="1_a2gf7"]
+[ext_resource type="Script" uid="uid://nctxlubjpa1v" path="res://Scripts/pointer.gd" id="1_a2gf7"]
 [ext_resource type="Script" uid="uid://nil0vr0bjbra" path="res://Scripts/enemy(flying).gd" id="1_y1n5o"]
 [ext_resource type="Texture2D" uid="uid://lcb2ic7ci6mu" path="res://Assets/Rolled.jpg" id="2_60crx"]
 

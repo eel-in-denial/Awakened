@@ -21,7 +21,7 @@ var centerMarker: Marker2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 @onready var hornet_projectile_scene = preload("res://Scenes/HornetBoss/hornet_boss_projectile.tscn")
-@onready var small_hornet_scene = preload("res://Scenes/StaticEnemy/enemy(static).tscn")
+@onready var small_hornet_scene = preload("res://Scenes/Enemies/StaticEnemy/enemy(static).tscn")
 
 var currentState: String = "Idle"
 var player: Node2D
