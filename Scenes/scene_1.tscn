@@ -1,8 +1,7 @@
-[gd_scene load_steps=16 format=4 uid="uid://1utfac8h3kp6"]
+[gd_scene load_steps=15 format=4 uid="uid://1utfac8h3kp6"]
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_nwpuv"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_xabcl"]
-
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/Enemies/enemy(walking).tscn" id="4_sduc3"]
 [ext_resource type="PackedScene" uid="uid://ck2jcklave3sf" path="res://Scenes/Enemies/enemy(charge).tscn" id="5_bvt53"]
 [ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/Enemies/enemy(flying).tscn" id="6_vlddq"]
@@ -19,7 +18,7 @@
 [node name="Prototype" type="Node2D"]
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_nwpuv")]
-position = Vector2(-674, 1591)
+position = Vector2(-111, 152)
 UI = NodePath("../UI")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -59,7 +58,7 @@ position = Vector2(701, -320)
 position = Vector2(-113, -308)
 
 [node name="CenterMarker" type="Marker2D" parent="."]
-position = Vector2(351, 17)
+position = Vector2(367, 129)
 
 [node name="PatrolPositionA3" type="Marker2D" parent="."]
 position = Vector2(44, -45)
@@ -68,10 +67,10 @@ position = Vector2(44, -45)
 position = Vector2(666, -47)
 
 [node name="ArenaTrigger3" parent="." instance=ExtResource("8_byxas")]
-position = Vector2(120, -417)
+position = Vector2(-21, 123)
 
 [node name="ArenaTrigger2" parent="." instance=ExtResource("8_4dwmg")]
-position = Vector2(-46, 127)
+position = Vector2(73, -416)
 
 [node name="ArenaTrigger" parent="." instance=ExtResource("9_t36cl")]
 position = Vector2(-36, -423)
