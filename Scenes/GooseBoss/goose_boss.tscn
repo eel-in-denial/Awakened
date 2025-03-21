@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://y0fmv42elpro"]
+[gd_scene load_steps=6 format=3 uid="uid://y0fmv42elpro"]
 
 [ext_resource type="Script" uid="uid://diglr7rjxdi7i" path="res://Scripts/GooseBoss/goose_boss.gd" id="1_717ya"]
+[ext_resource type="Script" uid="uid://m5flcknk44eb" path="res://Scripts/pointerGoose.gd" id="1_wwpk0"]
 [ext_resource type="Texture2D" uid="uid://bfjbqrbgb488m" path="res://Assets/Biblical goose1.png" id="2_5j0aq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xj6ly"]
@@ -9,28 +10,53 @@ size = Vector2(94, 89)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c1kbm"]
 size = Vector2(116, 109)
 
-[node name="GooseBoss" type="CharacterBody2D"]
-collision_layer = 4
-script = ExtResource("1_717ya")
+[node name="GooseBoss" type="Node2D" node_paths=PackedStringArray("points")]
+script = ExtResource("1_wwpk0")
+points = [NodePath("pointA"), NodePath("pointB"), NodePath("leftBound"), NodePath("rightBound"), NodePath("centreMarker")]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["Bosses"]]
+[node name="GooseBoss" type="CharacterBody2D" parent="." node_paths=PackedStringArray("pointA", "pointB", "leftBound", "rightBound", "centerMarker") groups=["Bosses", "Enemies"]]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_717ya")
+pointA = NodePath("../pointA")
+pointB = NodePath("../pointB")
+leftBound = NodePath("../leftBound")
+rightBound = NodePath("../rightBound")
+centerMarker = NodePath("../centreMarker")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GooseBoss" groups=["Bosses"]]
 shape = SubResource("RectangleShape2D_xj6ly")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="GooseBoss"]
 texture_filter = 1
 texture = ExtResource("2_5j0aq")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="GooseBoss"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GooseBoss/Hitbox"]
 shape = SubResource("RectangleShape2D_c1kbm")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="GooseBoss"]
 wait_time = 3.0
 
-[node name="UltimateTimer" type="Timer" parent="."]
+[node name="UltimateTimer" type="Timer" parent="GooseBoss"]
 wait_time = 7.0
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="UltimateTimer" to="." method="_on_ultimate_timer_timeout"]
+[node name="pointA" type="Marker2D" parent="."]
+top_level = true
+
+[node name="pointB" type="Marker2D" parent="."]
+top_level = true
+
+[node name="leftBound" type="Marker2D" parent="."]
+top_level = true
+
+[node name="rightBound" type="Marker2D" parent="."]
+top_level = true
+
+[node name="centreMarker" type="Marker2D" parent="."]
+top_level = true
+
+[connection signal="body_entered" from="GooseBoss/Hitbox" to="GooseBoss" method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="GooseBoss/AttackTimer" to="GooseBoss" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="GooseBoss/UltimateTimer" to="GooseBoss" method="_on_ultimate_timer_timeout"]

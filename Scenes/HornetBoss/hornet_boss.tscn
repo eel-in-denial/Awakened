@@ -9,7 +9,7 @@ size = Vector2(94, 89)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q1ls"]
 size = Vector2(116, 109)
 
-[node name="HornetBoss" type="CharacterBody2D" groups=["Bosses"]]
+[node name="HornetBoss" type="CharacterBody2D" groups=["Bosses", "Enemies"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_hl75p")

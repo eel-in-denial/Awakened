@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="6_ywlpg"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="7_y2kox"]
 [ext_resource type="PackedScene" uid="uid://7l5d76b5c38w" path="res://Scenes/Enemies/StaticEnemy/enemy(static).tscn" id="8_1rdkb"]
-[ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/GooseBoss/arena_trigger.tscn" id="9_ein2r"]
+[ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/arena_door.tscn" id="9_ein2r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ux8i6"]
 size = Vector2(1278, 57)

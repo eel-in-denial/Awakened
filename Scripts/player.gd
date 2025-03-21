@@ -201,7 +201,6 @@ func set_attack(new_atk_state: Attack_States) -> void:
 			attack_timer = ATTACK_DURATION
 
 func _on_sword_area_body_entered(body: Node2D) -> void:
-	print(body, body.is_in_group("Enemies"))
 	if body.is_in_group("Enemies"):
 		body._deal_damage(1)
 

@@ -9,10 +9,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rqpr2"]
 size = Vector2(28, 23)
 
-[node name="Enemy(Flying)" type="Node2D" node_paths=PackedStringArray("pointA", "pointB")]
+[node name="Enemy(Flying)" type="Node2D" node_paths=PackedStringArray("points")]
 script = ExtResource("1_a2gf7")
-pointA = NodePath("pointA")
-pointB = NodePath("pointB")
+points = [NodePath("pointA"), NodePath("pointB")]
 
 [node name="Enemy(Flying)" type="CharacterBody2D" parent="." node_paths=PackedStringArray("pointA", "pointB") groups=["Enemies"]]
 collision_layer = 4
