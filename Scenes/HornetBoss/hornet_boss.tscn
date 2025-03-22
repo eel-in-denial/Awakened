@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx24x260fwfnl"]
+[gd_scene load_steps=6 format=3 uid="uid://cx24x260fwfnl"]
 
 [ext_resource type="Script" uid="uid://dym23c6cbee3x" path="res://Scripts/HornetBoss/hornet_boss.gd" id="1_hl75p"]
 [ext_resource type="Texture2D" uid="uid://c0dd0t08y82ht" path="res://Assets/honk.jpg" id="2_q8un2"]
+[ext_resource type="Script" uid="uid://rnjc35j7w6tf" path="res://Scripts/pointer_hornet.gd" id="3_d0tot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0tot"]
 size = Vector2(94, 89)
@@ -9,31 +10,40 @@ size = Vector2(94, 89)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q1ls"]
 size = Vector2(116, 109)
 
-[node name="HornetBoss" type="CharacterBody2D" groups=["Bosses", "Enemies"]]
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("points")]
+script = ExtResource("3_d0tot")
+points = [NodePath("Marker2D")]
+
+[node name="HornetBoss" type="CharacterBody2D" parent="." node_paths=PackedStringArray("centerMarker", "hornet_main") groups=["Bosses", "Enemies"]]
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_hl75p")
+centerMarker = NodePath("../Marker2D")
+hornet_main = NodePath("..")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HornetBoss"]
 shape = SubResource("RectangleShape2D_d0tot")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="HornetBoss"]
 position = Vector2(0.750004, 0.5)
 scale = Vector2(0.484615, 0.344961)
 texture = ExtResource("2_q8un2")
 
-[node name="Hitbox" type="Area2D" parent="."]
+[node name="Hitbox" type="Area2D" parent="HornetBoss"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HornetBoss/Hitbox"]
 shape = SubResource("RectangleShape2D_4q1ls")
 
-[node name="AttackTimer" type="Timer" parent="."]
+[node name="AttackTimer" type="Timer" parent="HornetBoss"]
 
-[node name="UltimateTimer" type="Timer" parent="."]
+[node name="UltimateTimer" type="Timer" parent="HornetBoss"]
 
-[node name="DashTimer" type="Timer" parent="."]
+[node name="DashTimer" type="Timer" parent="HornetBoss"]
 
-[connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
-[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
-[connection signal="timeout" from="UltimateTimer" to="." method="_on_ultimate_timer_timeout"]
-[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[node name="Marker2D" type="Marker2D" parent="."]
+top_level = true
+
+[connection signal="body_entered" from="HornetBoss/Hitbox" to="HornetBoss" method="_on_hitbox_body_entered"]
+[connection signal="timeout" from="HornetBoss/AttackTimer" to="HornetBoss" method="_on_attack_timer_timeout"]
+[connection signal="timeout" from="HornetBoss/UltimateTimer" to="HornetBoss" method="_on_ultimate_timer_timeout"]
+[connection signal="timeout" from="HornetBoss/DashTimer" to="HornetBoss" method="_on_dash_timer_timeout"]

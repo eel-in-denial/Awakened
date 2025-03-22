@@ -22,3 +22,18 @@ func close_door():
 		
 func spawn_boss():
 	boss_start.emit()
+
+
+func _on_hornet_boss_dead() -> void:
+	collision.set_deferred("disabled", true)
+	sprite.visible = false
+
+
+func _on_goose_boss_dead() -> void:
+	collision.set_deferred("disabled", true)
+	sprite.visible = false
+
+
+func _on_boar_boss_dead() -> void:
+	collision.set_deferred("disabled", true)
+	sprite.visible = false

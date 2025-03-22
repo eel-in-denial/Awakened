@@ -11,7 +11,7 @@ var health = 40
 
 var has_landed = false
 
-@export var player: Node2D
+@onready var player = Global.player
 
 var currentState : String
 var direction: int = -1 
@@ -20,8 +20,11 @@ var ultimate_started = false
 var ultimate_state = ""
 var count: int
 
+signal dead
+
 func _ready() -> void:
-	_start_fight()
+	pass
+	
 
 func _start_fight() -> void:
 	await get_tree().create_timer(2.0).timeout 
@@ -166,4 +169,9 @@ func _deal_damage(damage: int) -> void:
 		_die()
 
 func _die() -> void:
+	dead.emit()
 	queue_free()
+
+
+func _on_arena_door_2_boss_start() -> void:
+	_start_fight()
