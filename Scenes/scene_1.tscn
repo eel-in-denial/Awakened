@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=15 format=4 uid="uid://bchapfvu73jof"]
-
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_nwpuv"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_xabcl"]
@@ -21,9 +19,7 @@
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_nwpuv")]
-
 position = Vector2(-7307, 91)
-
 UI = NodePath("../UI")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -49,12 +45,6 @@ position = Vector2(-3917, -50)
 
 [node name="Enemy(Static)2" parent="." instance=ExtResource("7_hb2iw")]
 position = Vector2(-3837, -723)
-
-[node name="Door" type="TileMapLayer" parent="."]
-visible = false
-tile_map_data = PackedByteArray("AAD9/wUAAQADAAIAAAD9/wQAAQADAAIAAAD9/wMAAQADAAIAAAD9/wIAAQADAAIAAAD9/wEAAQAHAAUAAAD9/wYAAQAIAAQAAAD+/wYAAQACAAQAAAD8/wYAAQAAAAQAAAD8/wEAAQABAAQAAAD7/wEAAQAEAAQAAAD9/wAAAQADAAEAAAD7/wAAAQADAAEAAAA=")
-tile_set = ExtResource("3_xabcl")
-collision_enabled = false
 
 [node name="ArenaLeftEdge" type="Marker2D" parent="."]
 position = Vector2(701, -320)
