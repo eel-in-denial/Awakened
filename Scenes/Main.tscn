@@ -1,6 +1,5 @@
 [gd_scene load_steps=17 format=4 uid="uid://bchapfvu73jof"]
 
-
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_h1m7h"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="2_erwvk"]
 [ext_resource type="PackedScene" uid="uid://ck2jcklave3sf" path="res://Scenes/Enemies/enemy(charge).tscn" id="3_2w5on"]
@@ -17,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://y0fmv42elpro" path="res://Scenes/GooseBoss/goose_boss.tscn" id="13_5jffn"]
 [ext_resource type="PackedScene" uid="uid://pdkoahpna2jj" path="res://Scenes/BoarBoss/boar_boss.tscn" id="14_kpo4j"]
 [ext_resource type="PackedScene" uid="uid://cx24x260fwfnl" path="res://Scenes/HornetBoss/hornet_boss.tscn" id="15_4n42c"]
-
 
 [node name="Main" type="Node2D"]
 metadata/_edit_lock_ = true
@@ -134,36 +132,6 @@ offset_right = -1612.0
 offset_bottom = 79.0
 text = "This is where we will probably have the player enco unter npcs and the first \"village\""
 
-[node name="Enemy4" parent="." instance=ExtResource("4_sduc3")]
-position = Vector2(-2018, 1639)
-
-[node name="GooseBoss" parent="." instance=ExtResource("15_bvt53")]
-position = Vector2(-8142, -42)
-point_pos = Array[Vector2]([Vector2(-8539, -119), Vector2(-7733, -111), Vector2(-8608, -290), Vector2(-7670, -259), Vector2(-8142, -42)])
-
-[node name="Arena Door" parent="." instance=ExtResource("9_t36cl")]
-position = Vector2(-7607, -716)
-
-[node name="Arena Door2" parent="." instance=ExtResource("9_t36cl")]
-position = Vector2(-7610, -1481)
-
-[node name="BoarBoss" parent="." instance=ExtResource("14_sduc3")]
-position = Vector2(-8195, -1540)
-
-[node name="HornetBoss" parent="." instance=ExtResource("15_vlddq")]
-position = Vector2(-8149, -973)
-point_pos = Array[Vector2]([Vector2(-8158, -976)])
-
-[node name="Enemy(Flying)" parent="." instance=ExtResource("15_hb2iw")]
-position = Vector2(-2407, 1577)
-point_pos = Array[Vector2]([Vector2(-2760, 1578), Vector2(-2407, 1577)])
-
-[connection signal="boss_start" from="ArenaTrigger" to="GooseBoss" method="_on_arena_trigger_boss_start"]
-[connection signal="dead" from="GooseBoss" to="ArenaTrigger" method="_on_goose_boss_dead"]
-[connection signal="boss_start" from="Arena Door" to="HornetBoss" method="_on_arena_door_boss_start"]
-[connection signal="boss_start" from="Arena Door2" to="BoarBoss" method="_on_arena_door_2_boss_start"]
-[connection signal="dead" from="BoarBoss" to="Arena Door2" method="_on_boar_boss_dead"]
-[connection signal="dead" from="HornetBoss" to="Arena Door" method="_on_hornet_boss_dead"]
 [connection signal="dead" from="First Level/Bosses/GooseBoss" to="First Level/Bosses/GooseArenaTrigger" method="_on_goose_boss_dead"]
 [connection signal="dead" from="First Level/Bosses/BoarBoss" to="First Level/Bosses/Boar Door" method="_on_boar_boss_dead"]
 [connection signal="dead" from="First Level/Bosses/HornetBoss" to="First Level/Bosses/Hornet Door" method="_on_hornet_boss_dead"]
