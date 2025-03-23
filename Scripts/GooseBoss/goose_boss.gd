@@ -19,6 +19,7 @@ var currentTarget: Marker2D
 @export var rightBound : Marker2D
 @export var centerMarker: Marker2D
 @onready var player = Global.player
+@export var goose_main: Node2D
 var last_spawn_x
 
 var rain_accumulator := 0.0
@@ -165,4 +166,5 @@ func _deal_damage(damage: int) -> void:
 		_die()
 
 func _die() -> void:
+	goose_main.dead.emit()
 	queue_free()

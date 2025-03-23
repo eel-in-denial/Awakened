@@ -2,6 +2,7 @@
 extends Node2D
 @export var points: Array[Marker2D]
 @export var point_pos: Array[Vector2] = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
+signal dead
 
 @export_tool_button("Set Pointer A") var set_a = func():
 	set_pointer(0)

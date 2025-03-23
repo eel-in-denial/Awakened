@@ -13,7 +13,8 @@ var dash_direction
 
 var health = HEALTH
 
-var centerMarker: Marker2D
+@export var centerMarker: Marker2D
+@export var hornet_main: Node2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var attack_timer: Timer = $AttackTimer
 @onready var ultimate_timer: Timer = $UltimateTimer
@@ -27,10 +28,8 @@ var currentState: String = "Idle"
 var player: Node2D
 
 func _ready() -> void:
-	centerMarker = get_node("../CenterMarker")
-	player = get_node("../Player")
+	player = Global.player
 	attack_timer.timeout.connect(_on_attack_timer_timeout)
-	_start_fight()
 	
 
 func _start_fight() -> void:
@@ -104,7 +103,7 @@ func _projectile(delta: float) -> void:
 		var projectile = hornet_projectile_scene.instantiate()
 		projectile.global_position = global_position
 		projectile.direction = base_dir.rotated(angle)
-		get_parent().add_child(projectile)
+		get_tree().get_root().add_child(projectile)
 		projectile.owner = self
 		
 	currentState = "Idle"
@@ -148,4 +147,5 @@ func _deal_damage(damage: int) -> void:
 		_die()
 
 func _die() -> void:
+	hornet_main.dead.emit()
 	queue_free()

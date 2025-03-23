@@ -14,7 +14,7 @@ size = Vector2(116, 109)
 script = ExtResource("1_wwpk0")
 points = [NodePath("pointA"), NodePath("pointB"), NodePath("leftBound"), NodePath("rightBound"), NodePath("centreMarker")]
 
-[node name="GooseBoss" type="CharacterBody2D" parent="." node_paths=PackedStringArray("pointA", "pointB", "leftBound", "rightBound", "centerMarker") groups=["Bosses", "Enemies"]]
+[node name="GooseBoss" type="CharacterBody2D" parent="." node_paths=PackedStringArray("pointA", "pointB", "leftBound", "rightBound", "centerMarker", "goose_main") groups=["Bosses", "Enemies"]]
 collision_layer = 4
 collision_mask = 3
 script = ExtResource("1_717ya")
@@ -23,6 +23,7 @@ pointB = NodePath("../pointB")
 leftBound = NodePath("../leftBound")
 rightBound = NodePath("../rightBound")
 centerMarker = NodePath("../centreMarker")
+goose_main = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GooseBoss" groups=["Bosses"]]
 shape = SubResource("RectangleShape2D_xj6ly")
