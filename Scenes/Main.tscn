@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://bchapfvu73jof"]
+[gd_scene load_steps=17 format=4 uid="uid://bchapfvu73jof"]
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_h1m7h"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="2_erwvk"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cdpak133rukrn" path="res://Assets/health bar.png" id="8_hwpts"]
 [ext_resource type="Texture2D" uid="uid://cuhto7kjb0wuh" path="res://Assets/energy shell.png" id="9_jyqft"]
 [ext_resource type="Texture2D" uid="uid://b1x6w8vbg0g3l" path="res://Assets/energy bar.png" id="10_3tgeq"]
+[ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/Enemies/enemy(flying).tscn" id="10_erwvk"]
 [ext_resource type="Texture2D" uid="uid://chp443iu56iv" path="res://Assets/clock_bar.png" id="11_c4ay3"]
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/Enemies/enemy(walking).tscn" id="12_aht7i"]
 [ext_resource type="PackedScene" uid="uid://y0fmv42elpro" path="res://Scenes/GooseBoss/goose_boss.tscn" id="13_5jffn"]
@@ -20,7 +21,7 @@
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_h1m7h")]
-position = Vector2(-4392, 1664)
+position = Vector2(87, 1448)
 UI = NodePath("../UI")
 
 [node name="First Level" type="Node2D" parent="."]
@@ -73,6 +74,16 @@ position = Vector2(-7610, -1481)
 
 [node name="Hornet Door" parent="First Level/Bosses" instance=ExtResource("5_0sclb")]
 position = Vector2(-7607, -716)
+
+[node name="Enemy1" parent="First Level" instance=ExtResource("3_2w5on")]
+position = Vector2(-5422, 1002)
+
+[node name="Enemy2" parent="First Level" instance=ExtResource("3_2w5on")]
+position = Vector2(-5418, 455)
+
+[node name="Enemy(Flying)" parent="First Level" instance=ExtResource("10_erwvk")]
+position = Vector2(-5234, 1168)
+point_pos = Array[Vector2]([Vector2(-5578, 1167), Vector2(-5234, 1168)])
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("6_sxkr1")
