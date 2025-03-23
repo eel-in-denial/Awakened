@@ -42,7 +42,6 @@ func _start_fight() -> void:
 	ultimate_timer.timeout.connect(_on_ultimate_timer_timeout)
 
 func _physics_process(delta: float) -> void:
-	print(currentState)
 	match currentState:
 		"Spawn":
 			_spawn(delta)

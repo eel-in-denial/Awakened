@@ -61,7 +61,7 @@ func _physics_process(delta):
 	elif state == "Recovery":
 		if abs(velocity.x) < recovery_threshold:
 			state = "Patrol"
-			if dash_direction.x > 0:
+			if direction == 1:
 				animation.play("walking_right")
 			else:
 				animation.play("walking_left")
