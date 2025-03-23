@@ -239,6 +239,7 @@ shape = SubResource("RectangleShape2D_1001u")
 
 [node name="LedgeDetector" type="RayCast2D" parent="."]
 target_position = Vector2(0, 19)
+collision_mask = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

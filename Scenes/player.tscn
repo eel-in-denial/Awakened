@@ -843,19 +843,18 @@ hframes = 8
 vframes = 7
 frame = 8
 
+[node name="ParryBox" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(-1, 5)
+scale = Vector2(0.27027, 0.511111)
+texture = ExtResource("3_xle8d")
+
 [node name="Player-body" type="Sprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(-1, 1)
 texture = ExtResource("3_fkybt")
 hframes = 8
 vframes = 7
-
-[node name="damageOverlay" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-scale = Vector2(0.2, 0.2)
-texture = ExtResource("3_xle8d")
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 5)
