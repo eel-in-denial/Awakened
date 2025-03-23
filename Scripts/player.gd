@@ -1,7 +1,7 @@
 extends CharacterBody2D
 class_name Player
 
-enum States {IDLE, RUNNING, JUMPING, FALLING, DASH, WALLCLING, KNOCKBACK}
+enum States {IDLE, RUNNING, JUMPING, FALLING, DASH, WALLCLING, KNOCKBACK, PARRY}
 enum Attack_States {IDLE, SLASH, SHOOT}
 var current_state: States = States.JUMPING: set = set_state
 var current_atk_state: Attack_States = Attack_States.SLASH: set = set_attack
@@ -17,32 +17,37 @@ const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
 const ATTACK_DURATION := 0.5
 const KNOCKBACK_HEIGHT := -250.0
+const PARRY_DURATION := 1.0
 const MAX_HEALTH := 10.0
+const MAX_ENERGY := 100.0
+
 var dash_time := 0.0
 var iframe_timer := 0.0
 var attack_timer := 0.0
+var parry_timer := 0.0
 var corner_jump := false
-var is_invinsible := false
+var is_invincible := false
 var direction := Vector2(1, 0)
 var knock_direction := 0.0
 var prev_velocity := 0.0
 var moving := 0.0
 var health := MAX_HEALTH
+var energy := 0.0
+var canMove = true
+
 var camera_return_offset: Vector2 = Vector2(0, -20)
 var camera_hold_duration: float = 0.0
 var camera_pan_duration: float = 0.0
 var centerMarker: Marker2D
-var canMove = true
+
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
-@onready var damage_overlay = $damageOverlay
+
+@onready var parry_overlay = $ParryBox
 @onready var leg_animation = $PlayerLegsAnim
 @onready var body_animation = $PlayerBodyAnim
 @export var UI: CanvasLayer
 @onready var camera = $Camera2D 
-
-# node tree variables
-
 
 func _ready() -> void:
 	centerMarker = get_node("../CenterMarker")
@@ -64,12 +69,20 @@ func _movement(delta: float) -> void:
 func _attack() -> void:
 	sword_collision.disabled = false
 
+func _parry(damage: int) -> void:
+	energy += damage * 20
+	parry_overlay.visible = false
+	set_state(States.KNOCKBACK)
+	is_invincible = true
+	iframe_timer = HURT_DURATION
+	UI.update()
 
 func _physics_process(delta: float) -> void:
 	moving = Input.get_axis("left", "right")
 	if moving:
 		direction.x = moving
 	direction.y = Input.get_axis("up", "down")
+	
 	match current_state:
 		States.IDLE:
 			if Input.is_action_just_pressed("jump"):
@@ -78,6 +91,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.RUNNING)
 			elif Input.is_action_just_pressed("dash"):
 				set_state(States.DASH)
+			elif Input.is_action_just_pressed("parry"):
+				set_state(States.PARRY)
 			elif not is_on_floor():
 				set_state(States.FALLING)
 		States.RUNNING:
@@ -88,6 +103,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.IDLE)
 			elif Input.is_action_just_pressed("dash"):
 				set_state(States.DASH)
+			elif Input.is_action_just_pressed("parry"):
+				set_state(States.PARRY)
 			elif not is_on_floor():
 				set_state(States.FALLING)
 		States.JUMPING:
@@ -99,6 +116,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.DASH)
 			elif is_on_floor() and moving:
 				set_state(States.RUNNING)
+			elif Input.is_action_just_pressed("parry"):
+				set_state(States.PARRY)
 			elif is_on_floor():
 				set_state(States.IDLE)
 		States.FALLING:
@@ -108,6 +127,8 @@ func _physics_process(delta: float) -> void:
 				set_state(States.DASH)
 			elif is_on_floor() and moving:
 				set_state(States.RUNNING)
+			elif Input.is_action_just_pressed("parry"):
+				set_state(States.PARRY)
 			elif is_on_floor():
 				set_state(States.IDLE)
 			elif is_on_wall():
@@ -127,8 +148,16 @@ func _physics_process(delta: float) -> void:
 				set_state(States.JUMPING)
 			elif Input.is_action_just_released("left") or Input.is_action_just_released("right"):
 				set_state(States.FALLING)
+			elif Input.is_action_just_pressed("parry"):
+				set_state(States.PARRY)
 			elif not is_on_wall() or is_on_floor():
 				set_state(States.IDLE)
+		States.PARRY:
+			parry_timer -= delta
+			parry_overlay.visible = true
+			if parry_timer <= 0:
+				set_state(prev_state)
+				parry_overlay.visible = false
 	
 	match current_atk_state:
 		Attack_States.IDLE:
@@ -139,10 +168,10 @@ func _physics_process(delta: float) -> void:
 			if attack_timer <= 0:
 				set_attack(Attack_States.IDLE)
 				
-	if is_invinsible:
+	if is_invincible:
 		iframe_timer -= delta
 		if iframe_timer <= 0.0:
-			is_invinsible = false
+			is_invincible = false
 	if canMove:
 		move_and_slide()
 	leg_animation.set("parameters/Run/blend_position", direction.x)
@@ -183,14 +212,14 @@ func set_state(new_state: States) -> void:
 			velocity.y = 0
 			dash_time = DASH_DURATION
 		States.KNOCKBACK:
-			is_invinsible = true
 			velocity.x = knock_direction*250
 			velocity.y = KNOCKBACK_HEIGHT
-			iframe_timer = HURT_DURATION
-			var tween: Tween = create_tween().set_loops(HURT_DURATION*2)
-			tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
 		States.WALLCLING:
 			velocity.y = 0
+		States.PARRY:
+			is_invincible = true
+			parry_timer = PARRY_DURATION
+			#velocity += KNOCKBACK_HEIGHT * direction.x
 			
 func set_attack(new_atk_state: Attack_States) -> void:
 	current_atk_state = new_atk_state
@@ -230,15 +259,26 @@ func _on_camera_hold_complete() -> void:
 		 .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
-	if is_invinsible:
-		return
-		
-	health -= damage
-	UI.update()
+	
 	if global_position.x < enemy_position.x:
 		knock_direction = -1
 	else:
 		knock_direction = 1
+		
+	if current_state == States.PARRY:
+		print("parrying")
+		_parry(damage)
+		return
+	if is_invincible:
+		return
+		
+	is_invincible = true
+	iframe_timer = HURT_DURATION
+	var tween: Tween = create_tween().set_loops(HURT_DURATION*2)
+	tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
+	print("dealing damage")
+	health -= damage
+	UI.update()
 	set_state(States.KNOCKBACK)
 	
 	

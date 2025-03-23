@@ -1,6 +1,4 @@
-
 [gd_scene load_steps=15 format=4 uid="uid://bchapfvu73jof"]
-
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_nwpuv"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_xabcl"]
@@ -21,9 +19,7 @@
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_nwpuv")]
-
-position = Vector2(-7307, 91)
-
+position = Vector2(-5470, 1505)
 UI = NodePath("../UI")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -34,9 +30,11 @@ metadata/_edit_lock_ = true
 
 [node name="Enemy(charge)" parent="." instance=ExtResource("5_bvt53")]
 position = Vector2(-3714, 1681)
+collision_mask = 3
 
 [node name="Enemy(charge)2" parent="." instance=ExtResource("5_bvt53")]
-position = Vector2(-5411, 465)
+position = Vector2(-5336, 1520)
+collision_mask = 3
 
 [node name="PatrolPositionB2" type="Marker2D" parent="."]
 position = Vector2(-5171, 577)
@@ -46,9 +44,11 @@ position = Vector2(-5654, 582)
 
 [node name="Enemy(Static)" parent="." groups=["Enemies"] instance=ExtResource("7_hb2iw")]
 position = Vector2(-3917, -50)
+collision_mask = 3
 
 [node name="Enemy(Static)2" parent="." instance=ExtResource("7_hb2iw")]
 position = Vector2(-3837, -723)
+collision_mask = 3
 
 [node name="Door" type="TileMapLayer" parent="."]
 visible = false
