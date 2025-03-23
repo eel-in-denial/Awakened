@@ -4,7 +4,8 @@ var state := "Patrol"
 var health = 3
 @onready var hitbox: Area2D = $Hitbox
 @onready var ledge_detector: RayCast2D = $LedgeDetector
-var should_turn := true
+@onready var animation = $AnimationPlayer
+var should_turn := true;
 
 var patrol_speed = 100
 var direction = 1
@@ -21,39 +22,42 @@ var player : CharacterBody2D
 var recovery_deceleration = 300.0  
 var recovery_threshold = 0.1
 
-var knockback_velocity := Vector2.ZERO  # Stores knockback speed
-
-@onready var animation := $AnimationPlayer
-
 func _ready() -> void:
 	ledge_detector.enabled = true
 	player = Global.player
 	
 func _physics_process(delta):
-	if state == "Knockback":
-		apply_knockback(delta)
-		return  # Prevents other states from running
-
+	#print(state)
 	if state == "Patrol":
 		patrol(delta)
 		if _detect_player():
 			state = "Charge"
 			charge_timer = charge_duration
 			dash_direction = Vector2(sign(player.global_position.x - global_position.x), 0)
-
-	elif state == "Charge":
+			if dash_direction.x > 0:
+				animation.play("stomp_right")
+			else:
+				animation.play("stomp_left")
+			# animation/sound here.
+			
+	if state == "Charge":
 		charge_timer -= delta
 		if charge_timer <= 0:
 			state = "Dash"
-
-	elif state == "Dash":
+			if dash_direction.x > 0:
+				animation.play("dash_right")
+			else:
+				animation.play("dash_left")
+			# animation
+				
+	if state == "Dash":
 		velocity.x = dash_direction.x * dash_speed
 		velocity += get_gravity() * delta
 		move_and_slide()
 		
 		if dash_complete():
 			state = "Recovery"
-
+			
 	elif state == "Recovery":
 		if abs(velocity.x) < recovery_threshold:
 			state = "Patrol"
@@ -66,15 +70,14 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, recovery_deceleration * delta)
 		velocity += get_gravity() * delta
 		move_and_slide()
-
+			
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var body = collision.get_collider()
 		if body is Player:
 			body._deal_damage_to_player(1, global_position)
 
-	if is_on_wall():
-		direction *= -1
+
 
 func patrol(delta):
 	if not is_on_floor():
@@ -83,12 +86,16 @@ func patrol(delta):
 	velocity.x = direction * patrol_speed
 	move_and_slide()
 
-	if (not ledge_detector.is_colliding()) and should_turn:
+	if ((not ledge_detector.is_colliding()) and should_turn) or is_on_wall():
 		direction *= -1
+		if direction == 1:
+			animation.play("walking_right")
+		else:
+			animation.play("walking_left")
 		should_turn = false
 		await get_tree().create_timer(0.2).timeout
 		should_turn = true
-
+		
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var body = collision.get_collider()
@@ -97,30 +104,30 @@ func patrol(delta):
 			body._deal_damage_to_player(1, global_position)
 
 func _detect_player() -> bool:
-	return global_position.distance_to(player.global_position) <= detectionRange and abs(global_position.y - player.global_position.y) <= 20.0
+	if global_position.distance_to(player.global_position) <= detectionRange and abs(global_position.y - player.global_position.y) <= 20.0:
+		return true
+	return false
 
 func dash_complete() -> bool:
-	return is_on_wall() or not _detect_player()
-
+	if is_on_wall():
+		return true
+	if not _detect_player():
+		return true
+	return false
+	
+func _on_enemy_body_contact(body: Node2D) -> void:
+	if body is Player:
+		body._deal_damage_to_player(1, global_position)
+	
+func _on_hitbox_body_entered(body: Node2D) -> void:
+	if body is Player:
+		body._deal_damage_to_player(1, global_position)
+	
 func _deal_damage(damage: int) -> void:
 	health -= damage
-	
-	# Determine knockback direction (away from player)
-	var knockback_direction = sign(global_position.x - player.global_position.x)
-	knockback_velocity = Vector2(knockback_direction * 100, -250)  # Apply horizontal & vertical knockback
-	velocity = knockback_velocity
-
-	state = "Knockback"
-
+	velocity.y = -200
 	if health <= 0:
 		_die()
 
-func apply_knockback(delta):
-	velocity += get_gravity() * delta  # Apply gravity to knockback
-	move_and_slide()
-
-	if is_on_floor():
-		state = "Patrol" if abs(knockback_velocity.x) < recovery_threshold else "Recovery"
-
 func _die() -> void:
-	queue_free()
+		queue_free()
