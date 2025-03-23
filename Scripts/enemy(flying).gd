@@ -55,7 +55,7 @@ func _detected(delta: float) -> void:
 	if not dash_initiated:
 		dash_initiated = true
 		velocity = Vector2.ZERO
-		await get_tree().create_timer(2.0).timeout  
+		await get_tree().create_timer(1.0).timeout  
 		if global_position.distance_to(player.global_position) <= 300:
 			dash_direction = (player.global_position - global_position).normalized()
 			velocity = dash_direction * CHARGESPEED
