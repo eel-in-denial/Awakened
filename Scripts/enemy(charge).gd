@@ -4,6 +4,7 @@ var state := "Patrol"
 var health = 3
 @onready var hitbox: Area2D = $Hitbox
 @onready var ledge_detector: RayCast2D = $LedgeDetector
+@onready var animation = $AnimationPlayer
 var should_turn := true;
 
 var patrol_speed = 100
@@ -31,6 +32,7 @@ func _physics_process(delta):
 		patrol(delta)
 		if _detect_player():
 			state = "Charge"
+			
 			charge_timer = charge_duration
 			dash_direction = Vector2(sign(player.global_position.x - global_position.x), 0)
 			# animation/sound here.
@@ -52,6 +54,7 @@ func _physics_process(delta):
 	elif state == "Recovery":
 		if abs(velocity.x) < recovery_threshold:
 			state = "Patrol"
+			
 		else:
 			velocity.x = move_toward(velocity.x, 0, recovery_deceleration * delta)
 		velocity += get_gravity() * delta
@@ -75,6 +78,10 @@ func patrol(delta):
 
 	if (not ledge_detector.is_colliding()) and should_turn:
 		direction *= -1
+		if direction == 1:
+			animation.play("walking_right")
+		else:
+			animation.play("walking_left")
 		should_turn = false
 		await get_tree().create_timer(0.2).timeout
 		should_turn = true

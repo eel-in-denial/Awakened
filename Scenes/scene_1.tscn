@@ -19,7 +19,7 @@
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_nwpuv")]
-position = Vector2(-7307, 91)
+position = Vector2(148, 1440)
 UI = NodePath("../UI")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
