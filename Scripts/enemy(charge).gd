@@ -25,8 +25,8 @@ var knockback_velocity := Vector2.ZERO  # Stores knockback speed
 
 func _ready() -> void:
 	ledge_detector.enabled = true
-	player = get_node("../Player")
-
+	player = Global.player
+	
 func _physics_process(delta):
 	if state == "Knockback":
 		apply_knockback(delta)
@@ -55,6 +55,11 @@ func _physics_process(delta):
 	elif state == "Recovery":
 		if abs(velocity.x) < recovery_threshold:
 			state = "Patrol"
+			if direction == 1:
+				animation.play("walking_right")
+			else:
+				animation.play("walking_left")
+			
 		else:
 			velocity.x = move_toward(velocity.x, 0, recovery_deceleration * delta)
 		velocity += get_gravity() * delta

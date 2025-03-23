@@ -1,8 +1,8 @@
 extends CanvasLayer
 
 @export var player: Player
-@onready var health = $"Health Bar"
-@onready var energy = $"Energy Bar"
+@onready var health = $"Bars/Health Bar"
+@onready var energy = $"Bars/Energy Bar"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
