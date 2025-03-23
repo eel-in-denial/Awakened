@@ -23,6 +23,8 @@ var recovery_threshold = 0.1
 
 var knockback_velocity := Vector2.ZERO  # Stores knockback speed
 
+@onready var animation := $AnimationPlayer
+
 func _ready() -> void:
 	ledge_detector.enabled = true
 	player = Global.player
