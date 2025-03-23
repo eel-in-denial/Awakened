@@ -24,7 +24,7 @@ var recovery_threshold = 0.1
 
 func _ready() -> void:
 	ledge_detector.enabled = true
-	player = get_node("../Player")
+	player = Global.player
 	
 func _physics_process(delta):
 	#print(state)
