@@ -32,15 +32,22 @@ func _physics_process(delta):
 		patrol(delta)
 		if _detect_player():
 			state = "Charge"
-			
 			charge_timer = charge_duration
 			dash_direction = Vector2(sign(player.global_position.x - global_position.x), 0)
+			if dash_direction.x > 0:
+				animation.play("stomp_right")
+			else:
+				animation.play("stomp_left")
 			# animation/sound here.
 			
 	if state == "Charge":
 		charge_timer -= delta
 		if charge_timer <= 0:
 			state = "Dash"
+			if dash_direction.x > 0:
+				animation.play("dash_right")
+			else:
+				animation.play("dash_left")
 			# animation
 				
 	if state == "Dash":
@@ -54,6 +61,10 @@ func _physics_process(delta):
 	elif state == "Recovery":
 		if abs(velocity.x) < recovery_threshold:
 			state = "Patrol"
+			if dash_direction.x > 0:
+				animation.play("walking_right")
+			else:
+				animation.play("walking_left")
 			
 		else:
 			velocity.x = move_toward(velocity.x, 0, recovery_deceleration * delta)
@@ -65,9 +76,8 @@ func _physics_process(delta):
 		var body = collision.get_collider()
 		if body is Player:
 			body._deal_damage_to_player(1, global_position)
-	
-	if is_on_wall():
-		direction *= -1
+
+
 
 func patrol(delta):
 	if not is_on_floor():
@@ -76,7 +86,7 @@ func patrol(delta):
 	velocity.x = direction * patrol_speed
 	move_and_slide()
 
-	if (not ledge_detector.is_colliding()) and should_turn:
+	if ((not ledge_detector.is_colliding()) and should_turn) or is_on_wall():
 		direction *= -1
 		if direction == 1:
 			animation.play("walking_right")
