@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://bchapfvu73jof"]
+[gd_scene load_steps=16 format=4 uid="uid://bchapfvu73jof"]
 
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/player.tscn" id="1_nwpuv"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_xabcl"]
@@ -13,13 +13,14 @@
 [ext_resource type="Texture2D" uid="uid://b1x6w8vbg0g3l" path="res://Assets/energy bar.png" id="14_4dwmg"]
 [ext_resource type="PackedScene" uid="uid://pdkoahpna2jj" path="res://Scenes/BoarBoss/boar_boss.tscn" id="14_sduc3"]
 [ext_resource type="PackedScene" uid="uid://y0fmv42elpro" path="res://Scenes/GooseBoss/goose_boss.tscn" id="15_bvt53"]
+[ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/Enemies/enemy(flying).tscn" id="15_hb2iw"]
 [ext_resource type="PackedScene" uid="uid://cx24x260fwfnl" path="res://Scenes/HornetBoss/hornet_boss.tscn" id="15_vlddq"]
 
 [node name="Prototype" type="Node2D"]
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_nwpuv")]
-position = Vector2(-4392, 1664)
+position = Vector2(-2832, 1702)
 UI = NodePath("../UI")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -82,7 +83,7 @@ offset_bottom = 79.0
 text = "This is where we will probably have the player enco unter npcs and the first \"village\""
 
 [node name="Enemy4" parent="." instance=ExtResource("4_sduc3")]
-position = Vector2(-587, 1562)
+position = Vector2(-2018, 1639)
 
 [node name="GooseBoss" parent="." instance=ExtResource("15_bvt53")]
 position = Vector2(-8142, -42)
@@ -100,6 +101,10 @@ position = Vector2(-8195, -1540)
 [node name="HornetBoss" parent="." instance=ExtResource("15_vlddq")]
 position = Vector2(-8149, -973)
 point_pos = Array[Vector2]([Vector2(-8158, -976)])
+
+[node name="Enemy(Flying)" parent="." instance=ExtResource("15_hb2iw")]
+position = Vector2(-2407, 1577)
+point_pos = Array[Vector2]([Vector2(-2760, 1578), Vector2(-2407, 1577)])
 
 [connection signal="boss_start" from="ArenaTrigger" to="GooseBoss" method="_on_arena_trigger_boss_start"]
 [connection signal="dead" from="GooseBoss" to="ArenaTrigger" method="_on_goose_boss_dead"]
