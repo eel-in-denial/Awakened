@@ -9,11 +9,10 @@ var should_turn := true
 
 var state := "Patrol"
 var knockback_velocity := Vector2.ZERO  # Stores knockback speed
-var player: CharacterBody2D
+@onready var player = Global.player
 
 func _ready() -> void:
 	ledge_detector.enabled = true
-	player = get_node("../Player")
 
 func _physics_process(delta: float) -> void:
 	if state == "Knockback":

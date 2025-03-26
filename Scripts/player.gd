@@ -1,11 +1,12 @@
-extends CharacterBody2D
-class_name Player
+class_name Player extends CharacterBody2D
 
 enum States {IDLE, RUNNING, JUMPING, FALLING, DASH, WALLCLING, KNOCKBACK, PARRY}
 enum Attack_States {IDLE, SLASH, SHOOT}
 var current_state: States = States.JUMPING: set = set_state
 var current_atk_state: Attack_States = Attack_States.SLASH: set = set_attack
 var prev_state: States
+
+var loaded = false
 
 const JUMP_VELOCITY := -450.0
 const gravity := Global.gravity
@@ -53,6 +54,7 @@ func _ready() -> void:
 	centerMarker = get_node("../CenterMarker")
 	sword_collision.disabled = true
 	Global.player = self
+	loaded = true
 	
 
 func _movement(delta: float) -> void:
@@ -82,7 +84,6 @@ func _physics_process(delta: float) -> void:
 	if moving:
 		direction.x = moving
 	direction.y = Input.get_axis("up", "down")
-	
 	match current_state:
 		States.IDLE:
 			if Input.is_action_just_pressed("jump"):
@@ -180,6 +181,8 @@ func _physics_process(delta: float) -> void:
 	body_animation.set("parameters/Slash/blend_position", direction)
 	body_animation.set("parameters/Run/blend_position", direction.x)
 	body_animation.set("parameters/Idle/blend_position", direction.x)
+	if loaded == false:
+		loaded = true
 	
 func set_state(new_state: States) -> void:
 	prev_state = current_state
@@ -287,3 +290,10 @@ func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
 	
 func _die() -> void:
 	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+
+func set_camera_limits(left, right, top, bottom) -> void:
+	camera.set_limit(SIDE_LEFT, left)
+	camera.set_limit(SIDE_RIGHT, right)
+	camera.set_limit(SIDE_TOP, top)
+	camera.set_limit(SIDE_BOTTOM, bottom)
+	print(camera.limit_left, camera.limit_right, camera.limit_top, camera.limit_bottom)

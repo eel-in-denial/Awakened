@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Awakened"
-run/main_scene="res://Scenes/start_screen.tscn"
+run/main_scene="res://Scenes/0_MainScenes/start_screen.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -92,6 +92,7 @@ parry={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="EnemyHurtboxes"
 2d_physics/layer_5="PlayerHurtbox"
+2d_physics/layer_8="Camera Bound"
 
 [rendering]
 

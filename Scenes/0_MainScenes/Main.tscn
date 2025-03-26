@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://bchapfvu73jof"]
+
+[ext_resource type="Script" uid="uid://dryqtcmxxu8lj" path="res://Scripts/main.gd" id="1_74bya"]
+[ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/0_MainScenes/player.tscn" id="2_fickt"]
+[ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="3_frhf3"]
+[ext_resource type="Texture2D" uid="uid://b7fsbqc10w3d3" path="res://Assets/health shell.png" id="4_r8ou2"]
+[ext_resource type="Texture2D" uid="uid://cdpak133rukrn" path="res://Assets/health bar.png" id="5_2urrx"]
+[ext_resource type="Texture2D" uid="uid://cuhto7kjb0wuh" path="res://Assets/energy shell.png" id="6_uqgo6"]
+[ext_resource type="Texture2D" uid="uid://b1x6w8vbg0g3l" path="res://Assets/energy bar.png" id="7_83x4p"]
+[ext_resource type="Texture2D" uid="uid://chp443iu56iv" path="res://Assets/clock_bar.png" id="8_6s0nu"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_74bya")
+metadata/_edit_lock_ = true
+
+[node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("2_fickt")]
+position = Vector2(-94, 98)
+UI = NodePath("../UI")
+
+[node name="Room" type="Node2D" parent="."]
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
+script = ExtResource("3_frhf3")
+player = NodePath("../Player")
+
+[node name="Bars" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Health Bar" type="TextureProgressBar" parent="UI/Bars"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 63.0
+offset_top = 6.0
+offset_right = 306.0
+offset_bottom = 67.0
+max_value = 10.0
+value = 5.0
+texture_over = ExtResource("4_r8ou2")
+texture_progress = ExtResource("5_2urrx")
+
+[node name="Energy Bar" type="TextureProgressBar" parent="UI/Bars"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 91.0
+offset_top = 42.0
+offset_right = 279.0
+offset_bottom = 82.0
+value = 90.0
+texture_over = ExtResource("6_uqgo6")
+texture_progress = ExtResource("7_83x4p")
+
+[node name="TextureRect" type="TextureRect" parent="UI/Bars"]
+texture_filter = 1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("8_6s0nu")
