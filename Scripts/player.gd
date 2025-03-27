@@ -291,9 +291,9 @@ func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
 func _die() -> void:
 	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
 
-func set_camera_limits(left, right, top, bottom) -> void:
-	camera.set_limit(SIDE_LEFT, left)
-	camera.set_limit(SIDE_RIGHT, right)
-	camera.set_limit(SIDE_TOP, top)
-	camera.set_limit(SIDE_BOTTOM, bottom)
+func set_camera_limits(box: CollisionShape2D) -> void:
+	camera.set_limit(SIDE_LEFT, box.global_position.x - box.shape.size.x/2)
+	camera.set_limit(SIDE_RIGHT, box.global_position.x + box.shape.size.x/2)
+	camera.set_limit(SIDE_TOP, box.global_position.y - box.shape.size.y/2)
+	camera.set_limit(SIDE_BOTTOM, box.global_position.y + box.shape.size.y/2)
 	print(camera.limit_left, camera.limit_right, camera.limit_top, camera.limit_bottom)

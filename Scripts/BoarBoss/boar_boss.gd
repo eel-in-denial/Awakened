@@ -7,6 +7,7 @@ const JUMP_FORCE = -400.0
 var health = 40
 @onready var hitbox: Area2D = $Hitbox
 @onready var attack_timer: Timer = $AttackTimer
+@onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var stomp_projectile = preload("res://Scenes/BoarBoss/stomp_projectile.tscn")
 
 var has_landed = false
@@ -35,6 +36,10 @@ func _start_fight() -> void:
 	attack_timer.start()
 	
 	currentState = "Patrol"
+	if direction == 1:
+		animation.play("walk_right")
+	else:
+		animation.play("walk_left")
 
 func _physics_process(delta: float) -> void:
 	#print(velocity) 
@@ -65,6 +70,11 @@ func _patrol(delta: float) -> void:
 	if is_on_wall():
 		print("patrol bounce")
 		direction *= -1 
+		if direction == 1:
+			animation.play("walk_right")
+		else:
+			animation.play("walk_left")
+		
 		
 var dash_in_progress: bool = false
 var dash_started: bool = false
@@ -89,6 +99,10 @@ func _charge(delta: float) -> void:
 func charge_routine() -> void:
 	await get_tree().create_timer(2.0).timeout
 	dash_started = true
+	if (player.global_position - global_position).normalized().x > 0:
+		animation.play("dash_right")
+	else:
+		animation.play("dash_left")
 
 
 func _ground_pound(delta: float) -> void:
