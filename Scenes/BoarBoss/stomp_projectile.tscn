@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://t7lfmqrvw1wm"]
 
 [ext_resource type="Script" uid="uid://w5mcnc8dur07" path="res://Scripts/BoarBoss/stomp_projectile.gd" id="1_2njxn"]
-[ext_resource type="Texture2D" uid="uid://bvot67eapw0nq" path="res://Assets/feather.jpg" id="1_tnsgb"]
+[ext_resource type="Texture2D" uid="uid://dq3l2juxroc2b" path="res://Assets/Boar wave.png" id="2_2njxn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2njxn"]
-size = Vector2(30, 50)
+size = Vector2(70, 32)
 
 [node name="StompProjectile" type="Area2D"]
 script = ExtResource("1_2njxn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -11)
+position = Vector2(-1, -2)
 shape = SubResource("RectangleShape2D_2njxn")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -11)
-scale = Vector2(0.0505051, 0.0388462)
-texture = ExtResource("1_tnsgb")
+texture_filter = 1
+position = Vector2(-1, -18)
+texture = ExtResource("2_2njxn")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

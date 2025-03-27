@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dwyrd3vw5k8ab" path="res://Scenes/2_RoomFeatures/door_group.tscn" id="1_dlxjb"]
 [ext_resource type="PackedScene" uid="uid://ctqq08es6me0h" path="res://Scenes/2_RoomFeatures/door.tscn" id="2_s1jkb"]
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="3_dgist"]
-[ext_resource type="PackedScene" uid="uid://y03xjy3sxe6d" path="res://Scenes/2_RoomFeatures/camera_bound.tscn" id="4_ngdjt"]
+[ext_resource type="PackedScene" uid="uid://do0ov176l2104" path="res://Scenes/2_RoomFeatures/camera_bound.tscn" id="4_ngdjt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t52uk"]
 size = Vector2(834, 1096)
@@ -32,8 +32,7 @@ tile_set = ExtResource("3_dgist")
 
 [node name="Bosses" type="Node2D" parent="."]
 
-[node name="Camera Bound" parent="." node_paths=PackedStringArray("box") instance=ExtResource("4_ngdjt")]
-box = NodePath("CollisionShape2D")
+[node name="Camera Bound" parent="." instance=ExtResource("4_ngdjt")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera Bound"]
 position = Vector2(-347, 231)

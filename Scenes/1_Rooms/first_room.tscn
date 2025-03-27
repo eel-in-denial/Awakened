@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=4 uid="uid://cs6hjddyahgfc"]
+[gd_scene load_steps=15 format=4 uid="uid://cs6hjddyahgfc"]
 
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="1_ci7ny"]
 [ext_resource type="PackedScene" uid="uid://dwyrd3vw5k8ab" path="res://Scenes/2_RoomFeatures/door_group.tscn" id="1_i3ngn"]
@@ -11,6 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://pdkoahpna2jj" path="res://Scenes/BoarBoss/boar_boss.tscn" id="7_87quj"]
 [ext_resource type="PackedScene" uid="uid://cx24x260fwfnl" path="res://Scenes/HornetBoss/hornet_boss.tscn" id="8_qebll"]
 [ext_resource type="PackedScene" uid="uid://buixklke8spa" path="res://Scenes/2_RoomFeatures/arena_door.tscn" id="9_n7iae"]
+[ext_resource type="PackedScene" uid="uid://do0ov176l2104" path="res://Scenes/2_RoomFeatures/camera_bound.tscn" id="12_xur1l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xur1l"]
+size = Vector2(758, 377)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_42qln"]
 size = Vector2(10580, 4193)
@@ -78,14 +82,25 @@ position = Vector2(-8115, -1544)
 position = Vector2(-8149, -973)
 point_pos = Array[Vector2]([Vector2(-8158, -976)])
 
-[node name="GooseArenaTrigger" parent="Bosses" instance=ExtResource("9_n7iae")]
+[node name="GooseArenaTrigger" parent="Bosses" node_paths=PackedStringArray("boss") instance=ExtResource("9_n7iae")]
 position = Vector2(-7642, 65)
+boss = NodePath("../GooseBoss")
 
-[node name="Boar Door" parent="Bosses" instance=ExtResource("9_n7iae")]
-position = Vector2(-7610, -1481)
+[node name="Boar Door" parent="Bosses" node_paths=PackedStringArray("camera_bounds", "boss") instance=ExtResource("9_n7iae")]
+position = Vector2(-7658, -1483)
+camera_bounds = NodePath("Camera Bound")
+boss = NodePath("../BoarBoss")
 
-[node name="Hornet Door" parent="Bosses" instance=ExtResource("9_n7iae")]
+[node name="Camera Bound" parent="Bosses/Boar Door" instance=ExtResource("12_xur1l")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bosses/Boar Door/Camera Bound"]
+position = Vector2(-376, -93)
+shape = SubResource("RectangleShape2D_xur1l")
+debug_color = Color(0.986307, 0.922526, 0, 0)
+
+[node name="Hornet Door" parent="Bosses" node_paths=PackedStringArray("boss") instance=ExtResource("9_n7iae")]
 position = Vector2(-7607, -716)
+boss = NodePath("../HornetBoss")
 
 [node name="TextEdit" type="TextEdit" parent="."]
 offset_left = -2266.0
@@ -97,7 +112,9 @@ text = "This is where we will probably have the player enco unter npcs and the f
 [node name="Player Spawn" type="Marker2D" parent="."]
 position = Vector2(-7382, -1551)
 
-[node name="Camera_Bounds" type="CollisionShape2D" parent="."]
+[node name="Camera Bound" parent="." instance=ExtResource("12_xur1l")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Camera Bound"]
 position = Vector2(-3931, -171.5)
 shape = SubResource("RectangleShape2D_42qln")
 debug_color = Color(1, 0.933333, 0, 0)

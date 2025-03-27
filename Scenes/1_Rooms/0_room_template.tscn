@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://d2ti1beo78r4f" path="res://Assets/prototype.tres" id="1_41re2"]
 [ext_resource type="PackedScene" uid="uid://ctqq08es6me0h" path="res://Scenes/2_RoomFeatures/door.tscn" id="1_n8fxg"]
-[ext_resource type="PackedScene" uid="uid://y03xjy3sxe6d" path="res://Scenes/2_RoomFeatures/camera_bound.tscn" id="3_68wn0"]
+[ext_resource type="PackedScene" uid="uid://do0ov176l2104" path="res://Scenes/2_RoomFeatures/camera_bound.tscn" id="3_68wn0"]
 [ext_resource type="PackedScene" uid="uid://dwyrd3vw5k8ab" path="res://Scenes/2_RoomFeatures/door_group.tscn" id="3_wo1vy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68wn0"]

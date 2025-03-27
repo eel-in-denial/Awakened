@@ -13,6 +13,7 @@ func _ready() -> void:
 	room.add_child(current_room)
 	load_rooms(current_room.get_node("Doors").adjacent_rooms) 
 	set_player_pos(current_room.get_node("Player Spawn").global_position)
+	current_room.get_node("Camera Bound").set_camera_bounds()
 	
 
 func change_scene(key: Area2D):
@@ -25,6 +26,7 @@ func change_scene(key: Area2D):
 	current_room = adjacent_rooms[key]
 	adjacent_rooms.clear()
 	load_rooms(current_room.get_node("Doors").adjacent_rooms)
+	current_room.get_node("Camera Bound").set_camera_bounds()
 	
 	
 	
