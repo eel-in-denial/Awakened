@@ -1,75 +1,120 @@
 extends CharacterBody2D
 
-@export var gravity: float = 800
-@export var attack_cooldown: float = 2.0
-@export var crash_speed: float = 600
-@export var return_speed: float = 400
-@export var projectile_scene: PackedScene
-@export var frag_projectile_scene: PackedScene
-@export var stock_arrow_scene: PackedScene
+const FALL_SPEED = 400.0
+const RETURN_SPEED = 300.0
+const ARROW_SPEED = 250.0
+const EXPLOSION_DELAY = 1.0
 
-var start_position: Vector2
-var attacking: bool = false
-var attack_timer: float = 0
+var health = 50
+@onready var hitbox: Area2D = $Hitbox
+@onready var attack_timer: Timer = $AttackTimer
+@onready var player = Global.player
+@onready var stomp_projectile = preload("res://Scenes/BoarBoss/stomp_projectile.tscn")
+#@onready var arrow_projectile = preload("res://Scenes/StockMarketBoss/arrow_projectile.tscn")
+#@onready var explosion_projectile = preload("res://Scenes/StockMarketBoss/explosion_projectile.tscn")
+@onready var small_screens = [$SmallScreen1, $SmallScreen2, $SmallScreen3, $SmallScreen4]
 
-func _ready():
-	start_position = position
+var currentState : String
+var original_position: Vector2
+var ultimate_started = false
 
-func _process(delta):
-	attack_timer -= delta
-	if attack_timer <= 0:
-		_choose_attack()
-		attack_timer = attack_cooldown
+signal dead
 
-func _choose_attack():
-	var attack_choice = randi() % 3
+func _ready() -> void:
+	original_position = global_position
+	_start_fight()
+
+func _start_fight() -> void:
+	await get_tree().create_timer(2.0).timeout
+	attack_timer.wait_time = 3.0
+	attack_timer.timeout.connect(_on_attack_timer_timeout)
+	attack_timer.start()
+	currentState = "Idle"
+
+func _physics_process(delta: float) -> void:
+	print(currentState)
+	if hitbox.overlaps_body(player):
+		player._deal_damage_to_player(2, self)
+	match currentState:
+		"Idle":
+			_idle()
+		"MarketCrash":
+			_market_crash(delta)
+		"ArrowAttack":
+			_arrow_attack()
+		"Ultimate":
+			_ultimate_attack()
+
+func _idle() -> void:
+	velocity = Vector2.ZERO
+
+func _market_crash(delta: float) -> void:
+	var selected_screen = small_screens.pick_random()
+	selected_screen.velocity.y += FALL_SPEED * delta
+	if selected_screen.is_on_floor():
+		_create_shockwaves(selected_screen.global_position)
+		await get_tree().create_timer(0.5).timeout
+		_return_to_ceiling(selected_screen)
+	selected_screen.move_and_slide()
+
+func _return_to_ceiling(screen) -> void:
+	while screen.global_position.y > original_position.y:
+		screen.global_position.y -= RETURN_SPEED * get_process_delta_time()
+	currentState = "Idle"
+	attack_timer.start()
+
+func _create_shockwaves(position: Vector2) -> void:
+	var shockwave_left = stomp_projectile.instantiate()
+	shockwave_left.global_position = position + Vector2(-50, 0)
+	shockwave_left.direction = Vector2.LEFT
+	get_parent().add_child(shockwave_left)
+
+	var shockwave_right = stomp_projectile.instantiate()
+	shockwave_right.global_position = position + Vector2(50, 0)
+	shockwave_right.direction = Vector2.RIGHT
+	get_parent().add_child(shockwave_right)
+
+func _arrow_attack() -> void:
+	#for i in range(5):
+		#var arrow_left = arrow_projectile.instantiate()
+		#arrow_left.global_position = global_position + Vector2(-200, randf_range(-50, 50))
+		#arrow_left.velocity = Vector2(ARROW_SPEED, sin(randf() * PI) * 50)
+		#get_parent().add_child(arrow_left)
+#
+		#var arrow_right = arrow_projectile.instantiate()
+		#arrow_right.global_position = global_position + Vector2(200, randf_range(-50, 50))
+		#arrow_right.velocity = Vector2(-ARROW_SPEED, sin(randf() * PI) * 50)
+		#get_parent().add_child(arrow_right)
+	#await get_tree().create_timer(2.0).timeout
+	#currentState = "Idle"
+	attack_timer.start()
+
+func _ultimate_attack() -> void:
+	#for i in range(5):
+		#await get_tree().create_timer(0.5).timeout
+		#var explosion = explosion_projectile.instantiate()
+		#explosion.global_position = global_position + Vector2(randf_range(-100, 100), randf_range(-50, 50))
+		#get_parent().add_child(explosion)
+	#await get_tree().create_timer(3.0).timeout
+	#currentState = "Idle"
+	attack_timer.start()
+
+func _on_attack_timer_timeout() -> void:
+	var attack_choice = randi() % 6
 	match attack_choice:
-		0:
-			_market_crash()
-		1:
-			_stock_arrows()
-		2:
-			_bubble_burst()
+		0, 1, 2:
+			currentState = "MarketCrash"
+		3, 4:
+			currentState = "ArrowAttack"
+		5:
+			currentState = "Ultimate"
+	print(currentState)
 
-func _market_crash():
-	attacking = true
-	await _play_crash_animation()
-	var target_position = start_position + Vector2(0, 300)  # Adjust drop distance
-	while position.y < target_position.y:
-		position.y += crash_speed * get_process_delta_time()
-		await get_tree().process_frame
-	_create_shockwaves()
-	await get_tree().create_timer(0.5).timeout  # Delay before returning
-	while position.y > start_position.y:
-		position.y -= return_speed * get_process_delta_time()
-		await get_tree().process_frame
-	attacking = false
+func _deal_damage(damage: int) -> void:
+	health -= damage
+	if health <= 0:
+		_die()
 
-func _create_shockwaves():
-	# Create shockwave effects (implement as needed)
-	pass
-
-func _stock_arrows():
-	attacking = true
-	for i in range(5):  # Adjust for more or fewer arrows
-		var arrow = stock_arrow_scene.instantiate()
-		arrow.position = Vector2(start_position.x + (i % 2) * 600 - 300, start_position.y)
-		get_parent().add_child(arrow)
-		await get_tree().create_timer(0.3).timeout
-	attacking = false
-
-func _bubble_burst():
-	attacking = true
-	for i in range(5):
-		var bubble = projectile_scene.instantiate()
-		bubble.position = Vector2(randf_range(100, 700), randf_range(100, 400))
-		bubble.set_explode_callback(_spawn_frags)
-		get_parent().add_child(bubble)
-		await get_tree().create_timer(0.4).timeout
-	attacking = false
-
-func _spawn_frags(position):
-	for i in range(3):
-		var frag = frag_projectile_scene.instantiate()
-		frag.position = position
-		get_parent().add_child(frag)
+func _die() -> void:
+	dead.emit()
+	queue_free()

@@ -1,16 +1,116 @@
-[gd_scene load_steps=2 format=3 uid="uid://bhufy7df1sf2s"]
+[gd_scene load_steps=8 format=3 uid="uid://bhufy7df1sf2s"]
 
 [ext_resource type="Script" uid="uid://b1i0fpa02do1c" path="res://Scripts/StockBoss/stock_boss.gd" id="1_jawcn"]
+[ext_resource type="Texture2D" uid="uid://cpsr7aag7hcr7" path="res://Assets/Cat Sandwich.jpg" id="2_ocaes"]
+[ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="3_h7h58"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0jt7"]
+size = Vector2(179, 101.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14dd5"]
+size = Vector2(200, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_13ajg"]
+size = Vector2(50, 50)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfm83"]
+size = Vector2(50, 50)
 
 [node name="StockBoss" type="CharacterBody2D"]
 script = ExtResource("1_jawcn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1.5, -3.75)
+shape = SubResource("RectangleShape2D_e0jt7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.00001, -3.25)
+scale = Vector2(0.347656, 0.204102)
+texture = ExtResource("2_ocaes")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_14dd5")
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="SmallScreen1" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen1"]
+position = Vector2(96, -31)
+shape = SubResource("RectangleShape2D_13ajg")
+
+[node name="Area2D" type="Area2D" parent="SmallScreen1"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen1/Area2D"]
+position = Vector2(96, -31)
+shape = SubResource("RectangleShape2D_bfm83")
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallScreen1"]
+position = Vector2(96.5, -30.5)
+scale = Vector2(0.689189, 0.566667)
+texture = ExtResource("3_h7h58")
+
+[node name="SmallScreen2" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen2"]
+position = Vector2(-74, 31)
+shape = SubResource("RectangleShape2D_13ajg")
+
+[node name="Area2D" type="Area2D" parent="SmallScreen2"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen2/Area2D"]
+position = Vector2(-75, 31)
+shape = SubResource("RectangleShape2D_bfm83")
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallScreen2"]
+position = Vector2(-75, 31)
+scale = Vector2(0.689189, 0.566667)
+texture = ExtResource("3_h7h58")
+
+[node name="SmallScreen3" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen3"]
+position = Vector2(76, 33)
+shape = SubResource("RectangleShape2D_13ajg")
+
+[node name="Area2D" type="Area2D" parent="SmallScreen3"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen3/Area2D"]
+position = Vector2(76, 32)
+shape = SubResource("RectangleShape2D_bfm83")
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallScreen3"]
+position = Vector2(76, 33)
+scale = Vector2(0.689189, 0.566667)
+texture = ExtResource("3_h7h58")
+
+[node name="SmallScreen4" type="CharacterBody2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen4"]
+position = Vector2(-93.5, -31.5)
+shape = SubResource("RectangleShape2D_13ajg")
+
+[node name="Area2D" type="Area2D" parent="SmallScreen4"]
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallScreen4/Area2D"]
+position = Vector2(-93.5, -31.5)
+shape = SubResource("RectangleShape2D_bfm83")
+
+[node name="Sprite2D" type="Sprite2D" parent="SmallScreen4"]
+position = Vector2(-92.5, -31.5)
+scale = Vector2(0.689189, 0.566667)
+texture = ExtResource("3_h7h58")
