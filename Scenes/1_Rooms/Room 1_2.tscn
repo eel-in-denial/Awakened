@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://cxpxsyemuxb1y"]
+[gd_scene load_steps=10 format=4 uid="uid://cxpxsyemuxb1y"]
 
 [ext_resource type="PackedScene" uid="uid://dwyrd3vw5k8ab" path="res://Scenes/2_RoomFeatures/door_group.tscn" id="1_oaf50"]
 [ext_resource type="PackedScene" uid="uid://ctqq08es6me0h" path="res://Scenes/2_RoomFeatures/door.tscn" id="2_8vg0q"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/Enemies/enemy(walking).tscn" id="5_yuwqh"]
 [ext_resource type="PackedScene" uid="uid://b2yh1t0op3ecn" path="res://Scenes/Enemies/enemy(flying).tscn" id="6_01q0y"]
 [ext_resource type="PackedScene" uid="uid://ck2jcklave3sf" path="res://Scenes/Enemies/enemy(charge).tscn" id="7_3syxv"]
+[ext_resource type="PackedScene" uid="uid://c6q51r3btq5f0" path="res://Scenes/2_RoomFeatures/player_spawn.tscn" id="8_01q0y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_68wn0"]
 size = Vector2(1695, 1819)
@@ -72,3 +73,6 @@ position = Vector2(122.5, -685.5)
 shape = SubResource("RectangleShape2D_68wn0")
 debug_color = Color(1, 0.933333, 0, 0)
 metadata/_edit_lock_ = true
+
+[node name="Player Spawn" parent="." instance=ExtResource("8_01q0y")]
+position = Vector2(-570, -648)

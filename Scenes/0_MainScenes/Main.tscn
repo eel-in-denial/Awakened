@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bchapfvu73jof"]
+[gd_scene load_steps=10 format=3 uid="uid://bchapfvu73jof"]
 
 [ext_resource type="Script" uid="uid://dryqtcmxxu8lj" path="res://Scripts/main.gd" id="1_74bya"]
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/0_MainScenes/player.tscn" id="2_fickt"]
+[ext_resource type="PackedScene" uid="uid://cxpxsyemuxb1y" path="res://Scenes/1_Rooms/Room 1_2.tscn" id="2_frhf3"]
 [ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="3_frhf3"]
 [ext_resource type="Texture2D" uid="uid://b7fsbqc10w3d3" path="res://Assets/health shell.png" id="4_r8ou2"]
 [ext_resource type="Texture2D" uid="uid://cdpak133rukrn" path="res://Assets/health bar.png" id="5_2urrx"]
@@ -11,6 +12,7 @@
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_74bya")
+first_room = ExtResource("2_frhf3")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("2_fickt")]
