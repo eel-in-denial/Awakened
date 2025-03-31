@@ -296,7 +296,7 @@ _data = {
 
 [node name="BoarBoss" type="CharacterBody2D" groups=["Bosses", "Enemies"]]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 2
 script = ExtResource("1_g30iv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

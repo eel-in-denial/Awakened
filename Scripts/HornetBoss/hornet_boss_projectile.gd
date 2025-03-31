@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		var collided_object = collision.get_collider()
 		# If we hit the Player, deal damage and remove the projectile.
 		if collided_object is Player:
-			collided_object._deal_damage_to_player(1, global_position)
+			collided_object._deal_damage_to_player(1, self)
 			queue_free()
 		else:
 			# Bounce off other surfaces by reflecting the direction using the collision normal.

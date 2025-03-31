@@ -43,8 +43,8 @@ func _start_fight() -> void:
 		animation.play("walk_left")
 
 func _physics_process(delta: float) -> void:
-	#print(velocity) 
-	#print(get_real_velocity())
+	if hitbox.overlaps_body(player):
+		player._deal_damage_to_player(2, self)
 	match currentState:
 		"Start":
 			_start(delta)
@@ -209,10 +209,6 @@ func _on_attack_timer_timeout() -> void:
 			count = 0
 			ultimate_state = "Jump"
 	print(currentState)
-
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body is Player:
-		body._deal_damage_to_player(1, global_position)
 
 func _deal_damage(damage: int) -> void:
 	health -= damage

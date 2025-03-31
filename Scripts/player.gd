@@ -73,13 +73,17 @@ func _movement(delta: float) -> void:
 		#animation_player.play("idle")
 		
 
-func _parry(damage: int) -> void:
+func _parry(damage: int, enemy: Node2D) -> void:
 	energy += damage * 20
 	parry_overlay.visible = false
-	set_state(States.KNOCKBACK)
 	is_invincible = true
-	iframe_timer = HURT_DURATION
+	iframe_timer = 0.33
 	UI.update()
+	if (damage > 1):
+		set_state(States.KNOCKBACK)
+	elif enemy.is_in_group("Enemies"):
+		enemy.set_knockback()
+		set_state(States.IDLE)
 
 func _physics_process(delta: float) -> void:
 	moving = Input.get_axis("left", "right")
@@ -208,6 +212,7 @@ func set_state(new_state: States) -> void:
 			velocity.y = 0
 			can_dash = true
 		States.PARRY:
+			
 			is_invincible = true
 			parry_timer = PARRY_DURATION
 			#velocity += KNOCKBACK_HEIGHT * direction.x
@@ -249,16 +254,16 @@ func _on_camera_hold_complete() -> void:
 	tween.tween_property(camera, "offset", camera_return_offset, camera_pan_duration) \
 		 .set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
-func _deal_damage_to_player(damage: int, enemy_position: Vector2) -> void:
+func _deal_damage_to_player(damage: int, enemy: Node2D) -> void:
 	
-	if global_position.x < enemy_position.x:
+	if global_position.x < enemy.global_position.x:
 		knock_direction = -1
 	else:
 		knock_direction = 1
 		
 	if current_state == States.PARRY:
 		print("parrying")
-		_parry(damage)
+		_parry(damage, enemy)
 		return
 	if is_invincible:
 		return

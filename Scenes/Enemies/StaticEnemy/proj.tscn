@@ -1,12 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyiakgme2l7i8"]
 
-[ext_resource type="Script" uid="uid://m0hifb0y6wmd" path="res://Scripts/StaticEnemy/proj.gd" id="1_fx7kf"]
+[ext_resource type="Script" uid="uid://c7w5vcxn0mxru" path="res://Scripts/StaticEnemy/proj.gd" id="1_fx7kf"]
 [ext_resource type="Texture2D" uid="uid://bvot67eapw0nq" path="res://Assets/feather.jpg" id="1_rl0hc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1fle"]
 size = Vector2(10, 10)
 
-[node name="Proj" type="Area2D"]
+[node name="Proj" type="Area2D" groups=["Projectiles"]]
+collision_mask = 3
 script = ExtResource("1_fx7kf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
