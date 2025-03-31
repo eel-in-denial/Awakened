@@ -2,6 +2,7 @@
 extends Node2D
 @export var points: Array[Marker2D]
 @export var point_pos: Array[Vector2] = [Vector2.ZERO, Vector2.ZERO, Vector2.ZERO, Vector2.ZERO, Vector2.ZERO]
+@export var arena_door: StaticBody2D
 signal dead
 
 @export_tool_button("Set Pointer A") var set_a = func():
@@ -18,6 +19,7 @@ signal dead
 @onready var goose = $GooseBoss
 
 func _ready() -> void:
+	arena_door.boss_start.connect(_boss_start)
 	for i in points.size():
 		points[i].global_position = point_pos[i]
 
@@ -26,5 +28,5 @@ func set_pointer(i):
 	points[i].global_position = self.global_position
 
 
-func _on_arena_trigger_boss_start() -> void:
+func _boss_start() -> void:
 	goose._start_fight()

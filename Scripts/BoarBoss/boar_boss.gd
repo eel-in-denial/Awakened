@@ -25,7 +25,7 @@ var count: int
 signal dead
 
 func _ready() -> void:
-	arena_door.boss_start.connect(_on_boss_start)
+	arena_door.boss_start.connect(_start_fight)
 	
 
 func _start_fight() -> void:
@@ -218,7 +218,3 @@ func _deal_damage(damage: int) -> void:
 func _die() -> void:
 	dead.emit()
 	queue_free()
-
-
-func _on_boss_start() -> void:
-	_start_fight()

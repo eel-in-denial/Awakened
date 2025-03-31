@@ -17,7 +17,8 @@ size = Vector2(1695, 1819)
 [node name="Doors" parent="." node_paths=PackedStringArray("adjacent_rooms") instance=ExtResource("1_oaf50")]
 adjacent_rooms = {
 NodePath("Door"): "res://Scenes/1_Rooms/first_room.tscn",
-NodePath("Door4"): "res://Scenes/1_Rooms/Room 1_3.tscn"
+NodePath("Door4"): "res://Scenes/1_Rooms/Room 1_3.tscn",
+NodePath("Door2"): "res://Scenes/1_Rooms/test_4.tscn"
 }
 metadata/_edit_lock_ = true
 
@@ -26,6 +27,7 @@ position = Vector2(-736, 98)
 
 [node name="Door2" parent="Doors" instance=ExtResource("2_8vg0q")]
 position = Vector2(980, 127)
+scale = Vector2(-1, 1)
 
 [node name="Door3" parent="Doors" instance=ExtResource("2_8vg0q")]
 position = Vector2(988, -706)
@@ -75,4 +77,4 @@ debug_color = Color(1, 0.933333, 0, 0)
 metadata/_edit_lock_ = true
 
 [node name="Player Spawn" parent="." instance=ExtResource("8_01q0y")]
-position = Vector2(-570, -648)
+position = Vector2(-579, -681)

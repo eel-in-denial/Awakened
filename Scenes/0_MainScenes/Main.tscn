@@ -16,7 +16,7 @@ first_room = ExtResource("2_frhf3")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("2_fickt")]
-position = Vector2(-94, 98)
+position = Vector2(-636, 107)
 UI = NodePath("../UI")
 
 [node name="Room" type="Node2D" parent="."]
