@@ -8,4 +8,4 @@ func _physics_process(delta):
 	
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
-		body._deal_damage_to_player(1, global_position)
+		body._deal_damage_to_player(1, self)
