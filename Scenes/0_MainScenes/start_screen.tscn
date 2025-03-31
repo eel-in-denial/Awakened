@@ -22,11 +22,11 @@ offset_bottom = 410.0
 layout_mode = 2
 theme_override_constants/separation = 70
 
-[node name="Start" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+[node name="Start2" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_es848")
 
-[node name="Start2" type="TextureButton" parent="CenterContainer/HBoxContainer"]
+[node name="Start" type="TextureButton" parent="CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture_normal = ExtResource("3_es848")
 

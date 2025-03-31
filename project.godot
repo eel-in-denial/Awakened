@@ -93,6 +93,7 @@ parry={
 2d_physics/layer_3="Enemies"
 2d_physics/layer_4="EnemyHurtboxes"
 2d_physics/layer_5="PlayerHurtbox"
+2d_physics/layer_6="Door"
 2d_physics/layer_8="Camera Bound"
 
 [rendering]

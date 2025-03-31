@@ -4,6 +4,7 @@ extends StaticBody2D
 @onready var collision = $CollisionShape2D
 @export var camera_bounds: Area2D
 @export var boss: Node2D
+@export var side_door: StaticBody2D
 var isTriggered = false
 signal boss_start
 
@@ -22,6 +23,8 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func close_door():
 	sprite.visible = true
 	collision.set_deferred("disabled", false)
+	if side_door != null:
+		side_door.close()
 	
 		
 func spawn_boss():
@@ -32,4 +35,6 @@ func _on_boss_dead() -> void:
 	collision.set_deferred("disabled", true)
 	sprite.visible = false
 	Global.main.current_room.get_node("Camera Bound").set_camera_bounds()
+	if side_door != null:
+		side_door.open()
 	
