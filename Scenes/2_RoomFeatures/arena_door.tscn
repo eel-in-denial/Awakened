@@ -1,20 +1,19 @@
 [gd_scene load_steps=4 format=3 uid="uid://buixklke8spa"]
 
 [ext_resource type="Script" uid="uid://6wibod5wbmdo" path="res://Scripts/GooseBoss/arena_trigger.gd" id="1_kjqt8"]
-[ext_resource type="Texture2D" uid="uid://cpsr7aag7hcr7" path="res://Assets/Cat Sandwich.jpg" id="2_gqpuh"]
+[ext_resource type="Texture2D" uid="uid://djrf286wvgr1y" path="res://Assets/Arena door.png" id="2_v07c8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0xk0"]
 size = Vector2(36, 127.5)
 
 [node name="Arena Door" type="StaticBody2D"]
+z_index = -1
 collision_layer = 2
 script = ExtResource("1_kjqt8")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
-position = Vector2(3, 2)
-scale = Vector2(0.0703125, 0.253906)
-texture = ExtResource("2_gqpuh")
+texture = ExtResource("2_v07c8")
 
 [node name="Area2D" type="Area2D" parent="."]
 
@@ -24,6 +23,13 @@ shape = SubResource("RectangleShape2D_i0xk0")
 debug_color = Color(1.2514e-06, 0.636158, 0.408381, 0.42)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_i0xk0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 32
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_i0xk0")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

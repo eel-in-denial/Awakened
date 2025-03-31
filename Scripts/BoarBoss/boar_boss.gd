@@ -9,6 +9,7 @@ var health = 40
 @onready var attack_timer: Timer = $AttackTimer
 @onready var animation: AnimationPlayer = $AnimationPlayer
 @onready var stomp_projectile = preload("res://Scenes/BoarBoss/stomp_projectile.tscn")
+@export var arena_door: StaticBody2D
 
 var has_landed = false
 
@@ -24,7 +25,7 @@ var count: int
 signal dead
 
 func _ready() -> void:
-	pass
+	arena_door.boss_start.connect(_on_boss_start)
 	
 
 func _start_fight() -> void:
@@ -223,5 +224,5 @@ func _die() -> void:
 	queue_free()
 
 
-func _on_arena_door_2_boss_start() -> void:
+func _on_boss_start() -> void:
 	_start_fight()

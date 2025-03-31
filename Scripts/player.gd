@@ -8,11 +8,12 @@ var prev_state: States
 
 var loaded = false
 
-const JUMP_VELOCITY := -450.0
+const JUMP_VELOCITY := -500.0
 const gravity := Global.gravity
 const ACCELERATION := 20.0
 const DECELERATION := 5.0
 const MAX_SPEED := 200.0
+const WALL_CLING_SPEED := 70
 const DASH_SPEED := 800.0
 const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
@@ -21,6 +22,7 @@ const KNOCKBACK_HEIGHT := -250.0
 const PARRY_DURATION := 1.0
 const MAX_HEALTH := 10.0
 const MAX_ENERGY := 100.0
+const DASH_RELOAD := 1.16
 
 var dash_time := 0.0
 var iframe_timer := 0.0
@@ -35,6 +37,8 @@ var moving := 0.0
 var health := MAX_HEALTH
 var energy := 0.0
 var canMove = true
+var can_dash = true
+var dash_reload := 0.0
 
 var camera_return_offset: Vector2 = Vector2(0, -20)
 var camera_hold_duration: float = 0.0
@@ -68,8 +72,6 @@ func _movement(delta: float) -> void:
 	#else:
 		#animation_player.play("idle")
 		
-func _attack() -> void:
-	sword_collision.disabled = false
 
 func _parry(damage: int) -> void:
 	energy += damage * 20
@@ -81,59 +83,40 @@ func _parry(damage: int) -> void:
 
 func _physics_process(delta: float) -> void:
 	moving = Input.get_axis("left", "right")
-	if moving:
+	if moving and current_state == States.WALLCLING:
+		direction.x = moving*-1
+	elif moving:
 		direction.x = moving
 	direction.y = Input.get_axis("up", "down")
+	
+	if Input.is_action_just_pressed("dash") and dash_reload == 0.0 and can_dash == true and current_state in [States.IDLE, States.RUNNING, States.JUMPING, States.FALLING, States.WALLCLING]:
+		set_state(States.DASH)
+	elif Input.is_action_just_pressed("jump") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING]:
+		set_state(States.JUMPING)
+	elif Input.is_action_just_pressed("parry") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING, States.JUMPING, States.FALLING]:
+		set_state(States.PARRY)
+	elif not is_on_floor() and current_state in [States.IDLE, States.RUNNING]:
+		set_state(States.FALLING)
+	elif is_on_floor() and current_state in [States.JUMPING, States.FALLING, States.WALLCLING]:
+		if moving:
+			set_state(States.RUNNING)
+		else:
+			set_state(States.IDLE)
+	elif moving and current_state in [States.IDLE]:
+		set_state(States.RUNNING)
+	elif not moving and current_state in [States.RUNNING]:
+		set_state(States.IDLE)
+	
 	match current_state:
-		States.IDLE:
-			if Input.is_action_just_pressed("jump"):
-				set_state(States.JUMPING)
-			elif moving:
-				set_state(States.RUNNING)
-			elif Input.is_action_just_pressed("dash"):
-				set_state(States.DASH)
-			elif Input.is_action_just_pressed("parry"):
-				set_state(States.PARRY)
-			elif not is_on_floor():
-				set_state(States.FALLING)
-		States.RUNNING:
-			_movement(delta)
-			if Input.is_action_just_pressed("jump"):
-				set_state(States.JUMPING)
-			elif not moving:
-				set_state(States.IDLE)
-			elif Input.is_action_just_pressed("dash"):
-				set_state(States.DASH)
-			elif Input.is_action_just_pressed("parry"):
-				set_state(States.PARRY)
-			elif not is_on_floor():
-				set_state(States.FALLING)
 		States.JUMPING:
 			velocity.y += gravity*delta
-			_movement(delta)
 			if Input.is_action_just_released("jump") or velocity.y >= 0:
 				set_state(States.FALLING)
-			elif Input.is_action_just_pressed("dash"):
-				set_state(States.DASH)
-			elif is_on_floor() and moving:
-				set_state(States.RUNNING)
-			elif Input.is_action_just_pressed("parry"):
-				set_state(States.PARRY)
-			elif is_on_floor():
-				set_state(States.IDLE)
 		States.FALLING:
 			velocity.y += gravity*delta
-			_movement(delta)
-			if Input.is_action_just_pressed("dash"):
-				set_state(States.DASH)
-			elif is_on_floor() and moving:
-				set_state(States.RUNNING)
-			elif Input.is_action_just_pressed("parry"):
-				set_state(States.PARRY)
-			elif is_on_floor():
-				set_state(States.IDLE)
-			elif is_on_wall():
+			if is_on_wall():
 				set_state(States.WALLCLING)
+				
 		States.DASH:
 			dash_time -= delta
 			if dash_time <= 0:
@@ -143,15 +126,9 @@ func _physics_process(delta: float) -> void:
 				set_state(States.IDLE)
 			velocity.y += gravity*delta
 		States.WALLCLING:
-			velocity.y = gravity*delta*7
+			velocity.y = WALL_CLING_SPEED*delta
 			_movement(delta)
-			if Input.is_action_just_pressed("jump"):
-				set_state(States.JUMPING)
-			elif Input.is_action_just_released("left") or Input.is_action_just_released("right"):
-				set_state(States.FALLING)
-			elif Input.is_action_just_pressed("parry"):
-				set_state(States.PARRY)
-			elif not is_on_wall() or is_on_floor():
+			if not is_on_wall():
 				set_state(States.IDLE)
 		States.PARRY:
 			parry_timer -= delta
@@ -159,6 +136,9 @@ func _physics_process(delta: float) -> void:
 			if parry_timer <= 0:
 				set_state(prev_state)
 				parry_overlay.visible = false
+				
+	if current_state in [States.RUNNING, States.FALLING, States.JUMPING]:
+		_movement(delta)
 	
 	match current_atk_state:
 		Attack_States.IDLE:
@@ -173,6 +153,10 @@ func _physics_process(delta: float) -> void:
 		iframe_timer -= delta
 		if iframe_timer <= 0.0:
 			is_invincible = false
+	if dash_reload:
+		dash_reload -= delta
+		if dash_reload <= 0.0:
+			dash_reload = 0.0
 	if canMove:
 		move_and_slide()
 	leg_animation.set("parameters/Run/blend_position", direction.x)
@@ -203,8 +187,9 @@ func set_state(new_state: States) -> void:
 	match current_state:
 		States.IDLE:
 			velocity.x = 0
+			can_dash = true
 		States.RUNNING:
-			pass
+			can_dash = true
 		States.JUMPING:
 			velocity.y = JUMP_VELOCITY
 		States.FALLING:
@@ -213,12 +198,15 @@ func set_state(new_state: States) -> void:
 			prev_velocity = velocity.x
 			velocity.x = direction.x * DASH_SPEED
 			velocity.y = 0
+			can_dash = false
 			dash_time = DASH_DURATION
+			dash_reload = DASH_RELOAD
 		States.KNOCKBACK:
 			velocity.x = knock_direction*250
 			velocity.y = KNOCKBACK_HEIGHT
 		States.WALLCLING:
 			velocity.y = 0
+			can_dash = true
 		States.PARRY:
 			is_invincible = true
 			parry_timer = PARRY_DURATION
