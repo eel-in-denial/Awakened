@@ -10,7 +10,7 @@ var should_turn := true
 
 var currentState := "Patrol"
 var knockback_velocity := Vector2.ZERO 
-var player: CharacterBody2D
+@onready var player = Global.player
 
 func _ready() -> void:
 	ledge_detector.enabled = true
