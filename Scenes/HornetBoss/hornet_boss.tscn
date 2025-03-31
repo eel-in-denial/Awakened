@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dym23c6cbee3x" path="res://Scripts/HornetBoss/hornet_boss.gd" id="1_hl75p"]
 [ext_resource type="Texture2D" uid="uid://c0dd0t08y82ht" path="res://Assets/honk.jpg" id="2_q8un2"]
-[ext_resource type="Script" uid="uid://rnjc35j7w6tf" path="res://Scripts/pointer_hornet.gd" id="3_d0tot"]
+[ext_resource type="Script" path="res://Scripts/pointer_hornet.gd" id="3_d0tot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0tot"]
 size = Vector2(94, 89)
@@ -16,7 +16,7 @@ points = [NodePath("Marker2D")]
 
 [node name="HornetBoss" type="CharacterBody2D" parent="." node_paths=PackedStringArray("centerMarker", "hornet_main") groups=["Bosses", "Enemies"]]
 collision_layer = 4
-collision_mask = 7
+collision_mask = 6
 script = ExtResource("1_hl75p")
 centerMarker = NodePath("../Marker2D")
 hornet_main = NodePath("..")

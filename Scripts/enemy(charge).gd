@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-var state := "Patrol"
+var currentState := "Patrol"
 var health = 3
 @onready var hitbox: Area2D = $Hitbox
 @onready var ledge_detector: RayCast2D = $LedgeDetector
@@ -27,40 +27,45 @@ func _ready() -> void:
 	player = Global.player
 	
 func _physics_process(delta):
-	#print(state)
-	if state == "Patrol":
+	if hitbox.overlaps_body(player):
+		player._deal_damage_to_player(1, self)
+	#print(currentState)
+	if currentState == "Knockback":
+		_knockback(delta)
+		return
+		
+	if currentState == "Patrol":
 		patrol(delta)
 		if _detect_player():
-			state = "Charge"
+			currentState = "Charge"
 			charge_timer = charge_duration
 			dash_direction = Vector2(sign(player.global_position.x - global_position.x), 0)
 			if dash_direction.x > 0:
 				animation.play("stomp_right")
 			else:
 				animation.play("stomp_left")
-			# animation/sound here.
 			
-	if state == "Charge":
+	if currentState == "Charge":
 		charge_timer -= delta
 		if charge_timer <= 0:
-			state = "Dash"
+			currentState = "Dash"
 			if dash_direction.x > 0:
 				animation.play("dash_right")
 			else:
 				animation.play("dash_left")
 			# animation
 				
-	if state == "Dash":
+	if currentState == "Dash":
 		velocity.x = dash_direction.x * dash_speed
 		velocity += get_gravity() * delta
 		move_and_slide()
 		
 		if dash_complete():
-			state = "Recovery"
+			currentState = "Recovery"
 			
-	elif state == "Recovery":
+	elif currentState == "Recovery":
 		if abs(velocity.x) < recovery_threshold:
-			state = "Patrol"
+			currentState = "Patrol"
 			if direction == 1:
 				animation.play("walking_right")
 			else:
@@ -71,13 +76,6 @@ func _physics_process(delta):
 		velocity += get_gravity() * delta
 		move_and_slide()
 			
-	for i in range(get_slide_collision_count()):
-		var collision = get_slide_collision(i)
-		var body = collision.get_collider()
-		if body is Player:
-			body._deal_damage_to_player(1, global_position)
-
-
 
 func patrol(delta):
 	if not is_on_floor():
@@ -104,7 +102,7 @@ func patrol(delta):
 			body._deal_damage_to_player(1, global_position)
 
 func _detect_player() -> bool:
-	if global_position.distance_to(player.global_position) <= detectionRange and abs(global_position.y - player.global_position.y) <= 20.0:
+	if global_position.distance_to(player.global_position) <= detectionRange and abs(global_position.y - player.global_position.y) <= 80.0:
 		return true
 	return false
 
@@ -115,17 +113,24 @@ func dash_complete() -> bool:
 		return true
 	return false
 	
-func _on_enemy_body_contact(body: Node2D) -> void:
-	if body is Player:
-		body._deal_damage_to_player(1, global_position)
+func set_knockback():
+	var knockback_direction = sign(global_position.x - player.global_position.x)
+	var knockback_velocity = Vector2(knockback_direction * 150, -250)
+	velocity = knockback_velocity
+	currentState = "Knockback"
 	
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body is Player:
-		body._deal_damage_to_player(1, global_position)
-	
+func _knockback(delta):
+	velocity += get_gravity() * delta 
+	move_and_slide()
+	if is_on_floor():
+		currentState = "Patrol"
+		
 func _deal_damage(damage: int) -> void:
 	health -= damage
 	velocity.y = -200
+	
+	set_knockback()
+	
 	if health <= 0:
 		_die()
 

@@ -32,6 +32,7 @@ Walls=""
 Player=""
 Enemies=""
 Bosses=""
+Projectiles=""
 
 [input]
 

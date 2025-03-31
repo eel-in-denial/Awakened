@@ -21,7 +21,7 @@
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("1_h1m7h")]
-position = Vector2(87, 1448)
+position = Vector2(-7492, 94)
 UI = NodePath("../UI")
 
 [node name="First Level" type="Node2D" parent="."]
@@ -33,25 +33,6 @@ tile_set = ExtResource("2_erwvk")
 metadata/_edit_lock_ = true
 
 [node name="Enemies" type="Node2D" parent="First Level"]
-
-[node name="Enemy(charge)" parent="First Level/Enemies" instance=ExtResource("3_2w5on")]
-position = Vector2(-3714, 1681)
-collision_mask = 3
-
-[node name="Enemy(charge)2" parent="First Level/Enemies" instance=ExtResource("3_2w5on")]
-position = Vector2(-5336, 1520)
-collision_mask = 3
-
-[node name="Enemy(Static)" parent="First Level/Enemies" groups=["Enemies"] instance=ExtResource("4_346fj")]
-position = Vector2(-3917, -50)
-collision_mask = 3
-
-[node name="Enemy(Static)2" parent="First Level/Enemies" instance=ExtResource("4_346fj")]
-position = Vector2(-3837, -723)
-collision_mask = 3
-
-[node name="Enemy4" parent="First Level/Enemies" instance=ExtResource("12_aht7i")]
-position = Vector2(-587, 1562)
 
 [node name="Bosses" type="Node2D" parent="First Level"]
 
@@ -74,16 +55,6 @@ position = Vector2(-7610, -1481)
 
 [node name="Hornet Door" parent="First Level/Bosses" instance=ExtResource("5_0sclb")]
 position = Vector2(-7607, -716)
-
-[node name="Enemy1" parent="First Level" instance=ExtResource("3_2w5on")]
-position = Vector2(-5422, 1002)
-
-[node name="Enemy2" parent="First Level" instance=ExtResource("3_2w5on")]
-position = Vector2(-5418, 455)
-
-[node name="Enemy(Flying)" parent="First Level" instance=ExtResource("10_erwvk")]
-position = Vector2(-5234, 1168)
-point_pos = Array[Vector2]([Vector2(-5578, 1167), Vector2(-5234, 1168)])
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("player")]
 script = ExtResource("6_sxkr1")
@@ -131,6 +102,19 @@ offset_top = -86.0
 offset_right = -1612.0
 offset_bottom = 79.0
 text = "This is where we will probably have the player enco unter npcs and the first \"village\""
+
+[node name="Enemy(Static)" parent="." instance=ExtResource("4_346fj")]
+position = Vector2(-3919, -36)
+
+[node name="Enemy1" parent="." instance=ExtResource("3_2w5on")]
+position = Vector2(-3587, 1648)
+
+[node name="Enemy2" parent="." instance=ExtResource("12_aht7i")]
+position = Vector2(-3336, 1706)
+
+[node name="Enemy(Flying)" parent="." instance=ExtResource("10_erwvk")]
+position = Vector2(-4527, 1549)
+point_pos = Array[Vector2]([Vector2(-4869, 1514), Vector2(-4527, 1549)])
 
 [connection signal="dead" from="First Level/Bosses/GooseBoss" to="First Level/Bosses/GooseArenaTrigger" method="_on_goose_boss_dead"]
 [connection signal="dead" from="First Level/Bosses/BoarBoss" to="First Level/Bosses/Boar Door" method="_on_boar_boss_dead"]

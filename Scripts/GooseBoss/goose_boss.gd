@@ -43,6 +43,8 @@ func _start_fight() -> void:
 	ultimate_timer.timeout.connect(_on_ultimate_timer_timeout)
 
 func _physics_process(delta: float) -> void:
+	if hitbox.overlaps_body(player):
+		player._deal_damage_to_player(2, self)
 	match currentState:
 		"Patrol":
 			_patrol(delta)
@@ -154,10 +156,6 @@ func _on_attack_timer_timeout() -> void:
 			last_spawn_x = leftBound.global_position.x - 100
 			ultimate_timer.start()
 	print(currentState)
-
-func _on_hitbox_body_entered(body: Node2D) -> void:
-	if body is Player:
-		body._deal_damage_to_player(1, global_position)
 
 func _deal_damage(damage: int) -> void:
 	health -= damage

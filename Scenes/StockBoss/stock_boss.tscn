@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhufy7df1sf2s"]
+
+[ext_resource type="Script" uid="uid://b1i0fpa02do1c" path="res://Scripts/StockBoss/stock_boss.gd" id="1_jawcn"]
+
+[node name="StockBoss" type="CharacterBody2D"]
+script = ExtResource("1_jawcn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+
+[node name="Timer" type="Timer" parent="."]
