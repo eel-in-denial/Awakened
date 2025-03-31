@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctqq08es6me0h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_41re2"]
+size = Vector2(22, 66)
+
+[node name="Door" type="Area2D"]
+collision_layer = 2
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(50, 5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_41re2")

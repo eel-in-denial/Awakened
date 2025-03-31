@@ -5,6 +5,7 @@ var direction := 1
 var health = 3
 @onready var hitbox: Area2D = $Hitbox
 @onready var ledge_detector: RayCast2D = $LedgeDetector
+@onready var animation = $AnimationPlayer
 var should_turn := true
 
 var currentState := "Patrol"
@@ -13,7 +14,6 @@ var player: CharacterBody2D
 
 func _ready() -> void:
 	ledge_detector.enabled = true
-	player = get_node("../Player")
 
 func _physics_process(delta: float) -> void:
 	print(currentState)
@@ -36,12 +36,13 @@ func patrol(delta):
 
 	if (not ledge_detector.is_colliding()) and should_turn:
 		direction *= -1
+		if direction == 1:
+			animation.play("walk_right")
+		else:
+			animation.play("walk_left")
 		should_turn = false
 		await get_tree().create_timer(0.2).timeout
 		should_turn = true
-	
-	if is_on_wall():
-		direction *= -1
 
 func _deal_damage(damage: int) -> void:
 	health -= damage

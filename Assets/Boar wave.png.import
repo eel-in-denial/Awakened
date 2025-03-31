@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br4odpa35f28g"
-path="res://.godot/imported/Owlet_Monster_Idle_4.png-c979ee27bd6cb6857e34355f5e966a07.ctex"
+uid="uid://dq3l2juxroc2b"
+path="res://.godot/imported/Boar wave.png-237602ebb6f27695df047438d6185c4f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Owlet_Monster_Idle_4.png"
-dest_files=["res://.godot/imported/Owlet_Monster_Idle_4.png-c979ee27bd6cb6857e34355f5e966a07.ctex"]
+source_file="res://Assets/Boar wave.png"
+dest_files=["res://.godot/imported/Boar wave.png-237602ebb6f27695df047438d6185c4f.ctex"]
 
 [params]
 

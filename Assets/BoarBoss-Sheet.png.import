@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6x8hajsjiyjr"
-path="res://.godot/imported/Owlet_Monster_Jump_8.png-1ae1598bd3f7cbaed576299f6dfdf316.ctex"
+uid="uid://cack8rx4dhrkf"
+path="res://.godot/imported/BoarBoss-Sheet.png-b4a89080009cc9f903e5bfcd674df535.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Owlet_Monster_Jump_8.png"
-dest_files=["res://.godot/imported/Owlet_Monster_Jump_8.png-1ae1598bd3f7cbaed576299f6dfdf316.ctex"]
+source_file="res://Assets/BoarBoss-Sheet.png"
+dest_files=["res://.godot/imported/BoarBoss-Sheet.png-b4a89080009cc9f903e5bfcd674df535.ctex"]
 
 [params]
 
