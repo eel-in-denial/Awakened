@@ -15,19 +15,21 @@ size = Vector2(798.75, 379.75)
 size = Vector2(1926, 1242)
 
 [node name="test room 1" type="Node2D"]
+position = Vector2(-3, 19)
 
 [node name="Doors" parent="." node_paths=PackedStringArray("adjacent_rooms") instance=ExtResource("1_d1jxq")]
+position = Vector2(226, 140)
 adjacent_rooms = {
 NodePath("Door"): "res://Scenes/1_Rooms/test room 2.tscn",
 NodePath("Door2"): "res://Scenes/1_Rooms/first_room.tscn"
 }
 
 [node name="Door" parent="Doors" instance=ExtResource("2_3d8qw")]
-position = Vector2(60, 95)
+position = Vector2(-244, -41)
 scale = Vector2(-1, 1)
 
 [node name="Door2" parent="Doors" instance=ExtResource("2_3d8qw")]
-position = Vector2(62, -418)
+position = Vector2(-560, -65)
 scale = Vector2(-1, 1)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -47,18 +49,20 @@ camera_bounds = NodePath("../Camera Bound2")
 boss = NodePath("../StockBoss")
 side_door = NodePath("../Arena_side_door")
 
-[node name="StockBoss" parent="Bosses" instance=ExtResource("5_nw3kf")]
-position = Vector2(-696, -102)
-
 [node name="Arena_side_door" parent="Bosses" instance=ExtResource("7_wms3h")]
 position = Vector2(-1076, 85)
 
+[node name="StockBoss" parent="Bosses" instance=ExtResource("5_nw3kf")]
+position = Vector2(-701, -108)
+
 [node name="Camera Bound2" parent="Bosses" instance=ExtResource("4_nw3kf")]
 position = Vector2(-1085, -197)
+metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Bosses/Camera Bound2"]
-position = Vector2(373.625, 180.125)
+position = Vector2(383, 179)
 shape = SubResource("RectangleShape2D_02mhj")
+metadata/_edit_lock_ = true
 
 [node name="Camera Bound" parent="." instance=ExtResource("4_nw3kf")]
 metadata/_edit_lock_ = true

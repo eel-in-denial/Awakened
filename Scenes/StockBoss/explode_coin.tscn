@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://dk2pw0kkvw2sh"]
+
+[ext_resource type="Script" uid="uid://b6md7bsyfb368" path="res://Scripts/StockBoss/explode_coin.gd" id="1_7bwtq"]
+[ext_resource type="Texture2D" uid="uid://cw3ds0r8vaum" path="res://Assets/dogecoin-doge-crypto-free-png.webp" id="2_q2pf4"]
+[ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="3_1ctgr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1ctgr"]
+size = Vector2(40, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0w03c"]
+size = Vector2(100, 100)
+
+[node name="ExplodeCoin" type="Area2D"]
+collision_layer = 0
+script = ExtResource("1_7bwtq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_1ctgr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(7.15256e-07, 1.66893e-06)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_q2pf4")
+
+[node name="ExplosionShape" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("RectangleShape2D_0w03c")
+disabled = true
+
+[node name="ExplosionSprite" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.35135, 1.11111)
+texture = ExtResource("3_1ctgr")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

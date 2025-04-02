@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bquyqfjfm563p"]
+
+[ext_resource type="Script" uid="uid://do4187pikihn8" path="res://Scripts/StockBoss/arrow.gd" id="1_cscxs"]
+[ext_resource type="Texture2D" uid="uid://dlg51ptjedep2" path="res://Assets/arrow.png" id="2_1mcs1"]
+[ext_resource type="PackedScene" uid="uid://brchjm4xu84em" path="res://Scenes/StockBoss/arrow_trail.tscn" id="3_1mcs1"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_gi85i"]
+a = Vector2(0, -11)
+b = Vector2(0, 0)
+
+[node name="Arrow" type="Area2D"]
+script = ExtResource("1_cscxs")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -9)
+texture = ExtResource("2_1mcs1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("SegmentShape2D_gi85i")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="DeathTimer" type="Timer" parent="."]
+
+[node name="ArrowTrail" parent="." instance=ExtResource("3_1mcs1")]
+top_level = true
+
+[connection signal="timeout" from="Timer" to="." method="_switch_arrow_direction"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_death_timer_timeout"]
