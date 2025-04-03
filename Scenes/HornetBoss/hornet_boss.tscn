@@ -1,14 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://cx24x260fwfnl"]
 
 [ext_resource type="Script" uid="uid://dym23c6cbee3x" path="res://Scripts/HornetBoss/hornet_boss.gd" id="1_hl75p"]
-[ext_resource type="Texture2D" uid="uid://dx1dxcnefg0uc" path="res://Assets/New Piskel.png" id="3_4q1ls"]
+[ext_resource type="Texture2D" uid="uid://c0dd0t08y82ht" path="res://Assets/honk.jpg" id="2_q8un2"]
 [ext_resource type="Script" uid="uid://rnjc35j7w6tf" path="res://Scripts/pointer_hornet.gd" id="3_d0tot"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0tot"]
-size = Vector2(94, 82)
+size = Vector2(94, 89)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q1ls"]
-size = Vector2(93, 82)
+size = Vector2(116, 109)
 
 [node name="Node2D" type="Node2D" node_paths=PackedStringArray("points")]
 script = ExtResource("3_d0tot")
@@ -22,17 +22,17 @@ centerMarker = NodePath("../Marker2D")
 hornet_main = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HornetBoss"]
-position = Vector2(0, -6)
 shape = SubResource("RectangleShape2D_d0tot")
-metadata/_edit_lock_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="HornetBoss"]
+position = Vector2(0.750004, 0.5)
+scale = Vector2(0.484615, 0.344961)
+texture = ExtResource("2_q8un2")
 
 [node name="Hitbox" type="Area2D" parent="HornetBoss"]
-metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HornetBoss/Hitbox"]
-position = Vector2(-0.5, -6)
 shape = SubResource("RectangleShape2D_4q1ls")
-metadata/_edit_lock_ = true
 
 [node name="AttackTimer" type="Timer" parent="HornetBoss"]
 
@@ -40,17 +40,8 @@ metadata/_edit_lock_ = true
 
 [node name="DashTimer" type="Timer" parent="HornetBoss"]
 
-[node name="Sprite2D" type="Sprite2D" parent="HornetBoss"]
-position = Vector2(0, 8.34465e-07)
-scale = Vector2(0.783333, 0.783333)
-texture = ExtResource("3_4q1ls")
-hframes = 3
-vframes = 3
-
 [node name="Marker2D" type="Marker2D" parent="."]
 top_level = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [connection signal="body_entered" from="HornetBoss/Hitbox" to="HornetBoss" method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="HornetBoss/AttackTimer" to="HornetBoss" method="_on_attack_timer_timeout"]

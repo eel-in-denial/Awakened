@@ -37,7 +37,7 @@ func _start_fight() -> void:
 	currentState = "Spawn"
 	
 	dash_timer.wait_time = 2.0
-	attack_timer.start(3.0)
+	attack_timer.wait_time = 3.0
 	ultimate_timer.wait_time = 3.0
 	ultimate_timer.timeout.connect(_on_ultimate_timer_timeout)
 
@@ -65,10 +65,9 @@ func _spawn(delta: float) -> void:
 		global_position = target
 		currentState = "Idle"
 		await get_tree().create_timer(3.0).timeout  
-		attack_timer.start(3.0)
+		attack_timer.start()
 
 func _idle(delta: float) -> void:
-	print(attack_timer.time_left)
 	bounce_offset += bounce_direction * BOUNCE_SPEED * delta
 	if bounce_offset <= -BOUNCE_RANGE or bounce_offset >= BOUNCE_RANGE:
 		bounce_direction *= -1  

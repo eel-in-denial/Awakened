@@ -19,7 +19,7 @@ signal dead
 @onready var goose = $GooseBoss
 
 func _ready() -> void:
-	#arena_door.boss_start.connect(_boss_start)
+	arena_door.boss_start.connect(_boss_start)
 	for i in points.size():
 		points[i].global_position = point_pos[i]
 
