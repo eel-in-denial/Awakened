@@ -1,23 +1,38 @@
-[gd_scene load_steps=10 format=3 uid="uid://bchapfvu73jof"]
+[gd_scene load_steps=14 format=3 uid="uid://bchapfvu73jof"]
 
 [ext_resource type="Script" uid="uid://dryqtcmxxu8lj" path="res://Scripts/main.gd" id="1_74bya"]
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/0_MainScenes/player.tscn" id="2_fickt"]
-[ext_resource type="PackedScene" uid="uid://blbg8pg7c6m3i" path="res://Scenes/1_Rooms/test room 1.tscn" id="2_frhf3"]
+[ext_resource type="PackedScene" uid="uid://c35cm6u4p4p3e" path="res://Scenes/1_Rooms/test_4.tscn" id="2_uqgo6"]
 [ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="3_frhf3"]
 [ext_resource type="Texture2D" uid="uid://b7fsbqc10w3d3" path="res://Assets/health shell.png" id="4_r8ou2"]
 [ext_resource type="Texture2D" uid="uid://cdpak133rukrn" path="res://Assets/health bar.png" id="5_2urrx"]
 [ext_resource type="Texture2D" uid="uid://cuhto7kjb0wuh" path="res://Assets/energy shell.png" id="6_uqgo6"]
 [ext_resource type="Texture2D" uid="uid://b1x6w8vbg0g3l" path="res://Assets/energy bar.png" id="7_83x4p"]
 [ext_resource type="Texture2D" uid="uid://chp443iu56iv" path="res://Assets/clock_bar.png" id="8_6s0nu"]
+[ext_resource type="Texture2D" uid="uid://biaho8k6p4btu" path="res://Assets/backgrounds/Background.png" id="10_uqgo6"]
+[ext_resource type="Texture2D" uid="uid://c5q8nefdt6eop" path="res://Assets/backgrounds/Background3.png" id="11_83x4p"]
+[ext_resource type="Texture2D" uid="uid://bsfaudf4sc34h" path="res://Assets/backgrounds/Background2.png" id="12_6s0nu"]
+[ext_resource type="Texture2D" uid="uid://c6w85e3n1ic2g" path="res://Assets/backgrounds/Background1.png" id="13_r72v4"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_74bya")
-first_room = ExtResource("2_frhf3")
+first_room = ExtResource("2_uqgo6")
 metadata/_edit_lock_ = true
 
 [node name="Player" parent="." node_paths=PackedStringArray("UI") instance=ExtResource("2_fickt")]
 position = Vector2(-636, 107)
 UI = NodePath("../UI")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -100)
+limit_smoothed = true
+position_smoothing_enabled = true
+drag_vertical_enabled = true
+drag_top_margin = 0.4
+drag_bottom_margin = 0.0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+metadata/_edit_lock_ = true
 
 [node name="Room" type="Node2D" parent="."]
 
@@ -60,3 +75,33 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("8_6s0nu")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(200, 200)
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(100, 100)
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_offset = Vector2(300, 300)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Background" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 180)
+texture = ExtResource("10_uqgo6")
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 180)
+texture = ExtResource("11_83x4p")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 180)
+texture = ExtResource("12_6s0nu")
+
+[node name="Sprite2D3" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 180)
+texture = ExtResource("13_r72v4")

@@ -1,21 +1,21 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2eexcjujrivr"]
 
-[ext_resource type="Script" uid="uid://d3awuh5gdjsqj" path="res://Scripts/GooseBoss/shriek.gd" id="1_5k5xx"]
-[ext_resource type="Texture2D" uid="uid://dm0v7aowpfnxe" path="res://Assets/shriek.png" id="2_p368y"]
+[ext_resource type="Script" uid="uid://bndv5we1rmphg" path="res://Scripts/GooseBoss/shriek.gd" id="1_5k5xx"]
+[ext_resource type="Texture2D" uid="uid://br8l8sddkcar8" path="res://Assets/Honk.png" id="2_kb555"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gx3j"]
-size = Vector2(70, 90)
+size = Vector2(69, 63)
 
 [node name="Projectile" type="Area2D"]
 script = ExtResource("1_5k5xx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0.500002, 0.5)
-scale = Vector2(0.932432, 0.988889)
-texture = ExtResource("2_p368y")
+texture_filter = 1
+rotation = -1.5708
+texture = ExtResource("2_kb555")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0.5)
+position = Vector2(4.5, 0.5)
 shape = SubResource("RectangleShape2D_5gx3j")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

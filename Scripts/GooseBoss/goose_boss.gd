@@ -95,9 +95,10 @@ func _recovery(delta: float) -> void:
 		attack_timer.start(3.0)
 
 func _projectile(delta: float) -> void:
-	var projectile = shriek_projectile.instantiate()
+	var projectile: Node2D = shriek_projectile.instantiate()
 	projectile.global_position = global_position
 	projectile.direction = (player.global_position - global_position).normalized()
+	projectile.look_at(player.global_position)
 	get_tree().get_root().add_child(projectile)
 	currentState = "Patrol"
 	attack_timer.start(3.0)

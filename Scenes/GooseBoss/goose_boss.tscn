@@ -30,6 +30,7 @@ shape = SubResource("RectangleShape2D_xj6ly")
 
 [node name="Sprite2D" type="Sprite2D" parent="GooseBoss"]
 texture_filter = 1
+scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_5j0aq")
 
 [node name="Hitbox" type="Area2D" parent="GooseBoss"]
