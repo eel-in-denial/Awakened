@@ -1,7 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://d2eexcjujrivr"]
 
 [ext_resource type="Script" uid="uid://bndv5we1rmphg" path="res://Scripts/GooseBoss/shriek.gd" id="1_5k5xx"]
+
 [ext_resource type="Texture2D" uid="uid://br8l8sddkcar8" path="res://Assets/Honk.png" id="2_kb555"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5gx3j"]
 size = Vector2(69, 63)

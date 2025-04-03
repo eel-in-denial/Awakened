@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://brchjm4xu84em"]
+
+[ext_resource type="Script" uid="uid://brdrmpl7smp08" path="res://Scripts/StockBoss/arrow_trail.gd" id="1_0rq04"]
+
+[node name="ArrowTrail" type="Line2D"]
+show_behind_parent = true
+position = Vector2(0, 1)
+default_color = Color(1, 0, 1, 1)
+script = ExtResource("1_0rq04")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]

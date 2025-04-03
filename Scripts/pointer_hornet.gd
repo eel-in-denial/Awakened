@@ -8,7 +8,6 @@ signal dead
 @export_tool_button("Set Pointer Centre") var set_c = func():
 	set_pointer(0)
 
-
 func _ready() -> void:
 	for i in points.size():
 		points[i].global_position = point_pos[i]
