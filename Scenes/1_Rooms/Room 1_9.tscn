@@ -11,7 +11,7 @@
 size = Vector2(798.75, 379.75)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_humr8"]
-size = Vector2(1926, 1242)
+size = Vector2(1121, 490)
 
 [node name="test room 1" type="Node2D"]
 position = Vector2(-3, 19)
@@ -58,7 +58,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera Bound"]
-position = Vector2(-913, 100)
+position = Vector2(-588.5, -9)
 shape = SubResource("RectangleShape2D_humr8")
 debug_color = Color(1, 0.933333, 0, 0)
 metadata/_edit_lock_ = true
