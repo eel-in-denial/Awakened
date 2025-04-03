@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dryqtcmxxu8lj" path="res://Scripts/main.gd" id="1_74bya"]
 [ext_resource type="PackedScene" uid="uid://ctakur372je0n" path="res://Scenes/0_MainScenes/player.tscn" id="2_fickt"]
-[ext_resource type="PackedScene" uid="uid://blbg8pg7c6m3i" path="res://Scenes/1_Rooms/test room 1.tscn" id="2_frhf3"]
+[ext_resource type="PackedScene" uid="uid://h1n7fy3nt5en" path="res://Scenes/1_Rooms/hornet_test.tscn" id="2_frhf3"]
 [ext_resource type="Script" uid="uid://bsfc8j5ib4wnf" path="res://Scripts/UI.gd" id="3_frhf3"]
 [ext_resource type="Texture2D" uid="uid://b7fsbqc10w3d3" path="res://Assets/health shell.png" id="4_r8ou2"]
 [ext_resource type="Texture2D" uid="uid://cdpak133rukrn" path="res://Assets/health bar.png" id="5_2urrx"]

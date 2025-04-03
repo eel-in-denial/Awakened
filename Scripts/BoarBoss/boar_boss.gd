@@ -25,7 +25,8 @@ var count: int
 signal dead
 
 func _ready() -> void:
-	arena_door.boss_start.connect(_start_fight)
+	#arena_door.boss_start.connect(_start_fight)
+	pass
 	
 
 func _start_fight() -> void:
