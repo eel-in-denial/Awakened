@@ -49,13 +49,11 @@ var centerMarker: Marker2D
 @onready var sword_collision = $"Sword area/CollisionShape2D"
 
 @onready var parry_overlay = $ParryBox
-@onready var leg_animation = $PlayerLegsAnim
 @onready var body_animation = $PlayerBodyAnim
 @export var UI: CanvasLayer
 @onready var camera = $Camera2D 
 
 func _ready() -> void:
-	centerMarker = get_node("../CenterMarker")
 	sword_collision.disabled = true
 	Global.player = self
 	loaded = true
@@ -99,7 +97,8 @@ func _physics_process(delta: float) -> void:
 		set_state(States.JUMPING)
 	elif Input.is_action_just_pressed("parry") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING, States.JUMPING, States.FALLING]:
 		set_state(States.PARRY)
-	elif not is_on_floor() and current_state in [States.IDLE, States.RUNNING]:
+	elif (not is_on_floor()) and current_state in [States.IDLE, States.RUNNING]:
+		print(is_on_floor())
 		set_state(States.FALLING)
 	elif is_on_floor() and current_state in [States.JUMPING, States.FALLING, States.WALLCLING]:
 		if moving:
@@ -130,7 +129,7 @@ func _physics_process(delta: float) -> void:
 				set_state(States.IDLE)
 			velocity.y += gravity*delta
 		States.WALLCLING:
-			velocity.y = WALL_CLING_SPEED*delta
+			velocity.y = WALL_CLING_SPEED*delta*60
 			_movement(delta)
 			if not is_on_wall():
 				set_state(States.IDLE)
@@ -163,19 +162,18 @@ func _physics_process(delta: float) -> void:
 			dash_reload = 0.0
 	if canMove:
 		move_and_slide()
-	leg_animation.set("parameters/Run/blend_position", direction.x)
-	leg_animation.set("parameters/Idle/blend_position", direction.x)
-	leg_animation.set("parameters/Jump/blend_position", direction.x)
-	body_animation.set("parameters/Slash/blend_position", direction)
 	body_animation.set("parameters/Run/blend_position", direction.x)
 	body_animation.set("parameters/Idle/blend_position", direction.x)
+	body_animation.set("parameters/Jump/blend_position", direction.x)
+	body_animation.set("parameters/Fall/blend_position", direction.x)
+	body_animation.set("parameters/Wall/blend_position", direction.x)
 	if loaded == false:
 		loaded = true
 	
 func set_state(new_state: States) -> void:
 	prev_state = current_state
 	current_state = new_state
-	#print(States.keys()[current_state])
+	print(States.keys()[current_state])
 	match prev_state:
 		States.DASH:
 			if prev_velocity*direction.x <= 0:
@@ -190,7 +188,7 @@ func set_state(new_state: States) -> void:
 				velocity.x = get_wall_normal().x * 500
 	match current_state:
 		States.IDLE:
-			velocity.x = 0
+			velocity = Vector2.ZERO
 			can_dash = true
 		States.RUNNING:
 			can_dash = true
@@ -282,7 +280,7 @@ func _deal_damage_to_player(damage: int, enemy: Node2D) -> void:
 		_die()
 	
 func _die() -> void:
-	get_tree().change_scene_to_file("res://Scenes/game_over.tscn")
+	get_tree().change_scene_to_file("res://Scenes/0_MainScenes/game_over.tscn")
 
 func set_camera_limits(box: CollisionShape2D) -> void:
 	camera.set_limit(SIDE_LEFT, box.global_position.x - box.shape.size.x/2)
