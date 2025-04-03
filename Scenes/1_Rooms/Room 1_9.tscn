@@ -37,11 +37,10 @@ metadata/_edit_lock_ = true
 [node name="Bosses" type="Node2D" parent="."]
 metadata/_edit_lock_ = true
 
-[node name="Arena Door" parent="Bosses" node_paths=PackedStringArray("camera_bounds", "boss", "side_door") instance=ExtResource("6_7qe8l")]
+[node name="Arena Door" parent="Bosses" node_paths=PackedStringArray("camera_bounds", "boss") instance=ExtResource("6_7qe8l")]
 position = Vector2(-332, 79)
 camera_bounds = NodePath("../Camera Bound2")
 boss = NodePath("../StockBoss")
-side_door = NodePath("")
 
 [node name="StockBoss" parent="Bosses" instance=ExtResource("5_nw3kf")]
 position = Vector2(-701, -108)
