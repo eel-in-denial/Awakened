@@ -19,7 +19,7 @@ const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
 const ATTACK_DURATION := 0.5
 const KNOCKBACK_HEIGHT := -250.0
-const PARRY_DURATION := 1.0
+const PARRY_DURATION := 0.2
 const MAX_HEALTH := 10.0
 const MAX_ENERGY := 100.0
 const DASH_RELOAD := 1.16
@@ -45,6 +45,8 @@ var camera_hold_duration: float = 0.0
 var camera_pan_duration: float = 0.0
 var centerMarker: Marker2D
 
+var canParry = true
+
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
 
@@ -52,11 +54,13 @@ var centerMarker: Marker2D
 @onready var body_animation = $PlayerBodyAnim
 @export var UI: CanvasLayer
 @onready var camera = $Camera2D 
+@onready var parryDelay = $ParryDelay
 
 func _ready() -> void:
 	sword_collision.disabled = true
 	Global.player = self
 	loaded = true
+	parryDelay.wait_time = 2.5
 	
 
 func _movement(delta: float) -> void:
@@ -95,8 +99,10 @@ func _physics_process(delta: float) -> void:
 		set_state(States.DASH)
 	elif Input.is_action_just_pressed("jump") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING]:
 		set_state(States.JUMPING)
-	elif Input.is_action_just_pressed("parry") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING, States.JUMPING, States.FALLING]:
+	elif Input.is_action_just_pressed("parry") and current_state in [States.IDLE, States.RUNNING, States.WALLCLING, States.JUMPING, States.FALLING] and canParry:
 		set_state(States.PARRY)
+		canParry = false
+		parryDelay.start()
 	elif (not is_on_floor()) and current_state in [States.IDLE, States.RUNNING]:
 		print(is_on_floor())
 		set_state(States.FALLING)
@@ -134,6 +140,9 @@ func _physics_process(delta: float) -> void:
 			if not is_on_wall():
 				set_state(States.IDLE)
 		States.PARRY:
+			velocity.x = 0
+			if not is_on_floor():
+				velocity.y += gravity*delta
 			parry_timer -= delta
 			parry_overlay.visible = true
 			if parry_timer <= 0:
@@ -288,3 +297,7 @@ func set_camera_limits(box: CollisionShape2D) -> void:
 	camera.set_limit(SIDE_TOP, box.global_position.y - box.shape.size.y/2)
 	camera.set_limit(SIDE_BOTTOM, box.global_position.y + box.shape.size.y/2)
 	print(camera.limit_left, camera.limit_right, camera.limit_top, camera.limit_bottom)
+
+
+func _on_parry_delay_timeout() -> void:
+	canParry = true 

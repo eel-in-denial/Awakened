@@ -642,5 +642,8 @@ parameters/Jump/blend_position = -0.195027
 parameters/Run/blend_position = 0.397047
 parameters/Wall/blend_position = 0
 
+[node name="ParryDelay" type="Timer" parent="."]
+
 [connection signal="body_entered" from="Sword area" to="." method="_on_sword_area_body_entered"]
 [connection signal="body_exited" from="Sword area" to="." method="_on_sword_area_body_exited"]
+[connection signal="timeout" from="ParryDelay" to="." method="_on_parry_delay_timeout"]
