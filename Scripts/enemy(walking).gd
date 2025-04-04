@@ -30,6 +30,12 @@ func _physics_process(delta: float) -> void:
 func patrol(delta):
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+	if is_on_wall():
+		direction *= -1
+		if direction == 1:
+			animation.play("walk_right")
+		else:
+			animation.play("walk_left")
 
 	velocity.x = direction * SPEED
 	move_and_slide()
