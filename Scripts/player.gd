@@ -17,7 +17,7 @@ const WALL_CLING_SPEED := 70
 const DASH_SPEED := 800.0
 const DASH_DURATION := 0.16
 const HURT_DURATION := 1.0
-const ATTACK_DURATION := 0.5
+const ATTACK_DURATION := 0.3
 const KNOCKBACK_HEIGHT := -250.0
 const PARRY_DURATION := 1.0
 const MAX_HEALTH := 10.0
@@ -167,6 +167,8 @@ func _physics_process(delta: float) -> void:
 	body_animation.set("parameters/Jump/blend_position", direction.x)
 	body_animation.set("parameters/Fall/blend_position", direction.x)
 	body_animation.set("parameters/Wall/blend_position", direction.x)
+	body_animation.set("parameters/Attack/blend_position", direction.x)
+	body_animation.set("parameters/Dash/blend_position", direction.x)
 	if loaded == false:
 		loaded = true
 	
