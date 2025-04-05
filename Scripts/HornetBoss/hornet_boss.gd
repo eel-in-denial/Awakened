@@ -20,6 +20,7 @@ var health = HEALTH
 @onready var ultimate_timer: Timer = $UltimateTimer
 @onready var dash_timer: Timer = $DashTimer
 @onready var collision: CollisionShape2D = $CollisionShape2D
+@onready var animationPlayer := $AnimationPlayer
 
 @onready var hornet_projectile_scene = preload("res://Scenes/HornetBoss/hornet_boss_projectile.tscn")
 @onready var small_hornet_scene = preload("res://Scenes/Enemies/StaticEnemy/enemy(static).tscn")
@@ -35,6 +36,7 @@ func _ready() -> void:
 func _start_fight() -> void:
 	global_position = centerMarker.global_position + Vector2(0, -400)
 	currentState = "Spawn"
+	animationPlayer.play("hornet")
 	
 	dash_timer.wait_time = 2.0
 	attack_timer.wait_time = 3.0
@@ -86,6 +88,7 @@ func _on_dash_timer_timeout() -> void:
 	dash_timer.stop()
 	
 func _recovery(delta: float) -> void:
+	animationPlayer.play("hornet")
 	print("recovering")
 	var direction = (centerMarker.global_position - global_position).normalized()
 	global_position += direction * Recovery_speed * delta
@@ -104,10 +107,11 @@ func _projectile(delta: float) -> void:
 		var projectile = hornet_projectile_scene.instantiate()
 		projectile.global_position = global_position
 		projectile.direction = base_dir.rotated(angle)
-		get_tree().get_root().add_child(projectile)
+		Global.main.add_child(projectile)
 		projectile.owner = self
 		
 	currentState = "Idle"
+	animationPlayer.play("hornet")
 	attack_timer.start(3.0)
 
 func _ultimate(delta: float) -> void:
@@ -118,23 +122,30 @@ func _ultimate(delta: float) -> void:
 		small_hornet.player = player
 		small_hornet.global_position = global_position + spawn_offset
 		get_parent().add_child(small_hornet)
-		small_hornet.current_state = "Chasing"
+		small_hornet.currentState = "Chasing"
 	currentState = "Idle"
+	animationPlayer.play("hornet")
 	attack_timer.start()
 
 func _on_attack_timer_timeout() -> void:
 	var attack_choice = randi() % 10
 	if attack_choice < 4:	
+		animationPlayer.play("dash")
 		dash_timer.start()
 		dash_direction = (player.global_position - global_position).normalized()
 		currentState = "Dash"
 	elif attack_choice < 8:
+		animationPlayer.play("aim")
+		await get_tree().create_timer(0.5).timeout  
+		animationPlayer.play("boom")
+		await get_tree().create_timer(0.2).timeout  
 		currentState = "Projectile"
 	else:
 		currentState = "Ultimate"
 
 func _on_ultimate_timer_timeout() -> void:
 	currentState = "Idle"
+	animationPlayer.play("hornet")
 	attack_timer.start()
 
 func _deal_damage(damage: int) -> void:
