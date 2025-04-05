@@ -33,7 +33,7 @@ func _ready() -> void:
 func _start_fight() -> void:
 	visible = true
 	#play animation
-	await get_tree().create_timer(7.0).timeout  
+	await get_tree().create_timer(1.0).timeout  
 	currentState = "Patrol"
 	
 	attack_timer.wait_time = 3.0
@@ -161,6 +161,8 @@ func _on_attack_timer_timeout() -> void:
 func _deal_damage(damage: int) -> void:
 	health -= damage
 	#velocity.y = -200
+	var tween: Tween = create_tween().set_loops(0.5*2)
+	tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
 	if health <= 0:
 		_die()
 

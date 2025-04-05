@@ -151,6 +151,8 @@ func _on_ultimate_timer_timeout() -> void:
 func _deal_damage(damage: int) -> void:
 	health -= damage
 	velocity.y = -200
+	var tween: Tween = create_tween().set_loops(0.5*2)
+	tween.tween_property(self, "modulate:v", 1, 0.5).from(0)
 	if health <= 0:
 		_die()
 

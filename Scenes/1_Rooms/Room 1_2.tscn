@@ -16,9 +16,9 @@ size = Vector2(1695, 1819)
 [node name="Doors" parent="." node_paths=PackedStringArray("adjacent_rooms") instance=ExtResource("1_oaf50")]
 adjacent_rooms = {
 NodePath("Door"): "res://Scenes/1_Rooms/first_room.tscn",
-NodePath("Door4"): "res://Scenes/1_Rooms/Room 1_3.tscn",
-NodePath("Door2"): "res://Scenes/1_Rooms/Room 1_4.tscn",
-NodePath("Door3"): "res://Scenes/1_Rooms/Room 1_6.tscn",
+NodePath("Door4"): "res://Scenes/1_Rooms/Room 1_6.tscn",
+NodePath("Door2"): "res://Scenes/1_Rooms/Room 1_3.tscn",
+NodePath("Door3"): "res://Scenes/1_Rooms/Room 1_4.tscn",
 NodePath("Door5"): "res://Scenes/1_Rooms/Room 1_9.tscn"
 }
 metadata/_edit_lock_ = true

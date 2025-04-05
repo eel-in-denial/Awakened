@@ -8,10 +8,10 @@
 [ext_resource type="Texture2D" uid="uid://bp07go5kbfrlf" path="res://Assets/dash.png" id="5_leu7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d0tot"]
-size = Vector2(94, 94)
+size = Vector2(75, 84)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4q1ls"]
-size = Vector2(94, 94)
+size = Vector2(84, 90)
 
 [sub_resource type="Animation" id="Animation_leu7d"]
 length = 0.001
@@ -285,6 +285,7 @@ centerMarker = NodePath("../Marker2D")
 hornet_main = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HornetBoss"]
+position = Vector2(1.5, -5)
 shape = SubResource("RectangleShape2D_d0tot")
 
 [node name="Sprite2D" type="Sprite2D" parent="HornetBoss"]
@@ -298,6 +299,7 @@ frame = 1
 [node name="Hitbox" type="Area2D" parent="HornetBoss"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HornetBoss/Hitbox"]
+position = Vector2(1, -1)
 shape = SubResource("RectangleShape2D_4q1ls")
 
 [node name="AttackTimer" type="Timer" parent="HornetBoss"]

@@ -926,13 +926,13 @@ texture = ExtResource("3_xle8d")
 
 [node name="Player-body" type="Sprite2D" parent="."]
 texture_filter = 1
-scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("4_kdkr6")
 hframes = 8
 vframes = 4
 frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 2)
 shape = SubResource("CapsuleShape2D_rrfp3")
 
 [node name="Sword area" type="Area2D" parent="."]

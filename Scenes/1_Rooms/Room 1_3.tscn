@@ -16,6 +16,7 @@ size = Vector2(758, 377)
 size = Vector2(2183, 1096)
 
 [node name="Room 1_3" type="Node2D"]
+position = Vector2(-14, -925)
 
 [node name="Doors" parent="." node_paths=PackedStringArray("adjacent_rooms") instance=ExtResource("1_di83n")]
 adjacent_rooms = {
@@ -44,7 +45,7 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="BoarBoss" parent="Bosses" node_paths=PackedStringArray("arena_door") instance=ExtResource("6_m7khi")]
-position = Vector2(1327, 74)
+position = Vector2(1325, 80)
 arena_door = NodePath("../Arena Door")
 
 [node name="Arena Door" parent="Bosses" node_paths=PackedStringArray("camera_bounds", "boss", "side_door") instance=ExtResource("5_repxt")]

@@ -7,7 +7,7 @@
 size = Vector2(91, 45.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ohd1p"]
-size = Vector2(116, 75.5)
+size = Vector2(91, 46)
 
 [sub_resource type="Animation" id="Animation_ityqk"]
 length = 0.001
@@ -314,7 +314,7 @@ frame = 1
 [node name="Hitbox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2(0, 16.75)
+position = Vector2(1.5, 22)
 shape = SubResource("RectangleShape2D_ohd1p")
 
 [node name="AttackTimer" type="Timer" parent="."]
