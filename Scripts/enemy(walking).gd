@@ -16,7 +16,7 @@ func _ready() -> void:
 	ledge_detector.enabled = true
 
 func _physics_process(delta: float) -> void:
-	print(currentState)
+	#print(currentState)
 	if hitbox.overlaps_body(player):
 		player._deal_damage_to_player(1, self)
 		

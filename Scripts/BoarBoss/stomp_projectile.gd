@@ -4,8 +4,8 @@ extends Area2D
 var direction = Vector2.ZERO
 
 func _physics_process(delta):
-	print("projectile position")
-	print(global_position)
+	#print("projectile position")
+	#print(global_position)
 	position += direction * speed * delta
 	
 func _on_body_entered(body: Node2D) -> void:

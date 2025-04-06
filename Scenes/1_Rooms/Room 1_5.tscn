@@ -37,8 +37,8 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="GooseBoss" parent="Bosses" node_paths=PackedStringArray("arena_door") instance=ExtResource("6_jguqb")]
-position = Vector2(742, 49)
-point_pos = Array[Vector2]([Vector2(446, -119), Vector2(1021, -116), Vector2(374, -109), Vector2(1089, -102), Vector2(742, 49)])
+position = Vector2(739, 73)
+point_pos = Array[Vector2]([Vector2(428, -57), Vector2(1034, -64), Vector2(376, -93), Vector2(1092, -88), Vector2(740, 72)])
 arena_door = NodePath("../Arena Door")
 
 [node name="Camera Bound" parent="Bosses" instance=ExtResource("4_jguqb")]

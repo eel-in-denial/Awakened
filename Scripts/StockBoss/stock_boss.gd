@@ -145,7 +145,7 @@ func _on_attack_timer_timeout() -> void:
 			currentState = "ArrowAttack"
 		5:
 			currentState = "Ultimate"
-	print(currentState)
+	#print(currentState)
 
 func _deal_damage(damage: int) -> void:
 	health -= damage

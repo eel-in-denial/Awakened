@@ -11,7 +11,7 @@ var loaded = false
 const JUMP_VELOCITY := -500.0
 const gravity := Global.gravity
 const ACCELERATION := 20.0
-const DECELERATION := 5.0
+const DECELERATION := 50
 const MAX_SPEED := 200.0
 const WALL_CLING_SPEED := 70
 const DASH_SPEED := 800.0
@@ -23,6 +23,7 @@ const PARRY_DURATION := 0.2
 const MAX_HEALTH := 10.0
 const MAX_ENERGY := 100.0
 const DASH_RELOAD := 1.16
+const stUn_vEloCitY : Vector2 = Vector2(200, 300)
 
 var dash_time := 0.0
 var iframe_timer := 0.0
@@ -46,6 +47,8 @@ var camera_pan_duration: float = 0.0
 var centerMarker: Marker2D
 
 var canParry = true
+var hitback
+
 
 @onready var sword = $"Sword area"
 @onready var sword_collision = $"Sword area/CollisionShape2D"
@@ -148,8 +151,11 @@ func _physics_process(delta: float) -> void:
 			if parry_timer <= 0:
 				set_state(prev_state)
 				parry_overlay.visible = false
-				
-	if current_state in [States.RUNNING, States.FALLING, States.JUMPING]:
+	if hitback:
+		velocity = hitback
+		hitback = Vector2.ZERO
+	
+	if current_state in [States.RUNNING, States.FALLING, States.JUMPING, States.IDLE, States.PARRY]:
 		_movement(delta)
 	
 	match current_atk_state:
@@ -176,7 +182,7 @@ func _physics_process(delta: float) -> void:
 	body_animation.set("parameters/Jump/blend_position", direction.x)
 	body_animation.set("parameters/Fall/blend_position", direction.x)
 	body_animation.set("parameters/Wall/blend_position", direction.x)
-	body_animation.set("parameters/Attack/blend_position", direction.x)
+	body_animation.set("parameters/Attack/blend_position", direction)
 	body_animation.set("parameters/Dash/blend_position", direction.x)
 	if loaded == false:
 		loaded = true
@@ -184,7 +190,7 @@ func _physics_process(delta: float) -> void:
 func set_state(new_state: States) -> void:
 	prev_state = current_state
 	current_state = new_state
-	print(States.keys()[current_state])
+	#print(States.keys()[current_state])
 	match prev_state:
 		States.DASH:
 			if prev_velocity*direction.x <= 0:
@@ -199,7 +205,6 @@ func set_state(new_state: States) -> void:
 				velocity.x = get_wall_normal().x * 500
 	match current_state:
 		States.IDLE:
-			velocity = Vector2.ZERO
 			can_dash = true
 		States.RUNNING:
 			can_dash = true
@@ -237,6 +242,7 @@ func set_attack(new_atk_state: Attack_States) -> void:
 func _on_sword_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Enemies"):
 		body._deal_damage(1)
+		hitback = (global_position - body.global_position).normalized() * stUn_vEloCitY
 
 func _on_sword_area_body_exited(body: Node2D) -> void:
 	pass
