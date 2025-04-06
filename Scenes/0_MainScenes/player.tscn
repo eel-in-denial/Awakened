@@ -787,11 +787,12 @@ animation = &"AttackUp"
 
 [sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_8um8m"]
 blend_point_0/node = SubResource("AnimationNodeAnimation_4st33")
-blend_point_0/pos = Vector2(1, 0)
+blend_point_0/pos = Vector2(0.9, 0)
 blend_point_1/node = SubResource("AnimationNodeAnimation_uoxct")
-blend_point_1/pos = Vector2(-1, 0)
+blend_point_1/pos = Vector2(-0.9, 0)
 blend_point_2/node = SubResource("AnimationNodeAnimation_qh1fl")
-blend_point_2/pos = Vector2(0, 1)
+blend_point_2/pos = Vector2(0, -1)
+blend_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8um8m"]
 animation = &"DashRight"
