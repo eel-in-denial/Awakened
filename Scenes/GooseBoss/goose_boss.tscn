@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://diglr7rjxdi7i" path="res://Scripts/GooseBoss/goose_boss.gd" id="1_717ya"]
 [ext_resource type="Script" uid="uid://m5flcknk44eb" path="res://Scripts/pointerGoose.gd" id="1_wwpk0"]
-[ext_resource type="Texture2D" uid="uid://bfjbqrbgb488m" path="res://Assets/Biblical goose1.png" id="2_5j0aq"]
+[ext_resource type="Texture2D" uid="uid://brx38erft37x4" path="res://Assets/Biblical goose1.png" id="2_5j0aq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xj6ly"]
 size = Vector2(85, 83.5)
