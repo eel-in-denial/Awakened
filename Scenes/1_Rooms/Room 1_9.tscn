@@ -43,7 +43,7 @@ camera_bounds = NodePath("../Camera Bound2")
 boss = NodePath("../StockBoss")
 
 [node name="StockBoss" parent="Bosses" instance=ExtResource("5_nw3kf")]
-position = Vector2(-701, -108)
+position = Vector2(-702, -54)
 
 [node name="Camera Bound2" parent="Bosses" instance=ExtResource("4_nw3kf")]
 position = Vector2(-1085, -197)

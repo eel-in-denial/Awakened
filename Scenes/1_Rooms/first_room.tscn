@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://ctqq08es6me0h" path="res://Scenes/2_RoomFeatures/door.tscn" id="2_xur1l"]
 [ext_resource type="PackedScene" uid="uid://c6q51r3btq5f0" path="res://Scenes/2_RoomFeatures/player_spawn.tscn" id="4_ceenb"]
 [ext_resource type="PackedScene" uid="uid://gxfwy6fxcl77" path="res://Scenes/Enemies/enemy(walking).tscn" id="5_42qln"]
-[ext_resource type="Texture2D" uid="uid://cjgma4pvqut7d" path="res://Assets/Tutorial-Sheet.png" id="7_k1wbc"]
+[ext_resource type="Texture2D" uid="uid://cmpf33t32gtlf" path="res://Assets/Tutorial-Sheet.png" id="7_k1wbc"]
 [ext_resource type="Script" uid="uid://vjeb040ikpff" path="res://Scenes/1_Rooms/sprite_2d.gd" id="8_k3pn0"]
 [ext_resource type="PackedScene" uid="uid://do0ov176l2104" path="res://Scenes/2_RoomFeatures/camera_bound.tscn" id="12_xur1l"]
 
