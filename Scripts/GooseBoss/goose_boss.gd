@@ -22,6 +22,8 @@ var currentTarget: Marker2D
 @export var goose_main: Node2D
 var last_spawn_x
 
+var charge_timer := 1.5
+
 var rain_accumulator := 0.0
 
 func _ready() -> void:
@@ -77,6 +79,9 @@ func _patrol(delta: float) -> void:
 		#currentTarget = pointB if (currentTarget == pointA) else pointA
 
 func _charge(delta: float) -> void:
+	while charge_timer > 0:
+		charge_timer -= delta
+		return
 	move_and_slide()
 	if (is_on_floor() or is_on_wall()):
 		currentState = "Recovery"  
@@ -85,6 +90,7 @@ func _charge(delta: float) -> void:
 		await get_tree().create_timer(0.5).timeout  
 		currentState = "Patrol"
 		attack_timer.start(3.0)
+		charge_timer = 2
 		
 func _recovery(delta: float) -> void:
 	velocity.y = -300
@@ -95,6 +101,9 @@ func _recovery(delta: float) -> void:
 		attack_timer.start(3.0)
 
 func _projectile(delta: float) -> void:
+	while charge_timer > 0:
+		charge_timer -= delta
+		return
 	var projectile: Node2D = shriek_projectile.instantiate()
 	projectile.global_position = global_position
 	projectile.direction = (player.global_position - global_position).normalized()
@@ -102,6 +111,7 @@ func _projectile(delta: float) -> void:
 	get_tree().get_root().add_child(projectile)
 	currentState = "Patrol"
 	attack_timer.start(3.0)
+	charge_timer = 2
 		
 func _ultimate(delta: float) -> void:
 	attack_timer.stop()
@@ -148,8 +158,6 @@ func _on_attack_timer_timeout() -> void:
 	match attack_choice:
 		0, 1, 2, 3, 4:
 			currentState = "Charge"
-			var direction = (player.global_position - global_position).normalized()
-			velocity = direction * CHARGESPEED
 		5, 6, 7, 8, 9:
 			currentState = "Projectile"
 		10:
