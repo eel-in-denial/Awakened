@@ -21,7 +21,7 @@ func _process(delta: float) -> void:
 	if self.overlaps_body(player):
 		player._deal_damage_to_player(1, self)
 		
-	if global_position.y > boss.global_position.y + 230:
+	if global_position.y > boss.global_position.y + 215:
 		is_exploding = true
 		
 	if !is_exploding:
