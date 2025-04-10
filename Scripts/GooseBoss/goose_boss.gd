@@ -22,7 +22,7 @@ var currentTarget: Marker2D
 @export var goose_main: Node2D
 var last_spawn_x
 
-var charge_timer := 1.5
+var charge_timer := 0.6
 
 var rain_accumulator := 0.0
 
@@ -78,10 +78,16 @@ func _patrol(delta: float) -> void:
 	#if global_position.distance_to(currentTarget.global_position) < 10.0:
 		#currentTarget = pointB if (currentTarget == pointA) else pointA
 
+var timed = false
+
 func _charge(delta: float) -> void:
+	print(currentState)
 	while charge_timer > 0:
 		charge_timer -= delta
 		return
+	if not timed:
+		timed = true
+		velocity = (player.global_position - global_position).normalized() * CHARGESPEED
 	move_and_slide()
 	if (is_on_floor() or is_on_wall()):
 		currentState = "Recovery"  
@@ -90,7 +96,8 @@ func _charge(delta: float) -> void:
 		await get_tree().create_timer(0.5).timeout  
 		currentState = "Patrol"
 		attack_timer.start(3.0)
-		charge_timer = 2
+		charge_timer = 0.6
+		timed = false
 		
 func _recovery(delta: float) -> void:
 	velocity.y = -300
@@ -111,7 +118,7 @@ func _projectile(delta: float) -> void:
 	get_tree().get_root().add_child(projectile)
 	currentState = "Patrol"
 	attack_timer.start(3.0)
-	charge_timer = 2
+	charge_timer = 0.6
 		
 func _ultimate(delta: float) -> void:
 	attack_timer.stop()
