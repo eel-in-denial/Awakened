@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b1i0fpa02do1c" path="res://Scripts/StockBoss/stock_boss.gd" id="1_jawcn"]
 [ext_resource type="Texture2D" uid="uid://cpsr7aag7hcr7" path="res://Assets/Cat Sandwich.jpg" id="2_ocaes"]
-[ext_resource type="Script" uid="uid://c17odu8xbbk4d" path="res://Scripts/StockBoss/small_screen_1.gd" id="3_e0jt7"]
+[ext_resource type="Script" path="res://Scripts/StockBoss/small_screen_1.gd" id="3_e0jt7"]
 [ext_resource type="Texture2D" uid="uid://cxhk2iascalxy" path="res://Assets/red.png" id="3_h7h58"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e0jt7"]
